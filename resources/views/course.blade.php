@@ -5,20 +5,67 @@
 @endsection
 
 @section('content')
-    <div class="md:mx-4 mt-12">
+    <div class="md:mx-4 mt-1">
 
-        <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
+        <div class=" mt-3  rounded-xl py-8 px-[20px]  bg-white">
             <div>
-                <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">Course List</h3>
+                <div class="flex justify-end sm:justify-between  items-start  mb-3">
+                    <form action="">
+
+                        <form class="max-w-md mx-auto">
+                            <label for="default-search"
+                                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white ">Search</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                                <input type="search" id="search"
+                                    class="block min-w-[300px] px-4 py-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary "
+                                    placeholder="Search Mockups, Logos..." required />
+
+                            </div>
+                        </form>
+
+                    </form>
                     <div>
 
                         <button data-modal-target="addCourseModal" data-modal-toggle="addCourseModal"
-                            class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                            class="bg-primary cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
                             Add Course</button>
                     </div>
                 </div>
-                <div class="overflow-x-auto">
+                <div class="grid grid-cols-3 gap-6 mt-4  xl:px-[80px] ">
+
+
+                    @for ($i = 1; $i <= 4; $i++)
+                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700">
+                            <a href="#">
+                                <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
+                                    alt="" />
+                            </a>
+                            <div class="p-5">
+                                <a href="#">
+                                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                        Noteworthy
+                                        technology acquisitions 2021</h5>
+                                </a>
+                                <p class="mb-6 font-normal font-md text-gray-600 dark:text-gray-400">Here are the biggest
+                                    enterprise
+                                    technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                <a href="#"
+                                    class="bg-primary   cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">
+                                    Read more
+                                </a>
+                            </div>
+                        </div>
+                    @endfor
+
+                </div>
+                {{-- <div class="overflow-x-auto">
                     <table id="datatable">
                         <thead class="py-1 bg-primary text-white">
                             <tr>
@@ -66,7 +113,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
 
             </div>
         </div>

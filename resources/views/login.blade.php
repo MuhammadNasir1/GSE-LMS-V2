@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <button type="submit" id="loginbutton"
-                        class="bg-primary rounded-full w-full text-white  py-4 hover:scale-105 duration-300 shadow-sm mt-4">
+                        class="gradient-bg rounded-full w-full text-white  py-4 hover:scale-105 duration-300 shadow-sm mt-4">
                         <div class=" text-center hidden" id="spinner">
                             <svg aria-hidden="true"
                                 class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-white"
@@ -80,7 +80,7 @@
 
             <!-- image -->
             <div class="  w-1/2  h-full hidden md:flex items-center  ">
-                <div class="h-[98%] w-full bg-primary rounded-2xl flex flex-col justify-center items-center gap-6">
+                <div class="h-[98%] w-full gradient-bg rounded-2xl flex flex-col justify-center items-center gap-6">
 
                     <img src="{{ asset('images/GSE-logo(white).svg') }}" class="w-[50%] pt-10" alt="">
 

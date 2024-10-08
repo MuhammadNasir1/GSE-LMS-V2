@@ -38,17 +38,18 @@
 
         </div>
         <aside id="sidebar-multi-level-sidebar"
-            class="fixed  bg-primary text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            class="fixed  gradient-bg text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
             <div class="flex  justify-center mt-[30px] pr-4 mb-3">
-                <a href="../"> <img class=" w-48" src="{{ asset('images/GSE-log(bg).png') }}" alt="GSE"></a>
+                <a href="../"> <img class=" w-48" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
+                {{-- <a href="../"> <img class=" w-48" src="{{ asset('images/GSE-log(bg).png') }}" alt="GSE"></a> --}}
                 {{-- <a href="../"> <img class=" w-48" src="{{ asset('images/comapnylogo.svg') }}" alt="Horeca"></a> --}}
             </div>
-            <div class="h-full  py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div class="h-full  py-4 overflow-y-auto ">
                 <ul class="space-y-2  pl-3 pr-6 font-medium">
                     <li>
                         <a href="../"
-                            class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                             <svg width="20" height="15" viewBox="0 0 16 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -62,7 +63,7 @@
                     @if (session('user_det')['role'] == 'admin')
                         <li>
                             <a href="../users"
-                                class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                 <svg width="20" height="18" viewBox="0 0 20 14" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -92,7 +93,7 @@
 
                         <li>
                             <a href="../course"
-                                class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                 <i class="fa-solid fa-graduation-cap text-white"></i>
                                 <span class="ms-3">Courses</span>
                             </a>
@@ -101,7 +102,7 @@
                     @if (session('user_det')['role'] == 'canditate')
                         <li>
                             <a href="../user-profile/{{ session('user_det')['user_id'] }}"
-                                class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                 <svg class="w-5 h-5 text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -118,11 +119,10 @@
                         <li>
 
                             <button type="button"
-                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                class="flex items-center w-full p-2 text-base transition durationrounded-lg group hover:bg-gray-hover:text-primary:hover:bg-gray-700"
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                                <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
                                         clip-rule="evenodd" />
@@ -138,7 +138,7 @@
                                 class="hidden py-2 space-y-2 bg-white text-primary rounded-xl mx-2">
                                 <li>
                                     <a href="../view/resources"
-                                        class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                         <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -148,12 +148,12 @@
                                         </svg>
 
 
-                                        <span class="ms-3">Add Resources</span>
+                                        <span class="ms-3 text-primary">Add Resources</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="../resources"
-                                        class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                         <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -163,7 +163,7 @@
                                         </svg>
 
 
-                                        <span class="ms-3">Resources Detail</span>
+                                        <span class="ms-3  text-primary">Resources Detail</span>
                                     </a>
                                 </li>
 
@@ -173,10 +173,9 @@
                     @endif
                     <li>
                         <a href="../assignment"
-                            class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
+                            class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                            <svg class="w-5 h-5  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
                                     d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
                                     clip-rule="evenodd" />
@@ -189,7 +188,7 @@
                     @if (session('user_det')['role'] == 'canditate')
                         <li>
                             <a href="../resources"
-                                class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                 <svg class="w-5 h-5 text-white " aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -206,7 +205,7 @@
 
                     <li>
                         <a href="../help"
-                            class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                             <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -228,7 +227,7 @@
 
                     <li>
                         <a href="../setting"
-                            class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                             <svg width="20" height="20" viewBox="0 0 20 22" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -244,7 +243,7 @@
                         <form action="../weblogout" method="post" class=" cursor-pointer" id="logoutform">
                             @csrf
                             <div onclick="logoutform.submit()"
-                                class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
                                 <svg width="20" height="20" viewBox="0 0 20 19" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -280,8 +279,7 @@
 
 
                         <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification"
-                            class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400"
-                            type="button">
+                            class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:focus:outlinedark:hover:text-white dark:text-hover:text-primarybutton">
                             <svg width="19" height="21" viewBox="0 0 19 21" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -302,7 +300,7 @@
                             class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
                             aria-labelledby="dropdownNotificationButton">
                             <div
-                                class="block px-4 py-2 font-medium text-center text-white rounded-t-lg bg-primary mr-5">
+                                class="block px-4 py-2 font-medium text-center text-white rounded-t-lg gradient-bg mr-5">
                                 @lang('lang.Notifications')
                             </div>
                             <div class="divide-y divide-white mr-5">
@@ -311,8 +309,7 @@
 
                                 <div class="w-full ps-3 pb-3 border-b-2 border-primary">
                                     <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey,
-                                        what's up? All set for the presentation?"</div>
+                                            class="font-semibold dark:text->Jese Leos</span>: "hover:text-primary? All set for the presentation?"</div>
                                     <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
                                 </div>
                             </a> --}}
@@ -323,7 +320,7 @@
 
                             </div>
                             <a href="#"
-                                class="block py-2 text-sm font-medium text-center text-white rounded-b-lg bg-primary mr-5">
+                                class="block py-2 text-sm font-medium text-center text-white rounded-b-lg gradient-bg mr-5">
                                 <div class="inline-flex items-center ">
                                     <svg class="w-4 h-4 me-2 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">

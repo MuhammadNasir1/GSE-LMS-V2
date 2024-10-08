@@ -8,11 +8,11 @@ body {
 }
 
 ::selection {
-    background-color: #13242c !important;
+    background-color: #050a74 !important;
     color: white;
 }
 .accent-color {
-    accent-color: #13242c;
+    accent-color: #050a74;
 }
 
 input:focus,
@@ -95,14 +95,14 @@ table.dataTable.no-footer {
 /* select 2  styling */
 
 .select2-results__option[aria-selected="true"] {
-    background-color: #13242c !important;
+    background-color: #050a74 !important;
 }
 
 .select2-container--default
     .select2-selection--single
     .select2-selection__rendered {
     color: #444 !important;
-    line-height: 45px !important;
+    line-height: 40px !important;
     text-align: left !important;
 }
 
@@ -113,7 +113,7 @@ table.dataTable.no-footer {
 }
 
 .select2-container--default .select2-selection--single:focus {
-    border: 2px solid #13242c !important;
+    border: 1px solid #050a74 !important;
 }
 
 .select2-container--default
@@ -144,4 +144,22 @@ table.dataTable.no-footer {
 
 .vector-increase-size {
     animation: increaseSize 3s infinite;
+}
+
+.gradient-bg {
+    /* background: rgb(2, 0, 36);
+    background: linear-gradient(
+        60deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(5, 10, 116, 1) 28%,
+        rgba(5, 69, 116, 1) 96%
+    ); */
+    /* background: rgb(2,0,36);
+background: linear-gradient(308deg, rgba(2,0,36,1) 0%, rgba(5,10,116,1) 21%); */
+    /* background: rgb(5, 61, 116); */
+    background: linear-gradient(
+        308deg,
+        rgba(5, 61, 116, 1) 0%,
+        rgba(5, 10, 116, 1) 100%
+    );
 }
