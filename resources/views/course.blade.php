@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Assignment
+    Course
 @endsection
 
 @section('content')
@@ -41,7 +41,8 @@
                 <div class="grid grid-cols-3 gap-6 mt-4  xl:px-[80px] ">
 
 
-                    @for ($i = 1; $i <= 4; $i++)
+                    {{-- @for ($i = 1; $i <= 4; $i++) --}}
+                    @foreach ($courses as $data)
                         <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700">
                             <a href="#">
                                 <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
@@ -49,20 +50,19 @@
                             </a>
                             <div class="p-5">
                                 <a href="#">
-                                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        Noteworthy
-                                        technology acquisitions 2021</h5>
+                                    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                                        {{ $data->name }}</h5>
                                 </a>
-                                <p class="mb-6 font-normal font-md text-gray-600 dark:text-gray-400">Here are the biggest
-                                    enterprise
-                                    technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                                <a href="#"
-                                    class="bg-primary   cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">
-                                    Read more
+                                <p class="mb-1 font-normal font-sm text-gray-600 dark:text-gray-400">
+                                    {{ strlen($data->description) > 60 ? substr($data->description, 0, 60) . '...' : $data->description }}
+                                </p>
+                                <a href="#" class="underline text-sm font-semibold text-primary  cursor-pointer ">
+                                    More Details
                                 </a>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
+                    {{-- @endfor --}}
 
                 </div>
                 {{-- <div class="overflow-x-auto">

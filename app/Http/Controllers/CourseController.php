@@ -12,6 +12,12 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
+
+        foreach ($courses as $course) {
+            $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
+            $course->course_assignment = $course_assignment;
+        }
+        // return response()->json($courses);
         return view('course', compact('courses'));
     }
 
