@@ -28,6 +28,7 @@ class User extends Authenticatable
         'user_image',
         'verification',
         'city',
+        'course',
     ];
 
     /**

@@ -73,6 +73,7 @@ Route::middleware('custom')->group(function () {
             Route::post('/addCourse', 'insert');
         });
         Route::get('/users', [userController::class, 'users']);
+        Route::post('/addUser', [userController::class, 'insert']);
         Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
         Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
         Route::post('/updateUserCar/{id}', [userController::class, 'updateUserCar']);

@@ -10,8 +10,12 @@ class Course extends Model
     use HasFactory;
     public $table = 'courses';
     protected $fillable = [
+        'user_id',
         'name',
+        'teacher',
+        'qualification_number',
         'total_assignments',
+        'course_assignments',
         'description',
 
     ];

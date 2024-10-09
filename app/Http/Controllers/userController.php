@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use PhpParser\Node\Expr\AssignRef;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class userController extends Controller
 {
@@ -226,5 +227,31 @@ class userController extends Controller
         $assessments = assignmentReport::where('user_id', $user_id)->where('status', 'approve')->count();
         $feedbacks = assignmentReport::where('user_id', $user_id)->where('status', 'rejected')->count();
         return view('user_profile', compact('userDetails', 'course', 'totalAssignments', 'assessments', 'feedbacks'));
+    }
+
+    public function insert(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'role' => 'required',
+                'role' => 'required',
+                'course' => 'required',
+            ]);
+
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'role' =>  $validatedData['role'],
+                'password' => Hash::make(12345678),
+                'course' =>  $validatedData['course'],
+                'verification' => "approved",
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'User add successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }

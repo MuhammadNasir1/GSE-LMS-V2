@@ -121,7 +121,7 @@
             @if (isset($user))
                 <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
                 @else
-                    <form id="customerData" method="post" enctype="multipart/form-data">
+                    <form id="userForm" method="post" enctype="multipart/form-data">
             @endif
             @csrf
             <input type="hidden" value="canditate" name="role">
@@ -221,29 +221,14 @@
         </script>
     @endif
     <script>
-        let fileInput = document.getElementById('user_image');
-        let imageView = document.getElementById('img_view');
-
-        fileInput.addEventListener('change', function() {
-            const file = this.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                imageView.src = reader.result;
-            };
-
-            if (file) {
-                reader.readAsDataURL(file);
-            }
-        });
         $(document).ready(function() {
             $('.delButton').click(function() {
                 var id = $(this).attr('delId');
                 $('#delLink').attr('href', '../delCustomer/' + id);
             });
             // insert data
-            $("#customerData").submit(function(event) {
-                var url = "../registerdata";
+            $("#userForm").submit(function(event) {
+                var url = "../addUser";
                 event.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -278,49 +263,6 @@
                     }
                 });
             });
-
-
-            $("#courseData").submit(function(event) {
-                var url = "../addCourse";
-                event.preventDefault();
-                var formData = new FormData(this);
-                console.log(url);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#Cspinner').removeClass('hidden');
-                        $('#Ctext').addClass('hidden');
-                        $('#CaddBtn').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        $('#addCourseModal').addClass('hidden');
-                        var newSelect = $('<option></option>');
-                        newSelect.val(response.data.name);
-                        newSelect.text(response.data.name);
-                        $('#course').append(newSelect);
-
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
-
-                        $('#Ctext').removeClass('hidden');
-                        $('#Cspinner').addClass('hidden');
-                        $('#CaddBtn').attr('disabled', false);
-                    }
-                });
-            });
-
 
         });
     </script>

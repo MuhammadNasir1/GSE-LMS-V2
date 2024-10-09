@@ -124,11 +124,11 @@
 
     {{-- ============ add  customer modal  =========== --}}
     <div id="addCourseModal" data-modal-backdrop="static"
-        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
-        <div class="relative p-4 w-full   max-w-2xl max-h-full ">
+        <div class="relative p-4 w-full   max-w-7xl max-h-full ">
             @if (isset($user))
                 <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
                 @else
@@ -151,32 +151,61 @@
                     </button>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4  mx-6 my-6 relative">
                     <div>
                         <label class="text-[14px] font-normal" for="Course_name">Course Name</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="course_name" placeholder="Course Name Here" value="">
+                            name="name" id="course_name" placeholder="Course Name Here" value="" required>
                     </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="course_assigment">Course Assignments</label>
-                        <input type="number" required
-                            class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="total_assignments" id="course_assigment" placeholder="01">
+                    <div class="flex gap-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="Teacher">Teacher</label>
+                            <select name="teacher" id="Teacher" required>
+                                <option disabled selected>Select Teacher</option>
+                                <option>Jones</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="qualification_number">Qualification Number</label>
+                            <input type="text" required
+                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="qualification_number" id="qualification_num" placeholder="00/000/0" required>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div>
+                            <label class="text-[14px] font-normal" for="course_assigment">Total Assignments</label>
+                            <input type="number" required
+                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="total_assignments" id="TotalAssigment" placeholder="0" required>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="CourseAssignments">Mandatory Assignments</label>
+                            <input type="number" required
+                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="course_assignments" id="CourseAssignments" placeholder="0" required>
+                        </div>
                     </div>
 
-                </div>
-                <div class="grid  md:grid-cols-1 gap-6 mx-6 my-6">
 
-                    <div>
+                    <div class="col-span-2 lg:col-span-3">
                         <label class="text-[14px] font-normal" for="description">Course Description</label>
                         <textarea name="description" id="description"
-                            class="w-full min-h-20 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            class="w-full min-h-20 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]" required
                             placeholder="Course Description Here"></textarea>
                     </div>
+                    <div class="col-span-2 lg:col-span-3 grid grid-cols-3 gap-4" id="InputOutput">
 
+
+                    </div>
 
                 </div>
+                {{-- <div>
+                    <label class="text-[14px] invisible">+</label>
+                    <button class="gradient-bg h-[40px] w-[40px] text-white font-bold rounded-[4px] "
+                        id="addInputButton" type="button">+</button>
+                </div> --}}
 
 
 
@@ -261,6 +290,48 @@
                 });
             });
 
+            function addInputs() {
+                $('#TotalAssigment').on('input', function() {
+                    let assignmentCount = $(this).val();
+                    // change user cousre assignment 
+                    $('#CourseAssignments').val(assignmentCount);
+                    console.log(assignmentCount);
+
+                    let inputsHtml = ` <div>
+                            <label class="text-[14px] font-normal" for="RefrenceNo">Refrence No </label>
+                           <div class="w-full flex gap-2 items-center"> <input name="assignment_importance[]"  id="assignment_importance" type="checkbox" value="1" class="w-6 h-6 text-red-600 bg-green-500 border-primary  rounded-[4px] ">
+                            <input type="text" required
+                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="refrence_no[]" id="RefrenceNo" placeholder="Enter Refrence No" required></div>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="Title">Title </label>
+                            <input type="text" required
+                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="title[]" id="Title" placeholder="Enter Title" required>
+                        </div>
+                        <div class="flex gap-4">
+                            <div>
+                                <label class="text-[14px] font-normal" for="Title">Credits </label>
+                                <input type="text" required
+                                    class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="credits[]" id="Credits" placeholder="10" required>
+                            </div>
+                            <div>
+                                <label class="text-[14px] font-normal" for="Progress">Progress(%)</label>
+                                <input type="text" required
+                                    class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="progress[]" id="Progress" placeholder="33.40" required>
+                            </div>
+                        </div>`;
+                    $('#InputOutput').html('');
+                    for (let i = 0; i < assignmentCount; i++) {
+                        $('#InputOutput').append(inputsHtml);
+                    }
+                });
+
+            }
+            addInputs();
 
         });
     </script>
