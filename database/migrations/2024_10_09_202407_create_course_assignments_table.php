@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('course_assignments', function (Blueprint $table) {
             $table->id();
             $table->integer('course_id');
-            $table->integer('assignment_importance');
+            $table->integer('optional');
             $table->string('refrence_no');
             $table->string('title');
             $table->string('credits');

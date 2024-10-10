@@ -29,7 +29,7 @@ class CourseController extends Controller
                 "teacher" => "required",
                 "qualification_number" => "required",
                 "total_assignments" => "required",
-                "course_assignments" => "required",
+                "optional" => "required",
                 "description" => "required",
 
                 "assignment_importance" => "nullable|array",
@@ -47,14 +47,14 @@ class CourseController extends Controller
                 'teacher' => $validatedData['teacher'],
                 'qualification_number' => $validatedData['qualification_number'],
                 'total_assignments' => $validatedData['total_assignments'],
-                'course_assignments' => $validatedData['course_assignments'],
+                'optional' => $validatedData['optional'],
                 'description' => $validatedData['description'],
             ]);
             foreach ($validatedData['refrence_no'] as $i => $refrence_no) {
                 // Create the assignment for each set of data
                 $assignment = CourseAssignments::create([
                     'course_id' => $course->id,
-                    'assignment_importance' => $validatedData['assignment_importance'][$i] ?? 0, // Use null if nullable
+                    'optional' => $validatedData['optional'][$i] ?? 0, // Use null if nullable
                     'refrence_no' => $refrence_no,
                     'title' => $validatedData['title'][$i],
                     'credits' => $validatedData['credits'][$i],

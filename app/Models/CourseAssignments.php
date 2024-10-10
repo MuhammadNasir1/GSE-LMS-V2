@@ -10,7 +10,7 @@ class CourseAssignments extends Model
     use HasFactory;
     protected $fillable = [
         'course_id',
-        'assignment_importance',
+        'optional',
         'refrence_no',
         'title',
         'credits',
