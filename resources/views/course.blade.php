@@ -122,7 +122,7 @@
 
 
 
-    {{-- ============ add  customer modal  =========== --}}
+    {{-- ============ add  course modal  =========== --}}
     <div id="addCourseModal" data-modal-backdrop="static"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
         <div class="fixed inset-0 transition-opacity">
@@ -238,66 +238,225 @@
 
         </div>
     </div>
-@endsection
-@section('js')
-    @if (isset($user))
+
+    {{-- ============   course Details modal  =========== --}}
+    <div id="CourseDetailsModal" data-modal-backdrop="static"
+        class=" overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+        <div class="fixed inset-0 transition-opacity">
+            <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+        </div>
+        <div class="relative p-4 w-full   max-w-7xl max-h-full ">
+            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                    <h3 class="text-xl font-semibold text-white ">
+                        Course Details
+                    </h3>
+                    <button type="button"
+                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        data-modal-hide="CourseDetailsModal">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <div>
+                        {{-- <h2>Course Title <span class="font-md font-semibold">OTHM LEVEL 3 TECHNICAL CERTIFICATE IN
+                                OCCUPATIONAL HEALTH AND SAFETY</span></h2> --}}
+
+                    </div>
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8 mb-4 mx-5">
+
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8 mb-4 mx-5">
+                            <table>
+                                <thead>
+                                    <tr class="border-b border-primary">
+                                        <th class="gradient-bg text-white p-3 whitespace-nowrap border-b border-white ">
+                                            Course Name</th>
+                                        <td class="p-3">THM LEVEL 3 TECHNICAL CERTIFICATE IN
+                                            OCCUPATIONAL HEALTH AND SAFETY</td>
+                                        <th rowspan="2" class="gradient-bg  text-white p-3 border-b border-white">
+                                            Descritpion</th>
+                                        <td rowspan="2" class="border-b border-primary p-3">The OTHM Level
+                                            3 Technical Certificate in
+                                            Occupati...</td>
+                                    </tr>
+                                    <tr class="">
+                                        <th
+                                            class="gradient-bg  text-white mt-2 p-3 whitespace-nowrap border-b border-white">
+                                            Teacher Name</th>
+                                        <td class="p-3 border-b border-primary">Jonse Mask</td>
+                                    </tr>
+                                    <tr class="">
+                                        <th
+                                            class="gradient-bg  text-white mt-2 p-3 whitespace-nowrap border-b border-white">
+                                            Qualification Number</th>
+                                        <td class="p-3" class="border-b border-primary">603/7356/5</td>
+                                        <th
+                                            class="gradient-bg  text-white mt-2 p-3 whitespace-nowrap border-b border-white">
+                                            Total/Course Assignments</th>
+                                        <td class="p-3">10/10</td>
+                                        {{-- <th
+                                            class="gradient-bg  text-white mt-2 p-3 whitespace-nowrap border-b border-white">
+                                            Course Assignment</th>
+                                        <td class="p-3">603/7356/5</td> --}}
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 mb-4 mx-5">
+                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-white uppercase  gradient-bg">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            Refrence No
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Title
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Credit
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Progress
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Optional
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            L/618/6932
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            Health and Safety Principles in the Working Enviro...
+                                        </td>
+
+                                        <th class="px-6 py-4">
+                                            10
+                                        </th>
+                                        <th class="px-6 py-4">
+                                            33.33%
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 384 512">
+                                                <path fill="#087a06"
+                                                    d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
+                                            </svg>
+                                        </td>
+                                    </tr>
+                                    <tr class="odd:bg-white even:bg-gray-50  border-b">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            L/618/6932
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            Health and Safety Principles in the Working Enviro...
+                                        </td>
+                                        <th class="px-6 py-4">
+                                            10
+                                        </th>
+                                        <th class="px-6 py-4">
+                                            33.33%
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                <path fill='red'
+                                                    d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                            </svg>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end ">
+                        <button
+                            class="bg-primary flex gap-2 text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn items-center  font-semibold ">Course
+                            Resources <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    @endsection
+    @section('js')
+        @if (isset($user))
+            <script>
+                $(document).ready(function() {
+                    $('#addCourseModal').removeClass("hidden");
+
+                });
+            </script>
+        @endif
         <script>
             $(document).ready(function() {
-                $('#addCourseModal').removeClass("hidden");
-
-            });
-        </script>
-    @endif
-    <script>
-        $(document).ready(function() {
-            // insert data
-            $("#courseData").submit(function(event) {
-                var url = "../addCourse";
-                event.preventDefault();
-                var formData = new FormData(this);
-                console.log(url);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#spinner').removeClass('hidden');
-                        $('#text').addClass('hidden');
-                        $('#addBtn').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        // console.log(response);
-                        window.location.href = '../course';
+                // insert data
+                $("#courseData").submit(function(event) {
+                    var url = "../addCourse";
+                    event.preventDefault();
+                    var formData = new FormData(this);
+                    console.log(url);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#spinner').removeClass('hidden');
+                            $('#text').addClass('hidden');
+                            $('#addBtn').attr('disabled', true);
+                        },
+                        success: function(response) {
+                            // console.log(response);
+                            window.location.href = '../course';
 
 
-                    },
-                    error: function(jqXHR) {
-                        let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        );
+                        },
+                        error: function(jqXHR) {
+                            let response = JSON.parse(jqXHR.responseText);
+                            console.log("error");
+                            Swal.fire(
+                                'Warning!',
+                                response.message,
+                                'warning'
+                            );
 
-                        $('#text').removeClass('hidden');
-                        $('#spinner').addClass('hidden');
-                        $('#addBtn').attr('disabled', false);
-                    }
+                            $('#text').removeClass('hidden');
+                            $('#spinner').addClass('hidden');
+                            $('#addBtn').attr('disabled', false);
+                        }
+                    });
                 });
-            });
 
-            function addInputs() {
-                $('#TotalAssigment').on('input', function() {
-                    let assignmentCount = $(this).val();
-                    // change user cousre assignment 
-                    $('#CourseAssignments').val(assignmentCount);
-                    console.log(assignmentCount);
+                function addInputs() {
+                    $('#TotalAssigment').on('input', function() {
+                        let assignmentCount = $(this).val();
+                        // change user cousre assignment 
+                        $('#CourseAssignments').val(assignmentCount);
+                        console.log(assignmentCount);
 
-                    let inputsHtml = ` <div>
+                        let inputsHtml = ` <div>
                             <label class="text-[14px] font-normal" for="RefrenceNo">Refrence No </label>
                            <div class="w-full flex gap-2 items-center"> <input name="assignment_importance[]"  id="assignment_importance" type="checkbox" value="1" class="w-6 h-6 text-red-600 bg-green-500 border-primary  rounded-[4px] ">
                             <input type="text" required
@@ -324,15 +483,15 @@
                                     name="progress[]" id="Progress" placeholder="33.40" required>
                             </div>
                         </div>`;
-                    $('#InputOutput').html('');
-                    for (let i = 0; i < assignmentCount; i++) {
-                        $('#InputOutput').append(inputsHtml);
-                    }
-                });
+                        $('#InputOutput').html('');
+                        for (let i = 0; i < assignmentCount; i++) {
+                            $('#InputOutput').append(inputsHtml);
+                        }
+                    });
 
-            }
-            addInputs();
+                }
+                addInputs();
 
-        });
-    </script>
-@endsection
+            });
+        </script>
+    @endsection
