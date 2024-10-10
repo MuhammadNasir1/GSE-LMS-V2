@@ -71,6 +71,7 @@ Route::middleware('custom')->group(function () {
         Route::controller(CourseController::class)->group(function () {
             Route::get('/course', 'index');
             Route::post('/addCourse', 'insert');
+            Route::get('/getSingleCourse/{id}', 'getSingleCourse');
         });
         Route::get('/users', [userController::class, 'users']);
         Route::post('/addUser', [userController::class, 'insert']);
