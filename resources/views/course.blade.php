@@ -43,7 +43,8 @@
 
                     {{-- @for ($i = 1; $i <= 4; $i++) --}}
                     @foreach ($courses as $data)
-                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700">
+                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700"
+                            data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal">
                             <a href="#">
                                 <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
                                     alt="" />
@@ -241,7 +242,7 @@
 
     {{-- ============   course Details modal  =========== --}}
     <div id="CourseDetailsModal" data-modal-backdrop="static"
-        class=" overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
