@@ -48,8 +48,7 @@
             <div class="h-full  py-4 overflow-y-auto ">
                 <ul class="space-y-2  pl-3 pr-6 font-medium">
                     <li>
-                        <a href="../"
-                            class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                        <a href="../" class=" flex items-center p-2 rounded-lg text-white  group">
                             <svg width="20" height="15" viewBox="0 0 16 15" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -62,10 +61,9 @@
 
                     @if (session('user_det')['role'] == 'admin')
                         <li>
-                            <a href="../users"
-                                class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
-                                <svg width="20" height="18" viewBox="0 0 20 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                            <a href="../users" class="mt-3 flex items-center p-2 rounded-lg text-white  group">
+                                <svg class="group-hover:text-primary" width="20" height="18" viewBox="0 0 20 14"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M10.0002 7.98469C11.491 7.98469 12.6995 6.77614 12.6995 5.28531C12.6995 3.79449 11.491 2.58594 10.0002 2.58594C8.50933 2.58594 7.30078 3.79449 7.30078 5.28531C7.30078 6.77614 8.50933 7.98469 10.0002 7.98469Z"
                                         fill="white" />
@@ -92,8 +90,7 @@
                         </li>
 
                         <li>
-                            <a href="../course"
-                                class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                            <a href="../course" class=" flex items-center p-2 rounded-lg text-white  group">
                                 <i class="fa-solid fa-graduation-cap text-white"></i>
                                 <span class="ms-3">Courses</span>
                             </a>
@@ -102,7 +99,7 @@
                     @if (session('user_det')['role'] == 'canditate')
                         <li>
                             <a href="../user-profile/{{ session('user_det')['user_id'] }}"
-                                class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                                class=" flex items-center p-2 rounded-lg text-white  group">
                                 <svg class="w-5 h-5 text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -138,7 +135,7 @@
                                 class="hidden py-2 space-y-2 bg-white text-primary rounded-xl mx-2">
                                 <li>
                                     <a href="../view/resources"
-                                        class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                                        class=" flex items-center p-2 rounded-lg text-white  group">
                                         <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -153,7 +150,7 @@
                                 </li>
                                 <li>
                                     <a href="../resources"
-                                        class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                                        class=" flex items-center p-2 rounded-lg text-white  group">
                                         <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -172,8 +169,7 @@
                         </li>
                     @endif
                     <li>
-                        <a href="../assignment"
-                            class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                        <a href="../assignment" class=" flex items-center p-2 rounded-lg text-white  group">
                             <svg class="w-5 h-5  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -187,8 +183,7 @@
                     </li>
                     @if (session('user_det')['role'] == 'canditate')
                         <li>
-                            <a href="../resources"
-                                class=" flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                            <a href="../resources" class=" flex items-center p-2 rounded-lg text-white  group">
                                 <svg class="w-5 h-5 text-white " aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -204,8 +199,7 @@
                     @endif
 
                     <li>
-                        <a href="../help"
-                            class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                        <a href="../help" class="mt-3 flex items-center p-2 rounded-lg text-white  group">
                             <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -226,8 +220,7 @@
                     </li>
 
                     <li>
-                        <a href="../setting"
-                            class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                        <a href="../setting" class="mt-3 flex items-center p-2 rounded-lg text-white  group">
                             <svg width="20" height="20" viewBox="0 0 20 22" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -243,7 +236,7 @@
                         <form action="../weblogout" method="post" class=" cursor-pointer" id="logoutform">
                             @csrf
                             <div onclick="logoutform.submit()"
-                                class="mt-3 flex items-center p-2 rounded-lg text-white hover:bg-gray-100 hover:text-primary group">
+                                class="mt-3 flex items-center p-2 rounded-lg text-white  group">
                                 <svg width="20" height="20" viewBox="0 0 20 19" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
