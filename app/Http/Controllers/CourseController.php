@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\CourseAssignments;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -12,13 +13,14 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-
+        $teachers = User::Select('name', 'id')->where('role', 'teacher')->get();
         foreach ($courses as $course) {
             $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
             $course->course_assignment = $course_assignment;
         }
+
         // return response()->json($courses);
-        return view('course', compact('courses'));
+        return view('course', compact('courses', 'teachers'));
     }
 
     public function insert(Request $request)

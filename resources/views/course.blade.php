@@ -165,7 +165,10 @@
                             <label class="text-[14px] font-normal" for="Teacher">Teacher</label>
                             <select name="teacher" id="Teacher" required>
                                 <option disabled selected>Select Teacher</option>
-                                <option>Jones</option>
+                                @foreach ($teachers as $teachers)
+                                    <option id="{{ $teachers->id }}">{{ $teachers->name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                         <div>
@@ -469,7 +472,7 @@
                 function addInputs() {
                     $('#TotalAssigment').on('input', function() {
                         let assignmentCount = $(this).val();
-                        // change user cousre assignment 
+                        // change user cousre assignment
                         $('#CourseAssignments').val(assignmentCount);
                         console.log(assignmentCount);
 
@@ -491,13 +494,13 @@
                                 <label class="text-[14px] font-normal" for="Title">Credits </label>
                                 <input type="text" required
                                     class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="credits[]" id="Credits" placeholder="10" required>
+                                    name="credits[]" id="Credits" placeholder="Enter Credits" required>
                             </div>
                             <div>
                                 <label class="text-[14px] font-normal" for="Progress">Progress(%)</label>
                                 <input type="text" required
                                     class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="progress[]" id="Progress" placeholder="33.40" required>
+                                    name="progress[]" id="Progress" placeholder="Enter Progress" required>
                             </div>
                         </div>`;
                         $('#InputOutput').html('');
