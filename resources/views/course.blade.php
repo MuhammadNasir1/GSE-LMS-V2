@@ -287,10 +287,11 @@
                                     <tr class="border-b border-primary">
                                         <th class="gradient-bg text-white p-3 whitespace-nowrap border-b border-white ">
                                             Course Name</th>
-                                        <td class="p-3" id="courseName"></td>
+                                        <td class="p-3 min-w-[280px]" id="courseName"></td>
                                         <th rowspan="2" class="gradient-bg  text-white p-3 border-b border-white">
                                             Descritpion</th>
-                                        <td rowspan="2" class="border-b border-primary p-3" id="description"></td>
+                                        <td rowspan="2" class="border-b border-primary p-3" id="courseDescription">
+                                        </td>
                                     </tr>
                                     <tr class="">
                                         <th
@@ -339,31 +340,8 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr
-                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                        <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            L/618/6932
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            Health and Safety Principles in the Working Enviro...
-                                        </td>
+                                <tbody id="corseAssigmentBody">
 
-                                        <th class="px-6 py-4">
-                                            10
-                                        </th>
-                                        <th class="px-6 py-4">
-                                            33.33%
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 384 512">
-                                                <path fill="#087a06"
-                                                    d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
-                                            </svg>
-                                        </td>
-                                    </tr>
                                     <tr class="odd:bg-white even:bg-gray-50  border-b">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -467,6 +445,7 @@
                         type: "GET",
                         url: url,
                         beforeSend: function() {
+                            $("#corseAssigmentBody").html('');
                             $('#courseInfoData').addClass('hidden');
                             $('#Coursespinner').removeClass('hidden');
                         },
@@ -475,13 +454,38 @@
                             $('#courseInfoData').removeClass('hidden');
                             console.log(response)
                             let data = response.courses;
-                            $("#courseName").html(data.name)
-                            $("#teacher").html(data.teacher)
-                            $("#qualificationNumber").html(data.qualification_number)
-                            $("#assigments").html(data.total_assignments +
-                                "/" + data.course_assignments)
-                            $("#description").html(data.description)
+                            $("#courseName").html(data.name);
+                            $("#teacher").html(data.teacher);
+                            $("#qualificationNumber").html(data.qualification_number);
+                            $("#courseDescription").html(data.description);
 
+                            $("#assigments").html(data.total_assignments + "/" + data
+                                .course_assignments);
+
+                            data.course_assignment.forEach(assignment => {
+                                console.log(assignment);
+
+                                let row = ` <tr
+                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">${assignment.refrence_no}</th>
+                                        <td class="px-6 py-4">${assignment.title}</td>
+                                        <th class="px-6 py-4">${assignment.credits}</th>
+                                        <th class="px-6 py-4">${assignment.progress}</th>
+                                        <td class="px-6 py-4">
+                                           ${assignment.optional == 0 ? `
+                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                            <path fill="#087a06"
+                                                d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+                                        </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                                        <path fill='red'
+                                                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                                                    </svg>`
+            }
+                                        </td>
+                                    </tr>`
+                                $("#corseAssigmentBody").append(row);
+                            });
                         }
 
                     });
