@@ -11,14 +11,14 @@
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                     <h3 class="text-[20px] text-black hidden sm:block">Assignment List</h3>
-                    @if (session('user_det')['role'] == 'canditate')
-                        <div>
+                    {{-- @if (session('user_det')['role'] == 'student') --}}
+                    <div>
 
-                            <button data-modal-target="addAssignmentmodal" data-modal-toggle="addAssignmentmodal"
-                                class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                                Add Assignment</button>
-                        </div>
-                    @endif
+                        <button data-modal-target="addAssignmentmodal" data-modal-toggle="addAssignmentmodal"
+                            class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                            Add Assignment</button>
+                    </div>
+                    {{-- @endif --}}
                 </div>
                 <div class="overflow-x-auto">
                     <table id="datatable">

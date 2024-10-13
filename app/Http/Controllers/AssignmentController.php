@@ -14,7 +14,7 @@ class AssignmentController extends Controller
 
         $userRole = session('user_det')['role'];
         $user_id = session('user_det')['user_id'];
-        if ($userRole == "canditate") {
+        if ($userRole == "student") {
 
             $assigments = Assignment::where('user_id',  $user_id)->get();
         } else {

@@ -87,12 +87,12 @@
                                                 </button>
                                             </a>
                                             @if ($data->role == 'canditate')
-                                                <a href="../user-profile/{{ $data->id }}">
+                                                {{-- <a href="../user-profile/{{ $data->id }}">
                                                     <button
                                                         class="gradient-bg text-white font-bold px-4 py-2 rounded-lg text-nowrap">
                                                         Check Profile
                                                     </button>
-                                                </a>
+                                                </a> --}}
                                             @endif
 
                                         </div>
