@@ -69,19 +69,17 @@ class CourseController extends Controller
         }
     }
 
-    public function getSingleCourse($id)
+    public function getSingleCourse($course_id)
     {
 
         try {
-            $courses = Course::find($id);
+            $courses = Course::find($course_id);
             if (!$courses) {
 
                 return response()->json(['success' => false, 'message' => "Invalid Id"], 422);
             }
-            foreach ($courses as $course) {
-                $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
-                $course->course_assignment = $course_assignment;
-            }
+            $course_assignment = CourseAssignments::where('course_id', $courses->id)->get();
+            $courses->course_assignment = $course_assignment;
             return response()->json(['success' => true, 'message' => "Data get successfully", "courses" => $courses], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
