@@ -15,10 +15,12 @@
                         <!-- ==== -->
                         <div
                             class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
-                            <div class="h-20 w-20 bg-[#fe8949] rounded-full"></div>
+                            <div class="h-20 w-20 bg-[#fe8949] rounded-full flex items-center justify-center"> <img
+                                    class="h-[50px] w-[50px]" width="60px" height="60px"
+                                    src="{{ asset('images/icons/total_orders.svg') }}" alt="Orders"></div>
                             <div>
                                 <h3 class="font-bold text-4xl text-white">180</h3>
-                                <p class="text-gray-300 text-lg">Total Credit</p>
+                                <p class="text-gray-300 text-lg">Submission</p>
                             </div>
                         </div>
                         <!-- ==== -->
@@ -28,7 +30,7 @@
                             <div class="h-20 w-20 bg-[#fbbc1d] rounded-full"></div>
                             <div>
                                 <h3 class="font-bold text-4xl text-white">50</h3>
-                                <p class="text-gray-300 text-lg">Total Credit</p>
+                                <p class="text-gray-300 text-lg">pending Assignments</p>
                             </div>
                         </div>
                         <!-- ==== -->
@@ -38,17 +40,23 @@
                             <div class="h-20 w-20 bg-[#ffa7a7] rounded-full"></div>
                             <div>
                                 <h3 class="font-bold text-4xl text-white">10</h3>
-                                <p class="text-gray-300 text-lg">Total Credit</p>
+                                <p class="text-gray-300 text-lg"> Approved</p>
                             </div>
                         </div>
                         <!-- ==== -->
                         <!-- ==== -->
                         <div
                             class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
-                            <div class="h-20 w-20 bg-[#0ebdf6] rounded-full"></div>
+                            <div class="h-20 w-20 bg-[#0ebdf6] rounded-full flex justify-center items-center">
+                                <svg class="h-15 w-15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="#ffff"
+                                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                                </svg>
+
+                            </div>
                             <div>
                                 <h3 class="font-bold text-4xl text-white">1</h3>
-                                <p class="text-gray-300 text-lg">Total Credit</p>
+                                <p class="text-gray-300 text-lg">Rejection</p>
                             </div>
                         </div>
                         <!-- ==== -->
@@ -71,7 +79,7 @@
         </div>
     </div>
 
-
+    {{-- 
     <div class="mx-4 mt-12">
         <div>
             <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>
@@ -170,7 +178,7 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
 
     {{-- <div class="lg:flex gap-14 mt-16 px-3 ">

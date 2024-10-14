@@ -201,15 +201,27 @@
                                 name="qualification_number" id="qualification_num" placeholder="00/000/0" required>
                         </div>
                     </div>
-                    <div class="flex gap-4">
+                    <div>
+                        <label class="text-[14px] font-normal" for="course_assigment">Total Units</label>
+                        <input type="number" required
+                            class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="total_assignments" id="TotalAssigment" placeholder="0" required>
+                    </div>
+                    <div class="flex gap-4 col-span-3">
                         <div>
-                            <label class="text-[14px] font-normal" for="course_assigment">Total Assignments</label>
+                            <label class="text-[14px] font-normal" for="CourseAssignments">Mandatory Units</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="total_assignments" id="TotalAssigment" placeholder="0" required>
+                                name="course_assignments" id="CourseAssignments" placeholder="0" required>
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="CourseAssignments">Mandatory Assignments</label>
+                            <label class="text-[14px] font-normal" for="CourseAssignments">Total Optional Units</label>
+                            <input type="number" required
+                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="course_assignments" id="CourseAssignments" placeholder="0" required>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="CourseAssignments">Optional To Be Selected</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="course_assignments" id="CourseAssignments" placeholder="0" required>
@@ -330,7 +342,7 @@
                                             603/7356/5</td>
                                         <th
                                             class="gradient-bg  text-white mt-2 p-3 whitespace-nowrap border-b border-white">
-                                            Total/Course Assignments</th>
+                                            Total/Course Units</th>
                                         <td class="p-3" id="assigments">10/10</td>
                                         {{-- <th
                                             class="gradient-bg  text-white mt-2 p-3 whitespace-nowrap border-b border-white">
@@ -343,6 +355,7 @@
 
 
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 mb-4 mx-5">
+                            <h2 class="text-primary text-center my-2 font-semibold text-2xl">Units Details</h2>
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-white uppercase  gradient-bg">
                                     <tr>
@@ -356,37 +369,13 @@
                                             Credit
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Progress
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
                                             Optional
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody id="corseAssigmentBody">
 
-                                    <tr class="odd:bg-white even:bg-gray-50  border-b">
-                                        <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            L/618/6932
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            Health and Safety Principles in the Working Enviro...
-                                        </td>
-                                        <th class="px-6 py-4">
-                                            10
-                                        </th>
-                                        <th class="px-6 py-4">
-                                            33.33%
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path fill='red'
-                                                    d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                            </svg>
-                                        </td>
-                                    </tr>
+
 
 
                                 </tbody>
@@ -490,17 +479,16 @@
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">${assignment.refrence_no}</th>
                                         <td class="px-6 py-4">${assignment.title}</td>
                                         <th class="px-6 py-4">${assignment.credits}</th>
-                                        <th class="px-6 py-4">${assignment.progress}</th>
                                         <td class="px-6 py-4">
                                            ${assignment.optional == 0 ? `
-                                                                                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                                                                                                    <path fill="#087a06"
-                                                                                                                        d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
-                                                                                                                </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                                                                                                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                                                                                                                <path fill='red'
-                                                                                                                                                    d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                                                                                                                            </svg>`
+                                                                                                                                                                                                                                                                                                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                                                                                                                                                                                                                                                                                                                    <path fill="#087a06"
+                                                                                                                                                                                                                                                                                                                                        d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+                                                                                                                                                                                                                                                                                                                                </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                                                                                                                                                                                                                                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                                                                                                                                                                                                                                                                                                                                <path fill='red'
+                                                                                                                                                                                                                                                                                                                                                                    d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                                                                                                                                                                                                                                                                                                                                            </svg>`
             }
                                         </td>
                                     </tr>`

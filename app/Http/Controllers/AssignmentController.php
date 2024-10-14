@@ -17,20 +17,19 @@ class AssignmentController extends Controller
 
         $userRole = session('user_det')['role'];
         $user_id = session('user_det')['user_id'];
-        $assignments = Assignment::where('user_id',  $user_id)->get();
-        $user_course  = User::select('course')->where('id', $user_id)->first();
-        $course = Course::where('id', $user_course->course)->first();
-        $course_assignments = CourseAssignments::where('course_id', $course->id)->first();
-        // if ($userRole == "student") {
+        if ($userRole == "student") {
+            $assignments = Assignment::where('user_id',  $user_id)->get();
+            $user_course  = User::select('course')->where('id', $user_id)->first();
+            $course = Course::select('id', 'name')->where('id', $user_course->course)->first();
+            $course->course_assignments = CourseAssignments::where('course_id', $course->id)->get();
+        } else {
 
-        // } else {
+            $assignments = Assignment::all();
+        }
 
-        //     $assigments = Assignment::all();
-        // }
+        return response()->json($course);
 
-        return response()->json($course_assignments);
-
-        return  view('assignment', compact('assignment'));
+        return  view('assignment', compact('assignments'));
     }
 
     public function add(Request $request)
