@@ -31,21 +31,34 @@
                         </form>
 
                     </form>
-                    <div>
+                    @if (session('user_det')['role'] == 'admin')
+                        <div>
 
-                        <button data-modal-target="addCourseModal" data-modal-toggle="addCourseModal"
-                            class="bg-primary cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
-                            Add Course</button>
-                    </div>
+                            <button data-modal-target="addCourseModal" data-modal-toggle="addCourseModal"
+                                class="bg-primary cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
+                                Add Course</button>
+                        </div>
+                    @endif
                 </div>
                 <div class="grid grid-cols-3 gap-6 mt-4  xl:px-[80px] ">
 
 
                     {{-- @for ($i = 1; $i <= 4; $i++) --}}
                     @foreach ($courses as $data)
-                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700 courseCard"
-                            data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal"
-                            coureId="{{ $data->id }}">
+                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700 cursor-pointer  relative   {!! session('user_det')['role'] == 'student' &&
+                        isset($data->enrolled_course) &&
+                        $data->enrolled_course->course == $data->id
+                            ? 'courseCard'
+                            : (session('user_det')['role'] != 'student'
+                                ? 'courseCard'
+                                : '') !!}""
+                            {!! session('user_det')['role'] == 'student' &&
+                            isset($data->enrolled_course) &&
+                            $data->enrolled_course->course == $data->id
+                                ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
+                                : (session('user_det')['role'] != 'student'
+                                    ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
+                                    : '') !!}>
                             <a href="#">
                                 <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
                                     alt="" />
@@ -62,6 +75,16 @@
                                     More Details
                                 </a>
                             </div>
+                            @if (session('user_det')['role'] == 'student')
+                                {{-- @if ($data->enrolled_course->course) --}}
+                                <div
+                                    class="bg-[#0000005d]  cursor-pointer  absolute h-full w-full flex  items-center top-0 rounded-lg z-40 flex-col {{ $data->enrolled_course->course == $data->id ? '' : 'hidden' }}">
+                                    <div class="mt-20">
+                                        <p class="text-white text-4xl font-semibold text-center ">Enrolled</p>
+                                        <p class="text-white font-lg ">Click for course Details</p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     @endforeach
                     {{-- @endfor --}}
@@ -438,8 +461,7 @@
                 });
 
                 $('.courseCard').click(function() {
-                    let url = "getSingleCourse/" + $(this).attr('coureId');
-                    console.log(url);
+                    let url = "getSingleCourse/" + $(this).attr('courseId');
 
                     $.ajax({
                         type: "GET",
@@ -452,7 +474,6 @@
                         success: function(response) {
                             $('#Coursespinner').addClass('hidden');
                             $('#courseInfoData').removeClass('hidden');
-                            console.log(response)
                             let data = response.courses;
                             $("#courseName").html(data.name);
                             $("#teacher").html(data.teacher);
@@ -463,7 +484,6 @@
                                 .course_assignments);
 
                             data.course_assignment.forEach(assignment => {
-                                console.log(assignment);
 
                                 let row = ` <tr
                                         class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
@@ -473,14 +493,14 @@
                                         <th class="px-6 py-4">${assignment.progress}</th>
                                         <td class="px-6 py-4">
                                            ${assignment.optional == 0 ? `
-                                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                                            <path fill="#087a06"
-                                                                d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
-                                                        </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                                                        <path fill='red'
-                                                                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                                                                    </svg>`
+                                                                                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                                                                                            <path fill="#087a06"
+                                                                                                                d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+                                                                                                        </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                                                                                                        <path fill='red'
+                                                                                                                                            d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                                                                                                                    </svg>`
             }
                                         </td>
                                     </tr>`

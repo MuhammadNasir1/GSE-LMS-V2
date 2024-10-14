@@ -26,7 +26,7 @@ class userController extends Controller
     public function users()
     {
         $courses = Course::all();
-        $users =  User::where('role', 'canditate')->orWhere('role', 'assessor')->get();
+        $users =  User::wherenot('role', 'admin')->get();
         return view('users', compact('users', 'courses'));
     }
 

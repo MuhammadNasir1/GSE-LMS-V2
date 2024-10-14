@@ -67,12 +67,12 @@ Route::middleware('custom')->group(function () {
     });
     Route::get('/', [userController::class, 'Dashboard']);
 
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/course', 'index');
+        Route::post('/addCourse', 'insert');
+        Route::get('/getSingleCourse/{course_id}', 'getSingleCourse');
+    });
     Route::middleware('Admin')->group(function () {
-        Route::controller(CourseController::class)->group(function () {
-            Route::get('/course', 'index');
-            Route::post('/addCourse', 'insert');
-            Route::get('/getSingleCourse/{course_id}', 'getSingleCourse');
-        });
         Route::get('/users', [userController::class, 'users']);
         Route::post('/addUser', [userController::class, 'insert']);
         Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");

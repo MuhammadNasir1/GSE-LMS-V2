@@ -14,9 +14,16 @@ class CourseController extends Controller
     {
         $courses = Course::all();
         $teachers = User::Select('name', 'id')->where('role', 'teacher')->get();
+        $role = session('user_det')['role'];
+        $user_id = session('user_det')['user_id'];
         foreach ($courses as $course) {
-            $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
-            $course->course_assignment = $course_assignment;
+            // $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
+            // $course->course_assignment = $course_assignment;
+            $course->enrolled_course = 0;
+            if ($role == 'student') {
+                $student = User::select('course')->where('id', $user_id)->first();
+                $course->enrolled_course  = $student;
+            }
         }
 
         // return response()->json($courses);
