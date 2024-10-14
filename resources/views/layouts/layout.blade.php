@@ -351,7 +351,7 @@
                             <a href="#"
                                 class="block py-2 text-sm font-medium text-center text-white rounded-b-lg gradient-bg mr-5">
                                 <div class="inline-flex items-center ">
-                                    <svg class="w-4 h-4 me-2 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    <svg class="w-4 h-4 me-2 text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                                         <path
                                             d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
@@ -368,7 +368,8 @@
                             <p class="text-xs ">{{ session('user_det')['role'] }}</p>
                         </div>
                         <div>
-                            <img height="42px" width="42px" class="rounded-[5px] h-[42px] object-fill"
+                            <img height="48px" width="48px"
+                                class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 border-primary"
                                 src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
                                 alt="user">
                         </div>

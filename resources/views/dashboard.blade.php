@@ -5,6 +5,73 @@
 @endsection
 
 @section('content')
+    <div class="flex justify-around gap-5 w-full mt-10 px-5">
+        <div class="w-full">
+            <h2 class="text-black text-2xl font-semibold">OverView</h2>
+            <div class="bg-[#1c1f24]  px-10 py-8 rounded-2xl mt-2 min-h-[350px]">
+                <div class="flex gap-x-10  w-full ">
+
+                    <div class="grid grid-cols-2 w-full gap-5 items-center">
+                        <!-- ==== -->
+                        <div
+                            class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
+                            <div class="h-20 w-20 bg-[#fe8949] rounded-full"></div>
+                            <div>
+                                <h3 class="font-bold text-4xl text-white">180</h3>
+                                <p class="text-gray-300 text-lg">Total Credit</p>
+                            </div>
+                        </div>
+                        <!-- ==== -->
+                        <!-- ==== -->
+                        <div
+                            class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
+                            <div class="h-20 w-20 bg-[#fbbc1d] rounded-full"></div>
+                            <div>
+                                <h3 class="font-bold text-4xl text-white">50</h3>
+                                <p class="text-gray-300 text-lg">Total Credit</p>
+                            </div>
+                        </div>
+                        <!-- ==== -->
+                        <!-- ==== -->
+                        <div
+                            class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
+                            <div class="h-20 w-20 bg-[#ffa7a7] rounded-full"></div>
+                            <div>
+                                <h3 class="font-bold text-4xl text-white">10</h3>
+                                <p class="text-gray-300 text-lg">Total Credit</p>
+                            </div>
+                        </div>
+                        <!-- ==== -->
+                        <!-- ==== -->
+                        <div
+                            class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
+                            <div class="h-20 w-20 bg-[#0ebdf6] rounded-full"></div>
+                            <div>
+                                <h3 class="font-bold text-4xl text-white">1</h3>
+                                <p class="text-gray-300 text-lg">Total Credit</p>
+                            </div>
+                        </div>
+                        <!-- ==== -->
+
+                        <!-- ==== -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-full relative">
+            <h2 class="text-black text-2xl font-semibold">My Progress</h2>
+            <div class="bg-[#1c1f24]  min-h-[350px] px-10  rounded-2xl mt-2 flex justify-center   relative w-[400px]">
+                <div class="w-[300px] " id="progressChart"></div>
+                <div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
     <div class="mx-4 mt-12">
         <div>
             <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>
@@ -169,53 +236,38 @@
 
     <script>
         window.onload = function() {
-            CanvasJS.addColorSet("colors",
-                [
 
-                    "#417dfc",
-                    "#339B96",
-                    "#13242C",
-
-                ]);
-
-
-            var chart2 = new CanvasJS.Chart("barChart", {
-                colorSet: "colors",
+            var chart3 = new CanvasJS.Chart("progressChart", {
                 animationEnabled: true,
-                theme: "light1",
-                axisY: {
-                    gridColor: "#00000016",
-                    suffix: "-"
-
-                },
-
+                backgroundColor: "transparent",
                 data: [{
-                    type: "column",
-                    yValueFormatString: "#,##0.0#\"\"",
+                    type: "doughnut",
+                    startAngle: 60,
+
+                    //innerRadius: 60,
+                    indexLabelFontColor: "transparent",
+                    indexLabelPlacement: "inside",
                     dataPoints: [{
-                            label: "Jan",
-
-                            y: 78
+                            y: 10,
+                            color: "#fe8949",
+                            label: "Pending"
                         },
                         {
-                            label: "Feb",
-                            y: 55
+                            y: 20,
+                            color: "#417DFC",
+                            label: "Processing"
                         },
                         {
-                            label: "Mar",
-                            y: 80
+                            y: 50,
+                            color: "#fbbc1d",
+                            label: "Approved"
                         },
-                        {
-                            label: "Apr",
-                            y: 60
-                        },
-
 
                     ]
                 }]
             });
 
-            chart2.render();
+            chart3.render();
 
         }
     </script>
