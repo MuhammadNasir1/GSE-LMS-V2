@@ -15,11 +15,11 @@
                         <!-- ==== -->
                         <div
                             class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
-                            <div class="h-20 w-20 bg-[#fe8949] rounded-full flex items-center justify-center"> <img
-                                    class="h-[50px] w-[50px]" width="60px" height="60px"
-                                    src="{{ asset('images/icons/total_orders.svg') }}" alt="Orders"></div>
+                            <div class="h-20 w-20 bg-[#fe8949] rounded-full flex items-center justify-center">
+                                <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#ffffff" d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/></svg>
+                            </div>
                             <div>
-                                <h3 class="font-bold text-4xl text-white">180</h3>
+                                <h3 class="font-bold text-4xl text-white">00</h3>
                                 <p class="text-gray-300 text-lg">Submission</p>
                             </div>
                         </div>
@@ -27,9 +27,14 @@
                         <!-- ==== -->
                         <div
                             class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
-                            <div class="h-20 w-20 bg-[#fbbc1d] rounded-full"></div>
+                            <div class="h-20 w-20 bg-[#fbbc1d] rounded-full flex justify-center items-center">
+                                <svg class="h-12 w-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="#ffffff"
+                                        d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9L0 168c0 13.3 10.7 24 24 24l110.1 0c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24l0 104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65 0-94.1c0-13.3-10.7-24-24-24z" />
+                                </svg>
+                            </div>
                             <div>
-                                <h3 class="font-bold text-4xl text-white">50</h3>
+                                <h3 class="font-bold text-4xl text-white">01</h3>
                                 <p class="text-gray-300 text-lg">pending Assignments</p>
                             </div>
                         </div>
@@ -37,7 +42,9 @@
                         <!-- ==== -->
                         <div
                             class="flex border border-gray-500 gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
-                            <div class="h-20 w-20 bg-[#ffa7a7] rounded-full"></div>
+                            <div class="h-20 w-20 bg-[#ffa7a7] rounded-full flex justify-center  items-center">
+                                <svg class="w-10 h-10 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ffffff" d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L243.2 57.6C231.1 41.5 212.1 32 192 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z"/></svg>
+                            </div>
                             <div>
                                 <h3 class="font-bold text-4xl text-white">10</h3>
                                 <p class="text-gray-300 text-lg"> Approved</p>
@@ -79,7 +86,7 @@
         </div>
     </div>
 
-    {{-- 
+    {{--
     <div class="mx-4 mt-12">
         <div>
             <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>

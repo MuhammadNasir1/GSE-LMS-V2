@@ -117,12 +117,8 @@
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
-        <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-            @if (isset($user))
-                <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
-                @else
+        <div class="relative p-4 w-full   max-w-2xl max-h-full ">
                     <form id="userForm" method="post" enctype="multipart/form-data">
-            @endif
             @csrf
             <input type="hidden" value="canditate" name="role">
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -140,7 +136,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="grid md:grid-cols-3 gap-x-6 gap-y-4 mx-6 my-6">
+                <div class="grid xl:grid-cols-2 gap-y-2 gap-x-4 mx-6 mt-6">
                     <div>
                         <label class="text-[14px] font-normal" for="user_name">@lang('lang.User_Name')</label>
                         <input type="text" required
@@ -180,7 +176,7 @@
 
 
                 <div class="flex justify-end ">
-                    <button class="gradient-bg text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                    <button class="gradient-bg text-white py-2 px-6 w-full my-6 rounded-[4px]  mx-6 uaddBtn  font-semibold "
                         id="addBtn">
                         <div class=" text-center hidden" id="spinner">
                             <svg aria-hidden="true"
@@ -195,7 +191,7 @@
                             </svg>
                         </div>
                         <div id="text">
-                            @lang('lang.Save')
+                        Add User
                         </div>
 
                     </button>

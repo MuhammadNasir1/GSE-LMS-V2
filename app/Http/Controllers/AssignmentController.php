@@ -23,11 +23,12 @@ class AssignmentController extends Controller
             $course = Course::select('id', 'name')->where('id', $user_course->course)->first();
             $course->course_assignments = CourseAssignments::where('course_id', $course->id)->get();
         } else {
+            $course = Course::all();
 
             $assignments = Assignment::all();
         }
 
-        return response()->json($course);
+        //  return response()->json($course);
 
         return  view('assignment', compact('assignments'));
     }
