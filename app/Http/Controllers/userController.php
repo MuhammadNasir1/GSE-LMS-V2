@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\registrationMail;
 use App\Models\Assignment;
 use App\Models\assignmentReport;
 use App\Models\Course;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\AssignRef;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
@@ -34,65 +36,30 @@ class userController extends Controller
         return view('users', compact('users', 'courses'));
     }
 
-    public function  addCustomer(Request $request)
+    public function insert(Request $request)
     {
         try {
-            $validateData = $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'phone_no' => 'required',
-                'address' => 'required',
-                'user_id' => 'required'
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'role' => 'required',
+                'role' => 'required',
+                'course' => 'required',
             ]);
-            $customer =  User::create([
-                'user_id' => $validateData['user_id'],
-                'name' => $validateData['name'],
-                'email' => $validateData['email'],
+
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'role' =>  $validatedData['role'],
                 'password' => Hash::make(12345678),
-                'phone' => $validateData['phone_no'],
-                'role' => "customer",
-                'address' => $validateData['address'],
+                'course' =>  $validatedData['course'],
+                'verification' => "approved",
             ]);
-
-            return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
+            Mail::to("muhammadnasir.dev@gmail.com")->send(new registrationMail());
+            return response()->json(['success' => true, 'message' => 'User add successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => true, 'message' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-    }
-    public function  addAdminCustomer(Request $request)
-    {
-        try {
-            $validateData = $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'phone_no' => 'required',
-                'address' => 'required',
-            ]);
-            $customer =  User::create([
-                'name' => $validateData['name'],
-                'email' => $validateData['email'],
-                'password' => Hash::make(12345678),
-                'phone' => $validateData['phone_no'],
-                'role' => "customer",
-                'address' => $validateData['address'],
-                'tax_number' => $request['tax_number'],
-                'client_type' => $request['client_type'],
-                'postal_code' => $request['postal_code'],
-                'city' => $request['city'],
-                'note' => $request['note'],
-            ]);
-
-            return response()->json(['success' => true, 'message' => "Customer Add Successfully"]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => true, 'message' => $e->getMessage()]);
-        }
-    }
-
-    public function delCustomer($user_id)
-    {
-        $user = User::find($user_id);
-        $user->delete();
-        return redirect('customers');
     }
     public function CustomerUpdateData($user_id)
     {
@@ -128,27 +95,9 @@ class userController extends Controller
         }
     }
 
-    public function getCustomer()
-    {
-
-        try {
-            $customers =  User::where('role', "customer")->get();
-            return response()->json(['success' => true,  'message' => "Customer get successfully ", 'customers' => $customers]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false,  'message' => $e->getMessage()]);
-        }
-    }
-
-
     public function Dashboard()
     {
-
-        $total_submission =   Assignment::all()->count();
-        $today_submission =   Assignment::all()->count();
-        $assessments = assignmentReport::where('status', 'approve')->count();
-        $feedbacks = assignmentReport::where('status', 'rejected')->count();
-        $today_user =   User::where('role', 'canditate')->orwhere('role', 'assessor')->count();
-        return view('dashboard', compact('total_submission', 'today_submission', 'today_user', 'assessments', 'feedbacks'));
+        return view('dashboard');
     }
 
     public function changeVerifictionStatus(Request $request, $user_id)
@@ -167,20 +116,6 @@ class userController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
-    }
-
-    public function deleteUser(string $id)
-    {
-        $del = User::find($id);
-        $del->delete();
-        return redirect("../users");
-    }
-
-    public function updateUser(string $id)
-    {
-        $users =  User::where('role', 'seller   ')->get();
-        $user = User::find($id);
-        return view("users", compact("user", "users"));
     }
 
     public function updateUserCar(Request $request, $id)
@@ -233,29 +168,5 @@ class userController extends Controller
         return view('user_profile', compact('userDetails', 'course', 'totalAssignments', 'assessments', 'feedbacks'));
     }
 
-    public function insert(Request $request)
-    {
-        try {
-            $validatedData = $request->validate([
-                'name' => 'required|string',
-                'email' => 'required|email|unique:users,email',
-                'role' => 'required',
-                'role' => 'required',
-                'course' => 'required',
-            ]);
-
-            $user = User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'role' =>  $validatedData['role'],
-                'password' => Hash::make(12345678),
-                'course' =>  $validatedData['course'],
-                'verification' => "approved",
-            ]);
-
-            return response()->json(['success' => true, 'message' => 'User add successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
-        }
-    }
+   
 }
