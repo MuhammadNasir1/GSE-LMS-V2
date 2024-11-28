@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Dotenv\Util\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,7 +17,7 @@ class registrationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private string $email  , private string $user)
+    public function __construct(private string $user_name ,  private string $user , )
     {
         //
     }
@@ -39,7 +40,7 @@ class registrationMail extends Mailable
         return new Content(
             view: 'emails.registration',
             with: [
-                'email' => $this->email,
+                'user_name' => $this->user_name,
                 'user' => $this->user,
             ],
         );

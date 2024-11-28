@@ -15,6 +15,11 @@ Route::get('email', function () {
     Mail::to("muhammadnasir.dev@gmail.com")->send(new registrationMail("test" , "test"));
     return 'Email sent!';
 });
+
+
+Route::get('setupPassword', function () {
+    return view('Auth.setup_password');
+});
 Route::post('login', [authController::class, 'login']);
 Route::post('registerdata', [authController::class, 'register']);
 Route::post('updateUser/{id}', [authController::class, 'update'])->name("update");

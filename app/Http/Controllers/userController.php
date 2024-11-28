@@ -43,7 +43,6 @@ class userController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'role' => 'required',
-                'role' => 'required',
                 'course' => 'required',
             ]);
 
@@ -55,7 +54,7 @@ class userController extends Controller
                 'course' =>  $validatedData['course'],
                 'verification' => "approved",
             ]);
-            Mail::to("muhammadnasir.dev@gmail.com")->send(new registrationMail());
+            Mail::to($validatedData['email'])->send(new registrationMail($user->name , Hash::make($user->id)));
             return response()->json(['success' => true, 'message' => 'User add successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
