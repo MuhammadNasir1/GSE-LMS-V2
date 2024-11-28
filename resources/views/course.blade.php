@@ -154,7 +154,8 @@
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
         <div class="relative p-4 w-full   max-w-7xl max-h-full ">
-                    <form id="courseData" method="post" enctype="multipart/form-data">
+                    <form action="../addCourse" method="post" enctype="multipart/form-data">
+                    {{-- <form id="courseData" method="post" enctype="multipart/form-data"> --}}
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -181,11 +182,11 @@
                     </div>
                     <div class="flex gap-4">
                         <div>
-                            <label class="text-[14px] font-normal" for="Teacher">Teacher</label>
-                            <select name="teacher" id="Teacher" required>
-                                <option disabled selected>Select Teacher</option>
-                                @foreach ($teachers as $teachers)
-                                    <option id="{{ $teachers->id }}">{{ $teachers->name }}</option>
+                            <label class="text-[14px] font-normal" for="assessor">Assessor</label>
+                            <select name="assessor_id" id="assessor" required>
+                                <option disabled selected>Select Assessor</option>
+                                @foreach ($assessors as $assessor)
+                                    <option value="{{ $assessor->id }}">{{ $assessor->name }}</option>
                                 @endforeach
 
                             </select>
@@ -214,7 +215,7 @@
                             <label class="text-[14px] font-normal" for="CourseAssignments">Total Optional Units</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="optional_assignment" id="optionalAssignment" placeholder="0" required>
+                                name="optional_assignments" id="optionalAssignment" placeholder="0" required>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="CourseAssignments">Optional To Be Selected</label>

@@ -12,9 +12,13 @@ class Course extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'teacher',
+        'assessor_id',
         'qualification_number',
+        'with_optional',
         'total_assignments',
+        'mandatory_assignments',
+        'optional_assignments',
+        'option_selected',
         'course_assignments',
         'description',
 

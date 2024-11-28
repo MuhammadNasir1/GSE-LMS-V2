@@ -13,7 +13,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        $teachers = User::Select('name', 'id')->where('role', 'teacher')->get();
+        $assessors = User::Select('name', 'id')->where('role', 'assessor')->get();
         $role = session('user_det')['role'];
         $user_id = session('user_det')['user_id'];
         foreach ($courses as $course) {
@@ -27,20 +27,25 @@ class CourseController extends Controller
         }
 
         // return response()->json($courses);
-        return view('course', compact('courses', 'teachers'));
+        return view('course', compact('courses', 'assessors'));
     }
 
     public function insert(Request $request)
     {
+        // return response()->json($request);
         try {
             $validatedData = $request->validate([
                 "name" => "required",
-                "teacher" => "required",
+                "assessor_id" => "required",
                 "qualification_number" => "required",
                 "total_assignments" => "required",
-                "optional" => "required",
                 "description" => "required",
 
+                "mandatory_assignments" => "required",
+                "optional_assignments" => "required",
+                "option_selected" => "required",
+
+                "optional" => "nullable",
                 "assignment_importance" => "nullable|array",
                 "refrence_no" => "required|array",
                 "title" => "required|array",
@@ -52,11 +57,16 @@ class CourseController extends Controller
             $course = Course::create([
                 'user_id' => session('user_det')['user_id'],
                 'name' => $validatedData['name'],
-                'teacher' => $validatedData['teacher'],
+                'assessor_id' => $validatedData['assessor_id'],
                 'qualification_number' => $validatedData['qualification_number'],
                 'total_assignments' => $validatedData['total_assignments'],
-                'optional' => $validatedData['optional'],
+                // 'optional' => $validatedData['optional'],
                 'description' => $validatedData['description'],
+
+                'mandatory_assignments' => $validatedData['mandatory_assignments'],
+                'optional_assignments' => $validatedData['optional_assignments'],
+                'option_selected' => $validatedData['option_selected'],
+                'course_assignments' => 7,
             ]);
             foreach ($validatedData['refrence_no'] as $i => $refrence_no) {
                 // Create the assignment for each set of data

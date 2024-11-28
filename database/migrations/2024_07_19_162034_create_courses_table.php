@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name');
-            $table->string('teacher');
+            $table->integer('assessor_id');
             $table->string('qualification_number');
+            $table->integer('with_optional')->default(0);
+            $table->integer('mandatory_assignments');
+            $table->integer('optional_assignments');
+            $table->integer('option_selected');
             $table->integer('total_assignments');
             $table->integer('course_assignments');
             $table->string('description');
