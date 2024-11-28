@@ -46,7 +46,6 @@ class CourseController extends Controller
                 "title" => "required|array",
                 "credits" => "required|array",
                 "progress" => "required|array",
-                "progress" => "required|array",
 
             ]);
 

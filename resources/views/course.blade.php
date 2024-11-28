@@ -154,11 +154,7 @@
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
         <div class="relative p-4 w-full   max-w-7xl max-h-full ">
-            @if (isset($user))
-                <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
-                @else
                     <form id="courseData" method="post" enctype="multipart/form-data">
-            @endif
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -212,19 +208,19 @@
                             <label class="text-[14px] font-normal" for="CourseAssignments">Mandatory Units</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="course_assignments" id="CourseAssignments" placeholder="0" required>
+                                name="mandatory_assignments" id="mandatoryAssignments" placeholder="0" required value="0">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="CourseAssignments">Total Optional Units</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="course_assignments" id="CourseAssignments" placeholder="0" required>
+                                name="optional_assignment" id="optionalAssignment" placeholder="0" required>
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="CourseAssignments">Optional To Be Selected</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="course_assignments" id="CourseAssignments" placeholder="0" required>
+                                name="option_selected" id="optionSelected" placeholder="0" required>
                         </div>
                     </div>
 

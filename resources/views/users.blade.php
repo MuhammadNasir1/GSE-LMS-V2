@@ -10,12 +10,11 @@
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Users_List')</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">{{ucfirst($_GET['type'])}} List</h3>
                     <div>
 
                         <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
-                            class="gradient-bg cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                            @lang('lang.Add_User')</button>
+                            class="gradient-bg cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+ Add {{ucfirst($_GET['type'])}}</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -27,8 +26,8 @@
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Email')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Role')</th>
-                                <th class="whitespace-nowrap">Login Status</th>
+                                {{-- <th class="whitespace-nowrap">@lang('lang.Role')</th> --}}
+                                {{-- <th class="whitespace-nowrap">Login Status</th> --}}
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
                         </thead>
@@ -51,20 +50,17 @@
                                     <td><a href="mailto:{{ $data->email }}" class="text-blue-700">{{ $data->email }}</a>
                                     </td>
                                     <td>{{ $data->phone_no }}</td>
-                                    <td><span
+                                    {{-- <td><span
                                             class="{{ $data->role == 'assessor' ? 'text-green-800' : 'text-purple-700' }}">{{ $data->role }}</span>
-                                    </td>
-                                    <td>
-                                        {{-- <button
-                                            class="px-2 py-1  text-green-600 font-semibold  rounded-lg">{{ $data->verification }}</button> --}}
+                                    </td> --}}
+                                    {{-- <td>
                                         <span
                                             class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->verification }}</span>
 
-                                    </td>
+                                    </td> --}}
                                     <td>
                                         <div class="flex gap-5 items-center justify-center">
 
-                                            <a href="{{ route('updateUser', $data->id) }}">
                                                 <button data-modal-target="Updateproductmodal"
                                                     data-modal-toggle="Updateproductmodal"
                                                     class=" updateBtn cursor-pointer  w-[42px]"
@@ -78,22 +74,30 @@
                                                             fill="#233A85" />
                                                     </svg>
                                                 </button>
-                                            </a>
-                                            <a href="{{ route('deleteUser', $data->id) }}">
                                                 <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                                     class="delButton" delId="{{ $data->id }}">
                                                     <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                         alt="delete" class="cursor-pointer">
                                                 </button>
-                                            </a>
-                                            @if ($data->role == 'canditate')
-                                                {{-- <a href="../user-profile/{{ $data->id }}">
-                                                    <button
-                                                        class="gradient-bg text-white font-bold px-4 py-2 rounded-lg text-nowrap">
-                                                        Check Profile
-                                                    </button>
-                                                </a> --}}
-                                            @endif
+                                            {{-- @if ($data->role == 'canditate') --}}
+                                                <a href="../user-profile/{{ $data->id }}">
+                                                    <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0642 18.5C28.0642 18.126 27.8621 17.8812 27.4579 17.3896C25.9788 15.5938 22.7163 12.25 18.9288 12.25C15.1413 12.25 11.8788 15.5938 10.3996 17.3896C9.99542 17.8812 9.79333 18.126 9.79333 18.5C9.79333 18.874 9.99542 19.1187 10.3996 19.6104C11.8788 21.4062 15.1413 24.75 18.9288 24.75C22.7163 24.75 25.9788 21.4062 27.4579 19.6104C27.8621 19.1187 28.0642 18.874 28.0642 18.5ZM18.9288 21.625C19.7576 21.625 20.5524 21.2958 21.1385 20.7097C21.7245 20.1237 22.0538 19.3288 22.0538 18.5C22.0538 17.6712 21.7245 16.8763 21.1385 16.2903C20.5524 15.7042 19.7576 15.375 18.9288 15.375C18.0999 15.375 17.3051 15.7042 16.719 16.2903C16.133 16.8763 15.8038 17.6712 15.8038 18.5C15.8038 19.3288 16.133 20.1237 16.719 20.7097C17.3051 21.2958 18.0999 21.625 18.9288 21.625Z" fill="url(#paint0_linear_872_5570)"/>
+                                                        <circle opacity="0.1" cx="18.4287" cy="18" r="18" fill="url(#paint1_linear_872_5570)"/>
+                                                        <defs>
+                                                        <linearGradient id="paint0_linear_872_5570" x1="18.9288" y1="12.25" x2="18.9288" y2="24.75" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#394DBEFF"/>
+                                                        <stop offset="1" stop-color="#394DBEFF"/>
+                                                        </linearGradient>
+                                                        <linearGradient id="paint1_linear_872_5570" x1="18.4287" y1="0" x2="18.4287" y2="36" gradientUnits="userSpaceOnUse">
+                                                        <stop stop-color="#FCB376"/>
+                                                        <stop offset="1" stop-color="#394DBEFF"/>
+                                                        </linearGradient>
+                                                        </defs>
+                                                        </svg>
+
+                                                </a>
+                                            {{-- @endif --}}
 
                                         </div>
                                     </td>
@@ -120,7 +124,7 @@
         <div class="relative p-4 w-full   max-w-2xl max-h-full ">
                     <form id="userForm" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="canditate" name="role">
+            <input type="text" value="{{$_GET['type']}}" name="role">
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 gradient-bg">
                     <h3 class="text-xl font-semibold text-white ">
@@ -151,7 +155,7 @@
                             name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')"
                             value="{{ $user->email ?? '' }}">
                     </div>
-                    <div class="w-full">
+                    {{-- <div class="w-full">
                         <label class="text-[14px] font-normal" for="Role">Role</label>
                         <select name="role" id="Role">
                             <option disabled selected>Select Role</option>
@@ -159,7 +163,7 @@
                             <option value="teacher">Teacher</option>
 
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="w-full">
                         <label class="text-[14px] font-normal" for="course">Course</label>
                         <select name="course" id="course">
@@ -208,20 +212,8 @@
 
 
 @section('js')
-    @if (isset($user))
-        <script>
-            $(document).ready(function() {
-                $('#addcustomermodal').removeClass("hidden");
-
-            });
-        </script>
-    @endif
     <script>
         $(document).ready(function() {
-            $('.delButton').click(function() {
-                var id = $(this).attr('delId');
-                $('#delLink').attr('href', '../delCustomer/' + id);
-            });
             // insert data
             $("#userForm").submit(function(event) {
                 var url = "../addUser";

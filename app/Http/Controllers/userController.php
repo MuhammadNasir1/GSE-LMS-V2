@@ -23,10 +23,14 @@ class userController extends Controller
         return redirect()->back();
     }
     // dashboard  Users Couny
-    public function users()
+    public function users(Request $request)
     {
+        if($request['type'] == 'candidate'){
+            $users =  User::where('role', 'candidate')->get();
+        }elseif($request['type'] == 'assessor'){
+            $users =  User::where('role', '	assessor')->get();
+        }
         $courses = Course::all();
-        $users =  User::wherenot('role', 'admin')->get();
         return view('users', compact('users', 'courses'));
     }
 
