@@ -45,8 +45,8 @@ class CourseController extends Controller
                 "optional_assignments" => "required",
                 "option_selected" => "required",
 
-                "optional" => "nullable",
-                "assignment_importance" => "nullable|array",
+                "optional" => "required|array",
+                // "assignment_importance" => "nullable|array",
                 "refrence_no" => "required|array",
                 "title" => "required|array",
                 "credits" => "required|array",

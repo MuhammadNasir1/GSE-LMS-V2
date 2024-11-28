@@ -124,7 +124,7 @@
         <div class="relative p-4 w-full   max-w-2xl max-h-full ">
                     <form id="userForm" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="text" value="{{$_GET['type']}}" name="role">
+            <input type="hidden" value="{{$_GET['type']}}" name="role">
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 gradient-bg">
                     <h3 class="text-xl font-semibold text-white ">
@@ -164,7 +164,7 @@
 
                         </select>
                     </div> --}}
-                    <div class="w-full">
+                    <div class="w-full col-span-2">
                         <label class="text-[14px] font-normal" for="course">Course</label>
                         <select name="course" id="course">
                             <option disabled selected>Select Course</option>

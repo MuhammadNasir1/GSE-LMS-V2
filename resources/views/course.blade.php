@@ -154,8 +154,8 @@
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
         <div class="relative p-4 w-full   max-w-7xl max-h-full ">
-                    <form action="../addCourse" method="post" enctype="multipart/form-data">
-                    {{-- <form id="courseData" method="post" enctype="multipart/form-data"> --}}
+                    {{-- <form action="../addCourse" method="post" enctype="multipart/form-data"> --}}
+                    <form id="courseData" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -503,7 +503,7 @@
 
                         let inputsHtml = ` <div>
                             <label class="text-[14px] font-normal" for="RefrenceNo">Refrence No </label>
-                           <div class="w-full flex gap-2 items-center"> <input name="assignment_importance[]"  id="assignment_importance" type="checkbox" value="1" class="w-6 h-6 text-red-600 bg-green-500 border-primary  rounded-[4px] ">
+                           <div class="w-full flex gap-2 items-center"> <input name="optional[]"  id="assignment_importance" type="checkbox" value="1" class="w-6 h-6 text-red-600 bg-green-500 border-primary  rounded-[4px] ">
                             <input type="text" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="refrence_no[]" id="RefrenceNo" placeholder="Enter Refrence No" required></div>
