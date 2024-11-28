@@ -29,7 +29,7 @@
                     style="box-shadow: 0px 0px 8px 0px #00000026; background:rgba(255, 255, 255, 0.389)">
                     <div class="w-full">
                         <div>
-                            <h1 class="text-customBlackColor font-bold text-[44px] text-center">Reset Password</h1>
+                            <h1 class="text-customBlackColor font-bold text-[44px] text-center">Set Password</h1>
                         </div>
                         <form id="postDataForm" method="POST" url="../resetPassword">
                             @csrf
@@ -39,7 +39,7 @@
                                     <label for="password" class="block text-sm">Enter Password</label>
                                     <div class="relative mt-1">
                                         <input type="password" id="password"
-                                            class="w-full pr-12 bg-white border border-customGrayColorDark rounded-2xl placeholder:text-customGrayColorDark placeholder:text-sm focus:border-customOrangeDark focus:outline-none"
+                                            class="w-full pr-12 bg-white border border-customGrayColorDark rounded-2xl placeholder:text-customGrayColorDark placeholder:text-sm focus:border-primary focus:outline-none"
                                             placeholder="Enter Here" name="password">
                                         <span class="absolute inset-y-0 flex items-center cursor-pointer right-4 togglePassword">
                                             <i class="fa-solid fa-eye-slash text-customGrayColorDark"></i>
@@ -47,10 +47,10 @@
                                     </div>
                                 </div>
                                 <div class="relative mt-5">
-                                    <label for="password_confirmation" class="block text-sm">Re-Enter  Password</label>
+                                    <label for="password_confirmation" class="block text-sm">Re-Enter Password</label>
                                     <div class="relative mt-1">
                                         <input type="password" id="password_confirmation"
-                                            class="w-full pr-12 bg-white border border-customGrayColorDark rounded-2xl placeholder:text-customGrayColorDark placeholder:text-sm focus:border-customOrangeDark focus:outline-none"
+                                            class="w-full pr-12 bg-white border border-customGrayColorDark rounded-2xl placeholder:text-customGrayColorDark placeholder:text-sm focus:border-primary focus:outline-none"
                                             placeholder="Enter Here" name="password_confirmation">
                                         <span class="absolute inset-y-0 flex items-center cursor-pointer right-4 togglePassword">
                                             <i class="fa-solid fa-eye-slash text-customGrayColorDark"></i>
@@ -60,9 +60,9 @@
 
 
                               <div class="mt-6">
-                                <button class="w-full px-3 py-3 font-semibold text-white rounded-full shadow-md gradient-bg" id="submitBtn">
+                                <button class="w-full px-3 py-3 font-semibold text-white rounded-3xl shadow-md gradient-bg" id="submitBtn">
                                     <div id="btnSpinner" class="hidden">
-                                        <svg aria-hidden="true" class="w-6 h-6 mx-auto text-center text-gray-200 animate-spin fill-customOrangeLight"
+                                        <svg aria-hidden="true" class="w-6 h-6 mx-auto text-center text-gray-200 animate-spin fill-primary"
                                             viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
