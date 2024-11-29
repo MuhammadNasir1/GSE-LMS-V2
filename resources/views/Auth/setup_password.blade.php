@@ -25,9 +25,12 @@
             <div id="mainContent"
                 class="flex flex-col-reverse  items-center justify-center h-[100vh] mx-[10px]  xl:mx-auto z-40 relative ">
                 <div id="loginDiv"
-                    class="w-[480px] my-2 p-12  px-8 flex flex-col justify-center pt-10 items-center h-auto  rounded-2xl "
+                    class="w-[480px] relative my-2 p-12  px-8 flex flex-col justify-center pt-10 items-center h-auto  rounded-2xl "
                     style="box-shadow: 0px 0px 8px 0px #00000026; background:rgba(255, 255, 255, 0.389)">
                     <div class="w-full">
+                        <div class="flex justify-center">
+                            <img src="{{asset('images/logo-full.svg')}}" class="w-[250px]" alt="Company logo">
+                        </div>
                         <div>
                             <h1 class="text-customBlackColor font-bold text-[44px] text-center">Set Password</h1>
                         </div>
@@ -76,17 +79,22 @@
                                         Set password
                                     </div>
                                 </button>
-                               
+
                               </div>
                             </div>
                         </form>
                     </div>
+                    <h2 class="absolute bottom-1 left-1/2 -translate-x-1/2 text-sm text-customGrayColorDark">Version 1.0.0</h2>
                 </div>
 
             </div>
         </div>
     </div>
 
+    <div class="absolute flex justify-center  w-full  bottom-1 z-50">
+        <p class="text-sm text-black">Powered by <a href="https://globalconsulting-int.com/" target="_blank" class="text-primary font-semibold">Global Consulting pvt. Ltd.</a> & Developed by <a target="_blank" class="text-blue-500" href="">Velodity Solutions</a>.
+        </p>
+    </div>
     <script src="{{ asset('javascript/jquery.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('javascript/script.js') }}"></script>

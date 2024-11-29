@@ -25,7 +25,7 @@
                                 </div>
                                 <input type="search" id="search"
                                     class="block min-w-[300px] px-4 py-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary "
-                                    placeholder="Search Mockups, Logos..." required />
+                                    placeholder="Search course, details..." required />
 
                             </div>
                         </form>
