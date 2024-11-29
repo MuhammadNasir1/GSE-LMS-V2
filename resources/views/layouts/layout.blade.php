@@ -366,87 +366,24 @@
 
         </aside>
     </div>
-    <div class="p-4 sm:ml-[240px]  relative sm:z-50 rounded-l-[20px] h-[100vh] overflow-y-auto  bg-white"
-        id="content">
+    <div id="content">
         <nav id="Navbar">
-            <div class="flex justify-end items-center gap-5">
+            <div class="flex justify-between items-center gap-5 gradient-bg py-3 px-5">
 
 
-
-
-
-                <div class="flex justify-end gap-6">
-                    <button>
-
-
-                        <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification"
-                            class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:focus:outlinedark:hover:text-white dark:text-hover:text-primarybutton">
-                            <svg width="19" height="21" viewBox="0 0 19 21" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.13043 0.130859C4.80824 0.130859 1.30439 3.63472 1.30439 7.95694V12.6341L0.38207 13.5564C0.00902661 13.9294 -0.10256 14.4904 0.0993266 14.9779C0.301214 15.4653 0.776831 15.783 1.30439 15.783H16.9565C17.4841 15.783 17.9597 15.4653 18.1616 14.9779C18.3635 14.4904 18.2519 13.9294 17.8788 13.5564L16.9565 12.6341V7.95694C16.9565 3.63472 13.4527 0.130859 9.13043 0.130859Z"
-                                    fill="#67748E" />
-                                <path
-                                    d="M9.13082 21C6.96971 21 5.21777 19.2481 5.21777 17.0869H13.0439C13.0439 19.2481 11.292 21 9.13082 21Z"
-                                    fill="#67748E" />
-                            </svg>
-
-                            {{-- <div
-                            class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900">
-                        </div> --}}
-                        </button>
-
-                        <!-- Dropdown menu -->
-                        <div id="dropdownNotification"
-                            class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
-                            aria-labelledby="dropdownNotificationButton">
-                            <div
-                                class="block px-4 py-2 font-medium text-center text-white rounded-t-lg gradient-bg mr-5">
-                                @lang('lang.Notifications')
-                            </div>
-                            <div class="divide-y divide-white mr-5">
-                                <p class="text-center my-3">No Recent Notification</p>
-                                {{-- <a href="#" class="flex px-4 pt-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-
-                                <div class="w-full ps-3 pb-3 border-b-2 border-primary">
-                                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span
-                                            class="font-semibold dark:text->Jese Leos</span>: "hover:text-primary? All set for the presentation?"</div>
-                                    <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                                </div>
-                            </a> --}}
-
-
-
-
-
-                            </div>
-                            <a href="#"
-                                class="block py-2 text-sm font-medium text-center text-white rounded-b-lg gradient-bg mr-5">
-                                <div class="inline-flex items-center ">
-                                    <svg class="w-4 h-4 me-2 text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-                                        <path
-                                            d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                    </svg>
-                                    @lang('lang.View_all')
-                                </div>
-                            </a>
-                        </div>
-
-                    </button>
+                    <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2>
                     <div class="flex items-center gap-2">
                         <div class="leading-tight  text-end">
-                            <h2 class="text-md">{{ session('user_det')['name'] }}</h2>
-                            <p class="text-xs ">{{ session('user_det')['role'] }}</p>
+                            <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>
+                            <p class="text-xs  text-white">{{ session('user_det')['role'] }}</p>
                         </div>
                         <div>
                             <img height="48px" width="48px"
-                                class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 border-primary"
+                                class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 "
                                 src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
                                 alt="user">
                         </div>
                     </div>
-                </div>
             </div>
         </nav>
 

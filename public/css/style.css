@@ -147,19 +147,16 @@ table.dataTable.no-footer {
 }
 
 .gradient-bg {
-    /* background: rgb(2, 0, 36);
-    background: linear-gradient(
-        60deg,
-        rgba(2, 0, 36, 1) 0%,
-        rgba(5, 10, 116, 1) 28%,
-        rgba(5, 69, 116, 1) 96%
-    ); */
-    /* background: rgb(2,0,36);
-background: linear-gradient(308deg, rgba(2,0,36,1) 0%, rgba(5,10,116,1) 21%); */
-    /* background: rgb(5, 61, 116); */
     background: linear-gradient(
         308deg,
         rgba(5, 61, 116, 1) 0%,
         rgba(5, 10, 116, 1) 100%
+    );
+}
+.gradient-bg-rev {
+    background: linear-gradient(
+        308deg,
+        rgba(5, 10, 116, 1) 100%,
+        rgba(5, 61, 116, 1) 0%
     );
 }
