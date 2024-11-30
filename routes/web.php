@@ -20,6 +20,7 @@ Route::get('email', function () {
 Route::get('setupPassword', function () {
     return view('Auth.setup_password');
 });
+Route::post('setPassword', [userController::class  , 'setPassword']);
 Route::post('login', [authController::class, 'login']);
 Route::post('registerdata', [authController::class, 'register']);
 Route::post('updateUser/{id}', [authController::class, 'update'])->name("update");

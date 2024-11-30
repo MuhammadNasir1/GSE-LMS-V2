@@ -34,7 +34,7 @@
                         <div>
                             <h1 class="text-customBlackColor font-bold text-[44px] text-center">Set Password</h1>
                         </div>
-                        <form id="postDataForm" method="POST" url="../resetPassword">
+                        <form id="postDataForm" method="POST" url="../setPassword">
                             @csrf
                             <input type="hidden" name="user_id" id="" value="{{isset($_GET['key']) ? $_GET['key'] : null}}">
                             <div class="mt-10">
@@ -116,7 +116,7 @@
     });
      $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             if (response.success) {
-                window.location.href  = "../login";
+                window.location.href = "../login?key={{ request()->get('key') }}";
             } else {}
         });
 </script>

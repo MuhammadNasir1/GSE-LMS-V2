@@ -57,44 +57,12 @@ class userController extends Controller
                 'verification' => "approved",
             ]);
             Mail::to($validatedData['email'])->send(new registrationMail($user->name , Hash::make($user->id)));
-            return response()->json(['success' => true, 'message' => 'User add successfully'], 200);
+            return response()->json(['success' => true, 'message' => 'invitation Send Successfully!'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
-    public function CustomerUpdateData($user_id)
-    {
-        try {
 
-            $customer = User::find($user_id);
-            return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false,  'message' => $e->getMessage()]);
-        }
-    }
-    public function CustomerUpdate(Request $request, $user_id)
-    {
-        try {
-
-            $customer = User::find($user_id);
-
-            $validatedData = $request->validate([
-                'name' => 'nullable',
-                'email' => 'nullable',
-                'phone_no' => 'nullable',
-                'address' => 'nullable',
-            ]);
-
-            $customer->name = $validatedData['name'];
-            $customer->phone = $validatedData['phone_no'];
-            $customer->email = $validatedData['email'];
-            $customer->address = $validatedData['address'];
-            $customer->update();
-            return response()->json(['success' => true,  'message' => "Data  Get Successfully", 'customer' => $customer]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false,  'message' => $e->getMessage()]);
-        }
-    }
 
     public function Dashboard()
     {
@@ -170,4 +138,33 @@ class userController extends Controller
     }
 
    
+    public function setPassword(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'user_id' => 'required',
+                'password' => 'required|confirmed',
+            ]);
+
+            $hashedUserId = $validatedData['user_id'];
+            // Decrypt the hashed user_id
+            $user = User::all()->first(function ($user) use ($hashedUserId) {
+                return Hash::check($user->id, $hashedUserId);
+            });
+
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not found'], 404);
+            }
+            $user->password = $validatedData['password'];
+            $user->save();
+
+            return response()->json(['success' => true, 'message' => 'Password has been reset'], 200);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            return response()->json(['success' => false, 'message' => 'Invalid user ID'], 400);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+
+            
+        }
+    }
 }
