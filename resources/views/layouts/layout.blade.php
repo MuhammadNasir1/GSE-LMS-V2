@@ -62,13 +62,8 @@
 
         </div>
         <aside id="sidebar-multi-level-sidebar"
-            class="fixed  gradient-bg text-white top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            class="fixed   gradient-bg text-white top-[74px] left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
-            <div class="flex  justify-center mt-[30px] pr-4 mb-3">
-                <a href="../"> <img class=" w-48" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
-                {{-- <a href="../"> <img class=" w-48" src="{{ asset('images/GSE-log(bg).png') }}" alt="GSE"></a> --}}
-                {{-- <a href="../"> <img class=" w-48" src="{{ asset('images/comapnylogo.svg') }}" alt="Horeca"></a> --}}
-            </div>
             <div class="h-full  py-4 overflow-y-auto ">
                 <ul class="space-y-2  pl-3 pr-6 font-medium">
                     <li class="{{ request()->is('/') ? 'active bg-white text-black rounded-md ' : '' }} ">
@@ -340,7 +335,7 @@
                         </a>
                     </li>
 
-                    <li class="absolute bottom-5">
+                    <li>
                         <form action="../weblogout" method="post" class=" cursor-pointer" id="logoutform">
                             @csrf
                             <div onclick="logoutform.submit()"
@@ -366,26 +361,26 @@
 
         </aside>
     </div>
-    <div id="content">
-        <nav id="Navbar">
-            <div class="flex justify-between items-center gap-5 gradient-bg py-3 px-5">
+    <nav id="Navbar">
+        <div class="flex justify-between items-center gap-5 gradient-bg py-3 px-5 fixed top-0 w-full z-40">
 
-
-                    <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2>
-                    <div class="flex items-center gap-2">
-                        <div class="leading-tight  text-end">
-                            <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>
-                            <p class="text-xs  text-white">{{ session('user_det')['role'] }}</p>
-                        </div>
-                        <div>
-                            <img height="48px" width="48px"
-                                class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 "
-                                src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
-                                alt="user">
-                        </div>
+                <a href="../"> <img class=" h-[40px]" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
+                <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2>
+                <div class="flex items-center gap-2">
+                    <div class="leading-tight  text-end">
+                        <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>
+                        <p class="text-xs  text-white">{{ session('user_det')['role'] }}</p>
                     </div>
-            </div>
-        </nav>
+                    <div>
+                        <img height="48px" width="48px"
+                            class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 "
+                            src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
+                            alt="user">
+                    </div>
+                </div>
+        </div>
+    </nav>
+    <div id="content" class="sm:ml-[254px] my-[48px] min-h-full overflow-auto ">
 
 
 
@@ -393,6 +388,10 @@
 
 
 
+    </div>
+    <div class="fixed flex justify-center items-center  w-full bottom-0 py-2 bg-white ">
+        <p class="text-sm text-black">Powered by <a href="https://globalconsulting-int.com/" target="_blank" class="text-primary font-semibold">Global Consulting pvt. Ltd.</a> & Developed by <a  class="text-blue-500" href="">Velodity Solutions</a>.
+        </p>
     </div>
     <script src="https://kit.fontawesome.com/b6b9586b26.js" crossorigin="anonymous"></script>
     <script src="{{ asset('javascript/jquery.js') }}"></script>

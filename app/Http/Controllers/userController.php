@@ -30,7 +30,9 @@ class userController extends Controller
         if($request['type'] == 'candidate'){
             $users =  User::where('role', 'candidate')->get();
         }elseif($request['type'] == 'assessor'){
-            $users =  User::where('role', '	assessor')->get();
+            $users =  User::where('role', 'assessor')->get();
+        }else{
+            $users =  [];
         }
         $courses = Course::all();
         return view('users', compact('users', 'courses'));
