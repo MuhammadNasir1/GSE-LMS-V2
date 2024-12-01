@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('client_type')->nullable();
             $table->string('city')->nullable();
             $table->string('course')->nullable();
+            $table->integer('enrolled')->default(0);
         });
     }
 

@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\CourseAssignments;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CourseController extends Controller
 {
@@ -100,5 +101,14 @@ class CourseController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
         }
+    }
+
+    public function setAssignments(Request $request){
+        $course = Course::where('id' , $request['c'])->first();    
+        $course->assessor = User::where('id', $course->assessor_id)->value('name');
+        $course->assignments = CourseAssignments::where('course_id' , $request['c'])->get();
+        return response()->json($course);
+        return view('enrolled_course');
+
     }
 }

@@ -62,10 +62,10 @@
 
         </div>
         <aside id="sidebar-multi-level-sidebar"
-            class="fixed   gradient-bg text-white top-[74px] left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            class="fixed   gradient-bg text-white top-[73px] left-0 z-40 w-60 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
             <div class="h-full  py-4 overflow-y-auto ">
-                <ul class="space-y-2  pl-3 pr-6 font-medium">
+                <ul class="space-y-2  px-4 font-medium">
                     <li class="{{ request()->is('/') ? 'active bg-white text-black rounded-md ' : '' }} ">
                         <a href="../" class=" flex items-center p-2 rounded-lg   ">
                             <svg class="{{ request()->is('/') ? 'text-black' : 'text-white' }}" width="20"
@@ -380,7 +380,7 @@
                 </div>
         </div>
     </nav>
-    <div id="content" class="sm:ml-[254px] my-[48px] min-h-full overflow-auto ">
+    <div id="content" class="sm:ml-[240px] my-[48px] min-h-full overflow-auto ">
 
 
 

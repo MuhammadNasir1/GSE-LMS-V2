@@ -171,10 +171,10 @@ class authController extends Controller
 
                 ]]);
                 return  response()->json([
-                    'token' => $token,
+                    'key' => Hash::make($user->id),
                     'message' => 'login  Successful',
                     'success' => true,
-                    'user' => $user,
+                    'user' => $user,  
                 ],  200);
             } else {
 

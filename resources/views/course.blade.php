@@ -32,12 +32,12 @@
 
                     </form>
                     @if (session('user_det')['role'] == 'admin')
-                        <div>
+                        {{-- <div>
 
                             <button data-modal-target="addCourseModal" data-modal-toggle="addCourseModal"
                                 class="bg-primary cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
                                 Add Course</button>
-                        </div>
+                        </div> --}}
                     @endif
                 </div>
                 <div class="grid grid-cols-3 gap-6 mt-4  xl:px-[80px] ">
