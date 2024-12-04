@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 
 @section('title')
-    Assignment
+    Units
 @endsection
 
 @section('content')
-    <div class="p-10">
+    <div class="mx-10 my-16">
         <div class="flex justify-between gap-5">
             <div class="flex gap-4 items-center">
                 {{-- <div class="w-[200px] pt-3">
@@ -34,9 +34,9 @@
             </div>
             <div class="flex justify-end w-full">
 
-                <button data-modal-target="addAssignmentmodal" data-modal-toggle="addAssignmentmodal"
-                    class="bg-primary cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
-                    Add Assigment</button>
+                <button data-modal-target="unitModal" data-modal-toggle="unitModal"
+                    class="gradient-bg cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
+                    Add Unit Assignment</button>
             </div>
             <div>
 
@@ -45,20 +45,23 @@
 
         <div class="">
             <div class="grid  xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 gap-5  mt-7">
-                @for ($i = 1; $i <= 10; $i++)
-                    <div class="h-[220px]  bg-white border border-gray-400  rounded-lg p-3 shadow-lg">
-                        <a href="#">
+                @foreach ($assignments as $assignment)
+                    <div class="h-[220px] w-full  bg-white border border-gray-400  rounded-lg p-3 shadow-l relative">
+                        <a target="_blank" href="{{$assignment->file}}">
                             <div class="flex justify-center">
                                 <img width="120" src="{{ asset('images/icons/pdf-upload-3389.svg') }}" alt="">
                             </div>
                             <div class="mt-2">
-                                <h1 class="text-lg font-semibold text-[#545353] text-center text-[16px]">LFFICT/23/029/V1.0
-                                </h1>
+                                <h1 class="text-lg font-semibold text-[#545353] text-center text-[16px]">
+                                    {{ $assignment->reference_no }}</h1>
                                 <p class="text-[#545353c0] text-sm"> (Optional) UNIT 8 Review health and ....</p>
                             </div>
                         </a>
+                        {{-- <div class="absolute w-full h-full rounded-lg bg-black opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+                            <h2 class=" font-bold ">Pending</h2>
+                        </div> --}}
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
@@ -88,23 +91,25 @@
 
 
     {{-- ============ add  Assignment modal  =========== --}}
-    <div id="addAssignmentmodal" data-modal-backdrop="static"
-        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div id="unitModal" data-modal-backdrop="static"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
-        <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+        <div class="relative p-4 w-full   max-w-4xl max-h-full ">
 
-            <form id="assignmentData" method="post" enctype="multipart/form-data">
+            <form id="FormData" method="post" url="../addAssignment" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="reference_no" value="5374564">
                 <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                     <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                         <h3 class="text-xl font-semibold text-white ">
-                            Add Assignment
+                            Add Unit
                         </h3>
                         <button type="button"
-                            class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                            data-modal-hide="addAssignmentmodal">
+                            class="modalCloseBtn absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                            data-modal-hide="unitModal">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,41 +118,42 @@
                         </button>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+                    <div class="grid md:grid-cols-2 gap-4 mx-6 my-4">
                         <div>
-                            <label class="text-[14px] font-normal" for="name">Assignment Name</label>
-                            <input type="text" required
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="name" id="name" placeholder="Resource Name Here"
-                                value="{{ $user->email ?? '' }}">
+                            <label class="text-[14px] font-normal" for="name">Unit</label>
+                            <select name="unit_id" id="unit">
+                                <option disabled selected>Select Course Unit</option>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->title }} ({{ $unit->refrence_no }})
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div>
-                            <label class="text-[14px] font-normal" for="file">Assignment File</label>
+                            <label class="text-[14px] font-normal" for="file">Unit File</label>
                             <input type="file" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="file" id="file" value="{{ $user->name ?? '' }}"
+                                name="file" id="
                                 accept=".pdf , .DOCX , .DOC">
                         </div>
-
-                    </div>
-                    <div class="grid  md:grid-cols-1 gap-6 mx-6 my-6">
-
-                        <div>
-                            <label class="text-[14px] font-normal" for="description">Assignment Description</label>
+                        <div class="col-span-2">
+                            <label class="text-[14px] font-normal" for="description">Unit Description</label>
                             <textarea name="description" id="description"
                                 class="w-full min-h-20 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 placeholder="Resource Description Here"></textarea>
                         </div>
 
-
                     </div>
 
 
 
+
                     <div class="flex justify-end ">
-                        <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                            id="addBtn">
-                            <div class=" text-center hidden" id="spinner">
+                        <button
+                            class="gradient-bg text-white py-2 px-6 w-full my-6 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                            id="submitBtn">
+                            <div class=" text-center hidden" id="btnSpinner">
                                 <svg aria-hidden="true"
                                     class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
                                     viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -159,8 +165,8 @@
                                         fill="currentFill" />
                                 </svg>
                             </div>
-                            <div id="text">
-                                @lang('lang.Save')
+                            <div id="btnText">
+                                Add
                             </div>
 
                         </button>
@@ -173,4 +179,51 @@
 
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $("#FormData").submit(function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            // Send the AJAX request
+            $.ajax({
+                type: "POST",
+                url: "/addAssignment",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    $('#btnSpinner').removeClass('hidden');
+                    $('#btnText').addClass('hidden');
+                    $('#submitBtn').attr('disabled', true);
+                },
+                success: function(response) {
+
+                    $('#btnText').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    window.location.href = "../assignment"
+
+
+                },
+                error: function(jqXHR) {
+
+                    let response = JSON.parse(jqXHR.responseText);
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: "Error",
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 2000,
+                    });
+                    $('#btnText').removeClass('hidden');
+                    $('#btnSpinner').addClass('hidden');
+                    $('#submitBtn').attr('disabled', false);
+                }
+            });
+        });
+    </script>
 @endsection

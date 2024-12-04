@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="md:mx-4 mt-1">
+    <div class="md:mx-4 mt-1 ">
 
-        <div class=" mt-3  rounded-xl py-8 px-[20px]  bg-white">
+        <div class=" mt-6  rounded-xl py-8 xl:px-[60px]  ">
             <div>
                 <div class="flex justify-end sm:justify-between  items-start  mb-3">
                     <form action="">
@@ -40,25 +40,14 @@
                         </div> --}}
                     @endif
                 </div>
-                <div class="grid grid-cols-3 gap-6 mt-4  xl:px-[80px] ">
+                <div class="grid grid-cols-3 gap-6 mt-4   ">
 
 
                     {{-- @for ($i = 1; $i <= 4; $i++) --}}
                     @foreach ($courses as $data)
-                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700 cursor-pointer  relative   {!! session('user_det')['role'] == 'student' &&
-                        isset($data->enrolled_course) &&
-                        $data->enrolled_course->course == $data->id
-                            ? 'courseCard'
-                            : (session('user_det')['role'] != 'student'
-                                ? 'courseCard'
-                                : '') !!}""
-                            {!! session('user_det')['role'] == 'student' &&
-                            isset($data->enrolled_course) &&
-                            $data->enrolled_course->course == $data->id
-                                ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
-                                : (session('user_det')['role'] != 'student'
-                                    ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
-                                    : '') !!}>
+                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700 cursor-pointer  relative   {!! session('user_det')['role'] == 'candidate' &&  isset($data->enrolled_course) && $data->enrolled_course->course == $data->id ? 'courseCard'  : (session('user_det')['role'] != 'candidate' ? 'courseCard' : '') !!}"
+                            {!! session('user_det')['role'] == 'candidate' &&  isset($data->enrolled_course) && $data->enrolled_course->course == $data->id ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
+                                : (session('user_det')['role'] != 'candidate' ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"' : '') !!}>
                             <a href="#">
                                 <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
                                     alt="" />
@@ -75,7 +64,7 @@
                                     More Details
                                 </a>
                             </div>
-                            @if (session('user_det')['role'] == 'student')
+                            @if (session('user_det')['role'] == 'candidate')
                                 {{-- @if ($data->enrolled_course->course) --}}
                                 <div
                                     class="bg-[#0000005d]  cursor-pointer  absolute h-full w-full flex  items-center top-0 rounded-lg z-40 flex-col {{ $data->enrolled_course->course == $data->id ? '' : 'hidden' }}">

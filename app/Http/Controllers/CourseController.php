@@ -21,8 +21,8 @@ class CourseController extends Controller
         foreach ($courses as $course) {
             // $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
             // $course->course_assignment = $course_assignment;
-            $course->enrolled_course = 0;
-            if ($role == 'student') {
+            $course->enrolled_course = 2;
+            if ($role == 'candidate') {
                 $student = User::select('course')->where('id', $user_id)->first();
                 $course->enrolled_course  = $student;
             }

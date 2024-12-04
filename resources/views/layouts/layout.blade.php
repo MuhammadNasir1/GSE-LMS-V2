@@ -279,7 +279,7 @@
                             </svg>
 
 
-                            <span class="ms-3"> Assignments</span>
+                            <span class="ms-3">Units</span>
                         </a>
                     </li>
                     @if (session('user_det')['role'] == 'canditate')
@@ -365,7 +365,7 @@
         <div class="flex justify-between items-center gap-5 gradient-bg py-3 px-5 fixed top-0 w-full z-40">
 
                 <a href="../"> <img class=" h-[40px]" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
-                <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2>
+                {{-- <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2> --}}
                 <div class="flex items-center gap-2">
                     <div class="leading-tight  text-end">
                         <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>

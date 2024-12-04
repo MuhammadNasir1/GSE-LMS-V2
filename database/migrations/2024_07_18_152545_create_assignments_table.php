@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('name');
+            $table->integer('user_id');
+            $table->integer('unit_id');
+            $table->string('reference_no');
             $table->string('file');
             $table->string('description');
-            $table->string('status');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

@@ -8,9 +8,7 @@
     <title>Login - Poultry Bazar</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/DataTables-1.13.8/css/jquery.dataTables.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         #loading {
             position: fixed;
@@ -129,19 +127,11 @@
 
     <script src="{{ asset('javascript/jquery.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('javascript/script.js') }}"></script>
     <script>
         $(window).on('load', function() {
             $('#loading').hide();
         })
-        $(document).ready(function() {
-            $('select').select2({
-                width: '100%'
-            });
-            $('#Items_dropdown').select2({
-                minimumResultsForSearch: Infinity
-            });
-        });
+        
         $(document).ready(function() {
             $("#login_data").submit(function(event) {
                 event.preventDefault();
@@ -161,15 +151,7 @@
 
                         $('#text').removeClass('hidden');
                         $('#spinner').addClass('hidden');
-
-                        console.log(response);
-                        if (response.user.role == "candidate") {
-                            window.location.href =
-                                `../enrolledCourse?key=?${response.key}&c=${response.user.course}`;
-                        } else {
-                            window.location.href = "../"
-
-                        }
+                            window.location.href = "../"       
 
 
                     },
