@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('course')->nullable();
             $table->integer('enrolled')->default(0);
+            $table->text('assignments')->nullable();
         });
     }
 

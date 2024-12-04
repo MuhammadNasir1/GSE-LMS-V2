@@ -10,11 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/DataTables-1.13.8/css/jquery.dataTables.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         #loading {
@@ -69,6 +65,18 @@
 
 
             <div class="bg-white my-4 pt-4 pb-8 rounded-md">
+                <div>
+                    <ul class="list-disc list-inside space-y-2 mx-4  mb-4  ">
+                        <li class= " text-lg">Total Unit: <span class="font-bold">{{$course->course_assignments}}</span></li>
+                        <li class= " text-lg">Optional Unit:  <span class="font-bold">{{$course->optional_assignments}}</span> 
+                            @if ($course->with_optional == 1)
+                                <span class="text-sm font-semibold">(Select {{$course->option_selected}} Unit From table your total unit is 6)</span>
+                            @endif
+                        </li>
+                        {{-- <li class="text-primary font-semibold text-lg">Mandatory Unit: 5</li>
+                        <li class="text-primary font-semibold text-lg">Optional Unit: 5</li> --}}
+                    </ul>
+                </div>
                 <h2 class="font-semibold text-xl  mx-2 ">Course Content</h2>
 
                 <div class="relative overflow-x-auto mt-2">
@@ -94,6 +102,9 @@
                             @foreach ($course->assignments as $assignment)
                                 <tr class="bg-white border-b ">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                        @if ($assignment->optional == 1)
+                                        <input  id="green-checkbox" type="checkbox" value="" class="w-5 h-5 checkBoxes text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500  focus:ring-2">
+                                        @endif
                                         {{ $assignment->title }}
                                     </th>
                                     <td class="px-6 py-4">
@@ -118,7 +129,9 @@
                     </table>
                 </div>
 
-
+                <div class="flex justify-end mx-4 mt-4">
+                    <button class="px-6 py-2 gradient-bg font-semibold text-white rounded-lg">Enroll Now!</button>
+                </div>
             </div>
         </div>
     </div>
@@ -130,15 +143,27 @@
     </div>
     <script src="https://kit.fontawesome.com/b6b9586b26.js" crossorigin="anonymous"></script>
     <script src="{{ asset('javascript/jquery.js') }}"></script>
-    <script src="{{ asset('javascript/canvas.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
-        integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="{{ asset('DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('javascript/script.js') }}"></script>
     <script>
         $(document).ready(function() {
+            $(".checkBoxes").on("change", function () {
+        const checkedBoxes = $(".checkBoxes:checked").length;
+
+        // Check if more than 2 checkboxes are checked
+        if (checkedBoxes > 2) {
+            Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Warning",
+            text: "You can only select up to 2 options.",
+            showConfirmButton: false,
+            timer: 2000,
+        });
+            $(this).prop("checked", false); // Uncheck the current checkbox
+        }
+    });
+
             $('#datatable').DataTable();
         });
     </script>
