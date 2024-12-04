@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\CourseAssignments;
+use App\Models\EnrollUnits;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\Node\FunctionNode;
@@ -103,12 +104,49 @@ class CourseController extends Controller
         }
     }
 
-    public function setAssignments(Request $request){
-        $course = Course::where('id' , $request['c'])->first();    
+    public function setAssignments(Request $request)
+    {
+        $course = Course::where('id', $request['c'])->first();
         $course->assessor = User::where('id', $course->assessor_id)->value('name');
-        $course->assignments = CourseAssignments::where('course_id' , $request['c'])->get();
+        $course->assignments = CourseAssignments::where('course_id', $request['c'])->get();
         // return response()->json($course);
-        return view('enrolled_course' , compact("course"));
+        return view('enrolled_course', compact("course"));
+    }
 
+
+    public function enrollCandidate(Request $request)
+    {
+
+        try {
+                $validatedData = $request->validate([
+                    "user_id" => "required|exists:users,id", 
+                    "course_id" => "required|exists:courses,id",
+                    "reference_no" => "required|array",
+                ]);
+                
+                $user = User::find($validatedData['user_id']);
+                if (!$user) {
+                    return response()->json(['success' => false, 'message' => "User not found. Contact the Admin"], 422);
+                }
+                
+                foreach ($validatedData['reference_no'] as $reference_no) {
+                    EnrollUnits::create([
+                        'user_id' => $validatedData['user_id'],
+                        'course_id' => $validatedData['course_id'],
+                        'reference_no' => $reference_no,
+                    ]);
+                }
+                
+                $user->enrolled = 1;
+                $user->save();
+                
+                return response()->json(['success' => true, 'message' => "Units successfully enrolled"], 200);
+                
+
+
+            return response()->json(['success' => true, 'message' => "Enrollment successful"], 201);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+        }
     }
 }

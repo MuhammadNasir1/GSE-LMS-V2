@@ -8,9 +8,7 @@
     <title>Login - Poultry Bazar</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/DataTables-1.13.8/css/jquery.dataTables.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         #loading {
             position: fixed;
@@ -128,12 +126,7 @@
             $('#loading').hide();
         })
         $(document).ready(function() {
-            $('select').select2({
-                width: '100%'
-            });
-            $('#Items_dropdown').select2({
-                minimumResultsForSearch: Infinity
-            });
+           
         });
      $(document).ready(function () {
         // Toggle password visibility
@@ -151,8 +144,11 @@
         });
     });
      $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
-            if (response.success) {
-                window.location.href = "../login?key={{ request()->get('key') }}";
+        // console.log(response);
+        
+            if (response.user.enrolled == 0) {
+
+                window.location.href = `../enrolledCourse?key={{ request()->get('key') }}&c=${response.user.course}&i=${response.user.id}`;
             } else {}
         });
 </script>

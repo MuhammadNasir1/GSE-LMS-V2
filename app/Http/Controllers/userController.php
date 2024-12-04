@@ -158,7 +158,7 @@ class userController extends Controller
             $user->password = $validatedData['password'];
             $user->save();
 
-            return response()->json(['success' => true, 'message' => 'Password has been reset'], 200);
+            return response()->json(['success' => true, 'message' => 'Password has been set' , 'user' => $user], 200);
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return response()->json(['success' => false, 'message' => 'Invalid user ID'], 400);
         } catch (\Exception $e) {
