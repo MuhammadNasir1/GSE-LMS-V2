@@ -162,8 +162,7 @@ class userController extends Controller
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return response()->json(['success' => false, 'message' => 'Invalid user ID'], 400);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
-
+            return $this->errorResponse($e);
             
         }
     }

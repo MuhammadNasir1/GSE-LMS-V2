@@ -107,8 +107,8 @@ class CourseController extends Controller
         $course = Course::where('id' , $request['c'])->first();    
         $course->assessor = User::where('id', $course->assessor_id)->value('name');
         $course->assignments = CourseAssignments::where('course_id' , $request['c'])->get();
-        return response()->json($course);
-        return view('enrolled_course');
+        // return response()->json($course);
+        return view('enrolled_course' , compact("course"));
 
     }
 }
