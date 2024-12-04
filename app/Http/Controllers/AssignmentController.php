@@ -28,16 +28,15 @@ class AssignmentController extends Controller
 
         //     $assignments = Assignment::all();
         // }
-$assignments = Assignment::where('user_id' , $user_id)->get();
-
-        $allUnits = EnrollUnits::select('reference_no')->where('user_id', $user_id)->where('checked_status' , 0)->get();
+        $assignments = Assignment::where('user_id', $user_id)->get();
+        $allUnits = EnrollUnits::select('reference_no')->where('user_id', $user_id)->where('checked_status', 0)->get();
         $referenceNumbers = $allUnits->pluck('reference_no');
         $units = CourseAssignments::whereIn('refrence_no', $referenceNumbers)->get();
-    
-    // return response()->json($units);
-    
 
-        return  view('assignment', compact('units' , "assignments"));
+        // return response()->json($units);
+
+
+        return  view('assignment', compact('units', "assignments"));
     }
 
     public function add(Request $request)
@@ -58,10 +57,14 @@ $assignments = Assignment::where('user_id' , $user_id)->get();
             $resource->description = $validateData['description'];
             $resource->status = 2;
 
+            $unit = EnrollUnits::find($validateData['unit_id']);
+            $unit->checked_status = 2;
+            $unit->submission_count = $unit->submission_count + 1 ;
+            $unit->update();
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/assignment_files', $imageName); 
+                $image->storeAs('public/assignment_files', $imageName);
                 $resource->file = 'storage/assignment_files/' . $imageName;
             }
             $resource->save();
