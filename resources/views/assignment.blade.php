@@ -1,104 +1,82 @@
 @extends('layouts.layout')
 
 @section('title')
-    Units
+    Assignments
 @endsection
 
 @section('content')
-    <div class="mx-10 my-16">
-        <div class="flex justify-between gap-5">
-            <div class="flex gap-4 items-center">
-                {{-- <div class="w-[200px] pt-3">
-                    <select name="course" id="course" class="rounded-[5px] w-[100px] bg-gray border-0 ps-8 focus:border-0">
-                        <option value="Bacholer"> Bacholer</option>
-                        <option value="Masters">Masters</option>
-                    </select>
-                </div> --}}
-                <form class="max-w-md mx-auto">
-                    <label for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </div>
-                        <input type="search" id="search"
-                            class="block min-w-[300px] px-4 py-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary focus:border-primary "
-                            placeholder="Search Mockups, Logos..." required />
+    <div class="md:mx-4  mt-12">
 
-                    </div>
-                </form>
-            </div>
-            <div class="flex justify-end w-full">
-
-                <button data-modal-target="unitModal" data-modal-toggle="unitModal"
-                    class="gradient-bg cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
-                    Add Unit Assignment</button>
-            </div>
+        <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
+                <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
+                    <h3 class="text-[20px] text-black hidden sm:block">Assignment List</h3>
+                    <div>
 
-            </div>
-        </div>
-
-        <div class="">
-            <div class="grid  xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 gap-5  mt-7">
-                @foreach ($assignments as $assignment)
-                    <div class="h-[220px] w-full  bg-white border border-gray-400  rounded-lg p-3 shadow-l relative">
-                        <a target="_blank" href="{{$assignment->file}}">
-                            <div class="flex justify-center">
-                                <img width="120" src="{{ asset('images/icons/pdf-upload-3389.svg') }}" alt="">
-                            </div>
-                            <div class="mt-2">
-                                <h1 class="text-lg font-semibold text-[#545353] text-center text-[16px]">
-                                    {{ $assignment->reference_no }}</h1>
-                                <p class="text-[#545353c0] text-sm"> (Optional) UNIT 8 Review health and ....</p>
-                            </div>
-                        </a>
-                        {{-- <div class="absolute w-full h-full rounded-lg bg-black opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
-                            <h2 class=" font-bold ">Pending</h2>
-                        </div> --}}
+                        <button data-modal-target="userModal" data-modal-toggle="userModal"
+                            class="gradient-bg cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                            Add Assignment</button>
                     </div>
-                @endforeach
+                </div>
+                <div class="overflow-x-auto">
+                    <table id="datatable">
+                        <thead class="py-1 gradient-bg text-white">
+                            <tr>
+                                <th>STN</th>
+                                <th>Course</th>
+                                <th>Reference No</th>
+                                <th>File</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            @foreach ($assignments as $assignment)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                      
+
+                                        {{-- <img src="{{ $data->user_image }}" alt=""> --}}
+                                        {{-- {{ asset($data->user_image) }} --}}
+                                    </td>
+
+                                    <td>{{ $assignment->name }}</td>
+                                    <td><a href="mailto:{{ $assignment->email }}" class="text-blue-700">{{ $assignment->email }}</a>
+                                    </td>
+                                    <td>{{ $assignment->reference_no }}</td>
+                                    {{-- <td><span
+                                            class="{{ $data->role == 'assessor' ? 'text-green-800' : 'text-purple-700' }}">{{ $data->role }}</span>
+                                    </td> --}}
+                                    {{-- <td>
+                                        <span
+                                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->verification }}</span>
+
+                                    </td> --}}
+                                    <td>
+                                  
+                                    </td>
+                                </tr>
+                                @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="mt-2 flex justify-center hidden">
-        <div class="flex">
-            <!-- Previous Button -->
-            <a href="#"
-                class="flex items-center justify-center px-3 py-2 text-white  me-3 text-md font-medium text-gray-500 gradient-bg rounded-lg ">
-                <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="white" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 5H1m0 0 4 4M1 5l4-4" />
-                </svg>
-                Previous
-            </a>
-            <a href="#"
-                class="flex items-center justify-center px-3 py-2 text-white  me-3 text-md font-medium text-gray-500 gradient-bg rounded-lg ">
-                Next
-                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="white" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
-        </div>
-    </div>
 
 
-    {{-- ============ add  Assignment modal  =========== --}}
-    <div id="unitModal" data-modal-backdrop="static"
+
+
+    {{-- ============ add  customer modal  =========== --}}
+    <div id="userModal" data-modal-backdrop="static"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
-        <div class="relative p-4 w-full   max-w-4xl max-h-full ">
-
+        <div class="relative p-4 w-full   max-w-2xl max-h-full ">
             <form id="FormData" method="post" url="../addAssignment" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="reference_no" value="5374564">
@@ -181,49 +159,17 @@
     </div>
 @endsection
 
+
 @section('js')
     <script>
-        $("#FormData").submit(function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
-            // Send the AJAX request
-            $.ajax({
-                type: "POST",
-                url: "/addAssignment",
-                data: formData,
-                dataType: "json",
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    $('#btnSpinner').removeClass('hidden');
-                    $('#btnText').addClass('hidden');
-                    $('#submitBtn').attr('disabled', true);
-                },
-                success: function(response) {
+        function updateDatafun() {}
+        // Listen for the custom form submission response event
+        $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
+            console.log(response);
 
-                    $('#btnText').removeClass('hidden');
-                    $('#spinner').addClass('hidden');
-                    window.location.href = "../assignment"
-
-
-                },
-                error: function(jqXHR) {
-
-                    let response = JSON.parse(jqXHR.responseText);
-
-                    Swal.fire({
-                        position: "center",
-                        icon: "warning",
-                        title: "Error",
-                        text: response.message,
-                        showConfirmButton: false,
-                        timer: 2000,
-                    });
-                    $('#btnText').removeClass('hidden');
-                    $('#btnSpinner').addClass('hidden');
-                    $('#submitBtn').attr('disabled', false);
-                }
-            });
+            if (response.success) {
+                $('.modalCloseBtn').click();
+            } else {}
         });
     </script>
 @endsection
