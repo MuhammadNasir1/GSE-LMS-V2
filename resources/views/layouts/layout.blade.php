@@ -279,10 +279,10 @@
                             </svg>
 
 
-                            <span class="ms-3">Units</span>
+                            <span class="ms-3">Assignments</span>
                         </a>
                     </li>
-                    @if (session('user_det')['role'] == 'canditate')
+                    @if (session('user_det')['role'] == 'candidate')
                         <li>
                             <a href="../resources" class=" flex items-center p-2 rounded-lg text-white  group">
                                 <svg class="w-5 h-5 text-white " aria-hidden="true"

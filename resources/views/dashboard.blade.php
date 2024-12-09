@@ -63,7 +63,7 @@
 
         </div>
     </div>
-
+@if(session('user_det')['role'] == "admin")
     <div class="lg:flex gap-4 mt-6 mx-6 ">
         <div class="lg:w-[60%] w-full">
             <div class="min-h-[448px] border border-primary rounded-xl">
@@ -120,6 +120,7 @@
         </div>
     </div>
 
+    @endif
     <script>
         window.onload = function() {
 
