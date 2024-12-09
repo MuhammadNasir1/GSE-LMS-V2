@@ -6,6 +6,8 @@ use App\Mail\registrationMail;
 use App\Models\Assignment;
 use App\Models\assignmentReport;
 use App\Models\Course;
+use App\Models\CourseAssignments;
+use App\Models\EnrollUnits;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
@@ -27,11 +29,11 @@ class userController extends Controller
     // dashboard  Users Couny
     public function users(Request $request)
     {
-        if($request['type'] == 'candidate'){
+        if ($request['type'] == 'candidate') {
             $users =  User::where('role', 'candidate')->get();
-        }elseif($request['type'] == 'assessor'){
+        } elseif ($request['type'] == 'assessor') {
             $users =  User::where('role', 'assessor')->get();
-        }else{
+        } else {
             $users =  [];
         }
         $courses = Course::all();
@@ -56,7 +58,7 @@ class userController extends Controller
                 'course' =>  $validatedData['course'],
                 'verification' => "approved",
             ]);
-            Mail::to($validatedData['email'])->send(new registrationMail($user->name , Hash::make($user->id)));
+            Mail::to($validatedData['email'])->send(new registrationMail($user->name, Hash::make($user->id)));
             return response()->json(['success' => true, 'message' => 'invitation Send Successfully!'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
@@ -137,7 +139,7 @@ class userController extends Controller
         return view('user_profile', compact('userDetails', 'course', 'totalAssignments', 'assessments', 'feedbacks'));
     }
 
-   
+
     public function setPassword(Request $request)
     {
         try {
@@ -158,12 +160,45 @@ class userController extends Controller
             $user->password = $validatedData['password'];
             $user->save();
 
-            return response()->json(['success' => true, 'message' => 'Password has been set' , 'user' => $user], 200);
+            return response()->json(['success' => true, 'message' => 'Password has been set', 'user' => $user], 200);
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
             return response()->json(['success' => false, 'message' => 'Invalid user ID'], 400);
         } catch (\Exception $e) {
             return $this->errorResponse($e);
-            
         }
+    }
+
+    public function profileData()
+    {
+
+        $user_id = session('user_det')['user_id'];
+        $course_id  = User::where('id', $user_id)->value('course');
+        $course = Course::where('id', $course_id)->first();
+        $course->assessor = User::where('id', $course->assessor_id)->value('name');
+
+        $assignments = CourseAssignments::where('course_id', $course->id)->get();
+
+        // Create an array to store combined assignment and report data
+        $assignmentReports = [];
+
+        // Loop through assignments and fetch corresponding reports
+        foreach ($assignments as $assignment) {
+            $report = EnrollUnits::where('assignment_id', $assignment->id)->first();
+
+            // Add assignment and its report as a combined object to the array
+            $assignmentReports[] = [
+                'assignment' => $assignment,
+                'report' => $report, // Will be null if no report is found
+            ];
+        }
+
+        // Assign the combined array to the course
+        $course->assignmentReports = $assignmentReports;
+
+        // Return the course object as JSON
+        return response()->json($course);
+
+        return response()->json($course);
+        return view('profile', compact("course"));
     }
 }

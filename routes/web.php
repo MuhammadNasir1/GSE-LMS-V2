@@ -39,6 +39,7 @@ Route::get('/notifications', function () {
 
 Route::middleware('custom')->group(function () {
 
+    Route::get('/profile', [UserController::class, 'profileData']);
     Route::get('/setting', [authController::class, 'settingdata']);
     Route::post('updateSettings', [authController::class, 'updateSet']);
     // Route::get('/', [userController::class, 'Dashboard']);
