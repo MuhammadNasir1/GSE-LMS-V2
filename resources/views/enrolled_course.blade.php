@@ -114,6 +114,7 @@
                                             @if ($assignment->optional == 1)
                                                 <input id="green-checkbox-{{ $assignment->refrence_no }}"
                                                     type="checkbox" value="{{ $assignment->refrence_no }}"
+                                                    assignmentId={{ $assignment->id }}
                                                     class="w-5 h-5 checkBoxes text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
                                             @endif
                                             {{ $assignment->title }}
@@ -129,6 +130,8 @@
                                                 @if ($assignment->optional == 0)
                                                     <input type="hidden" name="reference_no[]"
                                                         value="{{ $assignment->refrence_no }}">
+                                                    <input type="hidden"name="assignment_id[]"
+                                                        value="{{ $assignment->id }}">
                                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                                         viewBox="0 0 384 512">
                                                         <path fill="#087a06"
@@ -188,7 +191,7 @@
         $(document).ready(function() {
             $(".checkBoxes").on("change", function() {
                 const checkedBoxes = $(".checkBoxes:checked").length;
-                if (checkedBoxes == 2) {
+                if (checkedBoxes === 2) {
                     $('#submitBtn').attr('disabled', false);
                     $('#text').text('Enroll Now!');
                 } else {
@@ -208,6 +211,7 @@
                     $(this).prop("checked", false);
                 }
                 const refNo = $(this).val(); // Reference number of the assignment
+                const assignmentId = $(this).attr('assignmentId'); // Reference number of the assignment
 
                 if ($(this).is(":checked")) {
                     // Add a dynamic row
@@ -218,6 +222,12 @@
                         name="reference_no[]" 
                         class="border rounded px-3 py-2 w-full" 
                         value="${refNo}" 
+                        readonly>
+                    <input 
+                        type="hidden" 
+                        name="assignment_id[]" 
+                        class="border rounded px-3 py-2 w-full" 
+                        value="${assignmentId}" 
                         readonly>
                 </div>
             `);
@@ -266,7 +276,7 @@
                             position: "center",
                             icon: "warning",
                             title: "Error",
-                            text: response.message(),
+                            text: response.message,
                             showConfirmButton: false,
                             timer: 2000,
                         });

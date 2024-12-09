@@ -12,6 +12,7 @@ class EnrollUnits extends Model
     protected $fillable = [
         'user_id',
         'course_id',
+        'assignment_id',
         'reference_no',
         'checked_status',
         'submission_count',

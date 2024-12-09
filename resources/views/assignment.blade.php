@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                      
+
 
                                         {{-- <img src="{{ $data->user_image }}" alt=""> --}}
                                         {{-- {{ asset($data->user_image) }} --}}
@@ -53,7 +53,7 @@
 
                                     </td> --}}
                                     <td>
-                                  
+
                                     </td>
                                 </tr>
                                 @endforeach

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('course_id');
+            $table->integer('assignment_id');
             $table->string('reference_no');
             $table->integer('checked_status')->default(0);
             $table->integer('submission_count')->default(0);

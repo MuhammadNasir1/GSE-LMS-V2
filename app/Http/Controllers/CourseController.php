@@ -97,7 +97,7 @@ class CourseController extends Controller
                 return response()->json(['success' => false, 'message' => "Invalid Id"], 422);
             }
             $course_assignment = CourseAssignments::where('course_id', $courses->id)->get();
-            $courses->course_assignment = $course_assignment;
+        $courses->course_assignment = $course_assignment;
             return response()->json(['success' => true, 'message' => "Data get successfully", "courses" => $courses], 201);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
@@ -119,29 +119,31 @@ class CourseController extends Controller
 
         try {
                 $validatedData = $request->validate([
-                    "user_id" => "required|exists:users,id", 
+                    "user_id" => "required|exists:users,id",
                     "course_id" => "required|exists:courses,id",
                     "reference_no" => "required|array",
+                    "assignment_id" => "required|array",
                 ]);
-                
+
                 $user = User::find($validatedData['user_id']);
                 if (!$user) {
                     return response()->json(['success' => false, 'message' => "User not found. Contact the Admin"], 422);
                 }
-                
-                foreach ($validatedData['reference_no'] as $reference_no) {
+                for ($i = 0; $i < count($validatedData['reference_no']); $i++) {
                     EnrollUnits::create([
                         'user_id' => $validatedData['user_id'],
                         'course_id' => $validatedData['course_id'],
-                        'reference_no' => $reference_no,
+                        'assignment_id' => $validatedData['assignment_id'][$i],
+                        'reference_no' => $validatedData['reference_no'][$i],
                     ]);
                 }
                 
+
                 $user->enrolled = 1;
                 $user->save();
-                
+
                 return response()->json(['success' => true, 'message' => "Units successfully enrolled"], 200);
-                
+
 
 
             return response()->json(['success' => true, 'message' => "Enrollment successful"], 201);
