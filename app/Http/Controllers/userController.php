@@ -176,29 +176,24 @@ class userController extends Controller
         $course = Course::where('id', $course_id)->first();
         $course->assessor = User::where('id', $course->assessor_id)->value('name');
 
-        $assignments = CourseAssignments::where('course_id', $course->id)->get();
+        $enroll_assignments = EnrollUnits::where('user_id', $user_id)->get();
+        $enroll_assignments->assignment_details = [];
+        foreach($enroll_assignments as $enrollment){
 
-        // Create an array to store combined assignment and report data
-        $assignmentReports = [];
+            $course_assignments = CourseAssignments::where('id', $enrollment->assignment_id)->first();
 
-        // Loop through assignments and fetch corresponding reports
-        foreach ($assignments as $assignment) {
-            $report = EnrollUnits::where('assignment_id', $assignment->id)->first();
+            $enrollment->assignment_details =  $course_assignments;
+}
 
-            // Add assignment and its report as a combined object to the array
-            $assignmentReports[] = [
-                'assignment' => $assignment,
-                'report' => $report, // Will be null if no report is found
-            ];
-        }
+        $assignmentReports = [
+            "course" => $course,
+            "assignments" => $enroll_assignments,
+        ];
 
-        // Assign the combined array to the course
-        $course->assignmentReports = $assignmentReports;
 
-        // Return the course object as JSON
-        return response()->json($course);
 
-        return response()->json($course);
+        return response()->json($assignmentReports);
+
         return view('profile', compact("course"));
     }
 }

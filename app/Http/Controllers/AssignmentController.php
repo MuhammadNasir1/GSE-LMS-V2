@@ -18,21 +18,21 @@ class AssignmentController extends Controller
 
         $userRole = session('user_det')['role'];
         $user_id = session('user_det')['user_id'];
-     
-        $assignments = Assignment::where('user_id', $user_id)->get();
-        $units = EnrollUnits::where('user_id', $user_id)->where('checked_status', 0)->get();
 
+        $assignments = Assignment::where('user_id', $user_id)->get();
+        $units = EnrollUnits::where('checked_status', 0)->where('user_id', $user_id)->get();
+
+        // return response()->json($units);
         foreach ($units as $unit) {
-            $unit->course = CourseAssignments::select('title' , 'course_id')->where('id', $unit->assignment_id)->first();
-            $unit->assessor_id = Course::where('id' ,  $unit->course->course_id )->value('assessor_id');
+            $unit->course = CourseAssignments::select('title', 'course_id')->where('id', $unit->assignment_id)->first();
+            $unit->assessor_id = Course::where('id',  $unit->course->course_id)->value('assessor_id');
         }
-        foreach ($assignments as $assignment)    {
-            $assignmentData = CourseAssignments::where('id', $unit->assignment_id)->first(['title', 'refrence_no']);
+        foreach ($assignments as $assignment) {
+            $assignmentData = CourseAssignments::where('id', $assignment->assignment_id)->first(['title', 'refrence_no']);
             $assignment->unit = $assignmentData;
         }
 
 
-        // return response()->json($units);
 
 
         return  view('assignment', compact('units', "assignments"));
@@ -42,7 +42,7 @@ class AssignmentController extends Controller
     {
 
         try {
-            $user_id =session('user_det')['user_id'];
+            $user_id = session('user_det')['user_id'];
             $validateData = $request->validate([
                 'assignment_id' => 'required',
                 'file' => 'required',
@@ -57,13 +57,13 @@ class AssignmentController extends Controller
             $resource->description = $validateData['description'];
             $resource->status = 2;
 
-            $unit = EnrollUnits::where('assignment_id' , $validateData['assignment_id'])->first();
+            $unit = EnrollUnits::where('assignment_id', $validateData['assignment_id'])->where('user_id', $user_id)->first();
             $unit->checked_status = 2;
             $unit->submission_count = $unit->submission_count + 1;
             $unit->update();
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
-                $imageName = $user_id . 'i' .time() . '.' . $image->getClientOriginalExtension();
+                $imageName = $user_id . 'i' . time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/assignment_files', $imageName);
                 $resource->file = 'storage/assignment_files/' . $imageName;
             }
