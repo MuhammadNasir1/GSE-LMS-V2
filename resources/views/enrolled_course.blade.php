@@ -217,17 +217,17 @@
                     // Add a dynamic row
                     $("#dynamicInputs").append(`
                 <div id="input${refNo}" class="mb-2">
-                    <input 
-                        type="hidden" 
-                        name="reference_no[]" 
-                        class="border rounded px-3 py-2 w-full" 
-                        value="${refNo}" 
+                    <input
+                        type="hidden"
+                        name="reference_no[]"
+                        class="border rounded px-3 py-2 w-full"
+                        value="${refNo}"
                         readonly>
-                    <input 
-                        type="hidden" 
-                        name="assignment_id[]" 
-                        class="border rounded px-3 py-2 w-full" 
-                        value="${assignmentId}" 
+                    <input
+                        type="hidden"
+                        name="assignment_id[]"
+                        class="border rounded px-3 py-2 w-full"
+                        value="${assignmentId}"
                         readonly>
                 </div>
             `);

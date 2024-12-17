@@ -58,7 +58,7 @@ class userController extends Controller
                 'course' =>  $validatedData['course'],
                 'verification' => "approved",
             ]);
-            Mail::to($validatedData['email'])->send(new registrationMail($user->name, Hash::make($user->id)));
+            Mail::to($validatedData['email'])->send(new registrationMail($user->name, asset("setupPassword?key=" . Hash::make($user->id))));
             return response()->json(['success' => true, 'message' => 'invitation Send Successfully!'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);

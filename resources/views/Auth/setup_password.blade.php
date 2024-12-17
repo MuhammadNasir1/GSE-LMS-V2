@@ -126,7 +126,7 @@
             $('#loading').hide();
         })
         $(document).ready(function() {
-           
+
         });
      $(document).ready(function () {
         // Toggle password visibility
@@ -145,7 +145,7 @@
     });
      $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
         // console.log(response);
-        
+
             if (response.user.enrolled == 0) {
 
                 window.location.href = `../enrolledCourse?key={{ request()->get('key') }}&c=${response.user.course}&i=${response.user.id}`;
