@@ -11,6 +11,7 @@ use App\Models\EnrollUnits;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class AssignmentController extends Controller
 {
     public function index()
@@ -20,7 +21,7 @@ class AssignmentController extends Controller
         $user_id = session('user_det')['user_id'];
 
         $assignments = Assignment::where('user_id', $user_id)->get();
-        $units = EnrollUnits::where('checked_status', 0)->where('user_id', $user_id)->get();
+        $units = EnrollUnits::whereNotIn('checked_status', [2, 1])->where('user_id', $user_id)->get();
 
         // return response()->json($units);
         foreach ($units as $unit) {
@@ -92,25 +93,25 @@ class AssignmentController extends Controller
 
 
             $unit = EnrollUnits::where('assignment_id', $validateData['assignment_id'])->where('user_id', $validateData['user_id'])->first();
-            if(!$unit){
+            if (!$unit) {
                 return response()->json(['success' => false, 'message' => "Unit not found"], 500);
             }
             $unit->checked_status = $validateData['status'];
-            if($validateData['status'] == 3){
+            if ($validateData['status'] == 3) {
                 $unit->rejected_count = $unit->rejected_count + 1;
             }
 
             $unit->update();
             $assignment->update();
-            
-                        // $reviews = assignmentReport::create([
-                        //     'checker_user_id' => session('user_det')['user_id'],
-                        //     'user_id' => $assignment->user_id,
-                        //     'assignment_id' => $validateData['assignment_id'],
-                        //     'status' => $validateData['status'],
-                        //     'note' => $validateData['note'],
-                        // ]);
-                        // $reviews->save();
+
+            $reviews = assignmentReport::create([
+                'checker_user_id' => session('user_det')['user_id'],
+                'user_id' => $assignment->user_id,
+                'assignment_id' => $validateData['assignment_id'],
+                'status' => $validateData['status'],
+                'note' => $validateData['note'],
+            ]);
+            $reviews->save();
             return response()->json(['success' => true, 'message' => "Review add successfully"], 201);
         } catch (\Exception $error) {
             return response()->json(['success' => false, 'message' => $error->getMessage()], 500);
@@ -123,11 +124,10 @@ class AssignmentController extends Controller
             $user = User::where('id', $assignment->user_id)->first(['name', 'course']);
             $assignment->user_name = $user->name;
             $assignment->time_ago = $assignment->created_at->diffForHumans();
-            $assignment->assignment_name = CourseAssignments::where('id' , $assignment->assignment_id)->value('title');
+            $assignment->assignment_name = CourseAssignments::where('id', $assignment->assignment_id)->value('title');
             $assignment->course_name = Str::limit(Course::where('id', $user->course)->value('name'), 16);
-
         }
         // return response()->json($assignments);
-        return view('assignment_review' , compact('assignments'));
+        return view('assignment_review', compact('assignments'));
     }
 }

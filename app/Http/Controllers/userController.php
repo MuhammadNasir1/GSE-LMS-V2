@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\AssignRef;
 use Symfony\Component\CssSelector\Node\FunctionNode;
+use Illuminate\Support\Facades\Crypt;
 
 class userController extends Controller
 {
@@ -168,27 +169,53 @@ class userController extends Controller
         }
     }
 
-    public function profileData()
+    public function profileData(Request $request)
     {
-
-        $user_id = session('user_det')['user_id'];
+        $user_id =  Crypt::decryptString($request['u']);
+        $user = User::select('name', 'email', 'phone')->where('id', $user_id)->first();
         $course_id  = User::where('id', $user_id)->value('course');
         $course = Course::where('id', $course_id)->first();
         $course->assessor = User::where('id', $course->assessor_id)->value('name');
 
         $enroll_assignments = EnrollUnits::where('user_id', $user_id)->get();
         $enroll_assignments->assignment_details = [];
-        foreach($enroll_assignments as $enrollment){
+
+
+        $totalCredits = 0;
+        $totalSubmissions = 0;
+        $totalRejections = 0;
+        $completeCredits = 0;
+        foreach ($enroll_assignments as $enrollment) {
 
             $course_assignments = CourseAssignments::where('id', $enrollment->assignment_id)->first();
 
             $enrollment->assignment_details =  $course_assignments;
-}
+
+            $totalCredits += $enrollment->assignment_details->credits;
+            $totalSubmissions += $enrollment->submission_count;
+            $totalRejections += $enrollment->rejected_count;
+        }
 
 
+        $completeAssignments = EnrollUnits::select('assignment_id')->where('user_id', $user_id)->where('checked_status' , '1')->get();
+        foreach ($completeAssignments as $completeAssignment) {
+            $comCredits = CourseAssignments::select('credits')->where('id', $completeAssignment->assignment_id)->first();
+            $completeCredits += $comCredits->credits;
 
+        }
 
+        $percentageCompleted = $totalCredits > 0 
+        ? round(($completeCredits / $totalCredits) * 100, 2) 
+        : 0;
+        $progress_data = [
+            'assessments' => $completeAssignments->count(),
+            'completeCredits' => $completeCredits,
+            'totalCredits' => $totalCredits,
+            'totalSubmissions' => $totalSubmissions,
+            'feedbacks' => $totalRejections,
+            'completionPercentage' => $percentageCompleted,
+        ];
 
-        return view('profile', compact( "course","enroll_assignments"));
+        return view('profile', compact("course", "enroll_assignments", 'user' , 'progress_data'));
     }
 }
