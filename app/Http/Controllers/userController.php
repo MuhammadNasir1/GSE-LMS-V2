@@ -185,15 +185,10 @@ class userController extends Controller
             $enrollment->assignment_details =  $course_assignments;
 }
 
-        $assignmentReports = [
-            "course" => $course,
-            "assignments" => $enroll_assignments,
-        ];
 
 
 
-        return response()->json($assignmentReports);
 
-        return view('profile', compact("course"));
+        return view('profile', compact( "course","enroll_assignments"));
     }
 }

@@ -26,7 +26,8 @@
                                 <th>Unit Name</th>
                                 <th>Reference No</th>
                                 <th>File</th>
-                                <th>Assignment status</th>
+                                <th>Check status</th>
+                                <th>Note</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,11 +39,20 @@
                                     <td>{{ $assignment->unit->refrence_no }}</td>
                                     <td><a href="{{ $assignment->file }}" target="_blank" class="text-blue-600">open
                                             File</a></td>
-                                    <td>{!! $assignment->status = 2
-                                        ? '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>'
-                                        : '<span class="green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>' !!} </td>
                                     <td>
-                                        <button class="updateDataBtn" assignmentId="{{$assignment->id}}"  unit="{{$assignment->assignment_id}}" description="{{$assignment->description}}">
+                                        {!! $assignment->status == 2
+                                            ? '<span class="bg-purple-100 text-purple-800r text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>'
+                                            : ($assignment->status == 1
+                                                ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Approved</span>'
+                                                : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Rejected</span>') !!}
+                                    </td>
+                                    <td>{{ $assignment->note}}</td>
+
+                                    <td>
+                                        @if($assignment->status == 2)
+                                        <button class="updateDataBtn" assignmentId="{{ $assignment->id }}"
+                                            unit="{{ $assignment->assignment_id }}"
+                                            description="{{ $assignment->description }}">
                                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <circle cx="18" cy="18" r="18" fill="#161D6F" />
@@ -51,9 +61,10 @@
                                                     fill="white" />
                                             </svg>
                                         </button>
+                                        @endif
 
                                     </td>
-                                </r>
+                                    </tr>
                             @endforeach
 
 
@@ -166,7 +177,7 @@
             $('#assignmentSelect').change(function() {
                 let assessorId = $(this).find(':selected').data('assessor-id');
 
-              $('#assessorId').val(assessorId || '');
+                $('#assessorId').val(assessorId || '');
             });
         });
 

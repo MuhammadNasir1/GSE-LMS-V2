@@ -23,7 +23,7 @@
                                 <th>Unit</th>
                                 <th>File</th>
                                 <th>status</th>
-                                <th>Upload</th>
+                                <th>Uploaded</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
