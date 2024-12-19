@@ -70,14 +70,15 @@ Route::middleware('custom')->group(function () {
         Route::get('/view/resources', 'index')->name('viewResource');
 
         Route::get('resources', function () {
-            return view('view_resources');
+            return view('view_resources');  
         });
     });
 
     Route::controller(AssignmentController::class)->group(function () {
         Route::post('/addAssignment', 'add');
         Route::get('assignment', 'index');
-        Route::post('/assignmentReview/{assignment_id}', 'assignmentReview');
+        Route::post('/reviewAssignment', 'assignmentReview');
+        Route::get('/assignmentReview', 'assignmentDate');
     });
     Route::get('/', [userController::class, 'Dashboard']);
 

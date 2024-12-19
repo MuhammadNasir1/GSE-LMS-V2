@@ -17,8 +17,9 @@ return new class extends Migration
             $table->integer('assessor_id');
             $table->integer('assignment_id');
             $table->string('file');
-            $table->string('description');
-            $table->string('status')->default(0);
+            $table->text('description');
+            $table->integer('status')->default(0);
+            $table->text('assignments')->nullable();
             $table->timestamps();
         });
     }

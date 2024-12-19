@@ -268,6 +268,7 @@
                             </ul>
                         </li>
                     @endif
+                    @if (session('user_det')['role'] == 'candidate')
                     <li class="{{ request()->is('assignment') ? 'active bg-white text-black rounded-md ' : '' }}">
                         <a href="../assignment" class=" flex items-center p-2 rounded-lg ">
                             <svg class="{{ request()->is('assignment') ? 'text-black' : 'text-white' }} w-5 h-5"
@@ -282,10 +283,26 @@
                             <span class="ms-3">Assignments</span>
                         </a>
                     </li>
-                    @if (session('user_det')['role'] == 'candidate')
-                        <li>
-                            <a href="../resources" class=" flex items-center p-2 rounded-lg text-white  group">
-                                <svg class="w-5 h-5 text-white " aria-hidden="true"
+                    @else
+                    <li class="{{ request()->is('assignmentReview') ? 'active bg-white text-black rounded-md ' : '' }}">
+                        <a href="../assignmentReview" class=" flex items-center p-2 rounded-lg ">
+                            <svg class="{{ request()->is('assignmentReview') ? 'text-black' : 'text-white' }} w-5 h-5"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+
+                            <span class="ms-3">Assignments</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if (session('user_det')['role'] !== 'admin')
+                    <li class="{{ request()->is('resources') ? 'active bg-white text-black rounded-md ' : '' }}">
+                            <a href="../resources" class=" flex items-center p-2 rounded-lg ">
+                                <svg class="{{ request()->is('resources') ? 'text-black' : 'text-white' }} w-5 h-5" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
