@@ -22,7 +22,7 @@ class AssignmentController extends Controller
 
         $assignments = Assignment::where('user_id', $user_id)->get();
         $units = EnrollUnits::whereNotIn('checked_status', [2, 1])->where('user_id', $user_id)->get();
-
+        
         // return response()->json($units);
         foreach ($units as $unit) {
             $unit->course = CourseAssignments::select('title', 'course_id')->where('id', $unit->assignment_id)->first();
