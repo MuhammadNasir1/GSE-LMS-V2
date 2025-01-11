@@ -49,7 +49,7 @@
                             {!! session('user_det')['role'] == 'candidate' &&  isset($data->enrolled_course) && $data->enrolled_course->course == $data->id ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
                                 : (session('user_det')['role'] != 'candidate' ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"' : '') !!}>
                             <a href="#">
-                                <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg"
+                                <img class="rounded-t-lg" src="{{ $data->image}}"
                                     alt="" />
                             </a>
                             <div class="p-5">

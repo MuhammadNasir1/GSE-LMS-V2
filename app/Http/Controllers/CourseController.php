@@ -18,7 +18,13 @@ class CourseController extends Controller
         $assessors = User::Select('name', 'id')->where('role', 'assessor')->get();
         $role = session('user_det')['role'];
         $user_id = session('user_det')['user_id'];
-        foreach ($courses as $course) {
+
+        $images = [
+            asset('assets/course-imgs/Level 3.png'),
+            asset('assets/course-imgs/othm level 6.png'),
+            asset('assets/course-imgs/OTHM LEVEL 7.png'),
+        ];
+        foreach ($courses as $index => $course) {
             // $course_assignment = CourseAssignments::where('course_id', $course->id)->get();
             // $course->course_assignment = $course_assignment;
             $course->enrolled_course = 2;
@@ -26,6 +32,7 @@ class CourseController extends Controller
                 $student = User::select('course')->where('id', $user_id)->first();
                 $course->enrolled_course  = $student;
             }
+            $course->image = $images[$index % count($images)];
         }
 
         // return response()->json($courses);

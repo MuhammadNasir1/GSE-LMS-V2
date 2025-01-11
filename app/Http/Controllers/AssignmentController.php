@@ -14,15 +14,25 @@ use Illuminate\Support\Str;
 
 class AssignmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $userRole = session('user_det')['role'];
         $user_id = session('user_det')['user_id'];
 
-        $assignments = Assignment::where('user_id', $user_id)->get();
+        $status =  base64_decode($request['s']);
+        if ($status == 1) {
+            $assignments = Assignment::where('status', 1)->where('user_id', $user_id)->get();
+        } elseif ($status == 2) {
+            $assignments = Assignment::where('status', 2)->where('user_id', $user_id)->get();
+        } elseif ($status == 3) {
+            $assignments = Assignment::where('status', 3)->where('user_id', $user_id)->get();
+        } else {
+            $assignments = Assignment::where('user_id', $user_id)->get();
+        }
+
         $units = EnrollUnits::whereNotIn('checked_status', [2, 1])->where('user_id', $user_id)->get();
-        
+
         // return response()->json($units);
         foreach ($units as $unit) {
             $unit->course = CourseAssignments::select('title', 'course_id')->where('id', $unit->assignment_id)->first();
@@ -32,9 +42,6 @@ class AssignmentController extends Controller
             $assignmentData = CourseAssignments::where('id', $assignment->assignment_id)->first(['title', 'refrence_no']);
             $assignment->unit = $assignmentData;
         }
-
-
-
 
         return  view('assignment', compact('units', "assignments"));
     }
@@ -117,9 +124,20 @@ class AssignmentController extends Controller
             return response()->json(['success' => false, 'message' => $error->getMessage()], 500);
         }
     }
-    public function assignmentDate()
+    public function assignmentDate(Request $request)
     {
-        $assignments = Assignment::where("assessor_id", session('user_det')['user_id'])->get();
+
+        $status =  base64_decode($request['s']);
+        if ($status == 1) {
+            $assignments = Assignment::where('status', 1)->where("assessor_id", session('user_det')['user_id'])->get();
+        } elseif ($status == 2) {
+            $assignments = Assignment::where('status', 2)->where("assessor_id", session('user_det')['user_id'])->get();
+        } elseif ($status == 3) {
+            $assignments = Assignment::where('status', 3)->where("assessor_id", session('user_det')['user_id'])->get();
+        } else {
+            $assignments = Assignment::where("assessor_id", session('user_det')['user_id'])->get();
+        }
+
         foreach ($assignments as $assignment) {
             $user = User::where('id', $assignment->user_id)->first(['name', 'course']);
             $assignment->user_name = $user->name;

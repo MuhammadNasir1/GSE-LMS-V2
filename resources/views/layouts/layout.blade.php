@@ -79,77 +79,77 @@
                     </li>
 
                     @if (session('user_det')['role'] == 'admin')
-                    <li>
+                        <li>
 
-                        <button type="button"
-                            class="flex items-center w-full p-2 text-base transition duration rounded-lg group hover:bg-gray-hover:text-primary:hover:bg-gray-700"
-                            aria-controls="dropdown-user" data-collapse-toggle="dropdown-user">
-                            <svg class="{{ request()->is('users') ? 'text-white' : 'text-white' }}" width="20"
-                                height="18" viewBox="0 0 20 14" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M10.0002 7.98469C11.491 7.98469 12.6995 6.77614 12.6995 5.28531C12.6995 3.79449 11.491 2.58594 10.0002 2.58594C8.50933 2.58594 7.30078 3.79449 7.30078 5.28531C7.30078 6.77614 8.50933 7.98469 10.0002 7.98469Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M14.2741 13.2241C14.2272 10.6453 12.3334 8.57031 10.0003 8.57031C7.66719 8.57031 5.77281 10.6459 5.72656 13.2241H14.2741Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M3.20977 4.16172C4.32987 4.16172 5.23789 3.2537 5.23789 2.13359C5.23789 1.01349 4.32987 0.105469 3.20977 0.105469C2.08966 0.105469 1.18164 1.01349 1.18164 2.13359C1.18164 3.2537 2.08966 4.16172 3.20977 4.16172Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M6.42188 8.09781C6.38687 6.16094 4.96438 4.60156 3.21063 4.60156C1.45688 4.60156 0.035 6.16094 0 8.09781H6.42188Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M16.7879 4.16172C17.908 4.16172 18.816 3.2537 18.816 2.13359C18.816 1.01349 17.908 0.105469 16.7879 0.105469C15.6678 0.105469 14.7598 1.01349 14.7598 2.13359C14.7598 3.2537 15.6678 4.16172 16.7879 4.16172Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M20.0006 8.09781C19.9656 6.16094 18.5431 4.60156 16.7894 4.60156C15.0356 4.60156 13.6137 6.16094 13.5781 8.09781H20.0006Z"
-                                    fill="currentColor" />
-                            </svg>
+                            <button type="button"
+                                class="flex items-center w-full p-2 text-base transition duration rounded-lg group hover:bg-gray-hover:text-primary:hover:bg-gray-700"
+                                aria-controls="dropdown-user" data-collapse-toggle="dropdown-user">
+                                <svg class="{{ request()->is('users') ? 'text-white' : 'text-white' }}" width="20"
+                                    height="18" viewBox="0 0 20 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.0002 7.98469C11.491 7.98469 12.6995 6.77614 12.6995 5.28531C12.6995 3.79449 11.491 2.58594 10.0002 2.58594C8.50933 2.58594 7.30078 3.79449 7.30078 5.28531C7.30078 6.77614 8.50933 7.98469 10.0002 7.98469Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M14.2741 13.2241C14.2272 10.6453 12.3334 8.57031 10.0003 8.57031C7.66719 8.57031 5.77281 10.6459 5.72656 13.2241H14.2741Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M3.20977 4.16172C4.32987 4.16172 5.23789 3.2537 5.23789 2.13359C5.23789 1.01349 4.32987 0.105469 3.20977 0.105469C2.08966 0.105469 1.18164 1.01349 1.18164 2.13359C1.18164 3.2537 2.08966 4.16172 3.20977 4.16172Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M6.42188 8.09781C6.38687 6.16094 4.96438 4.60156 3.21063 4.60156C1.45688 4.60156 0.035 6.16094 0 8.09781H6.42188Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M16.7879 4.16172C17.908 4.16172 18.816 3.2537 18.816 2.13359C18.816 1.01349 17.908 0.105469 16.7879 0.105469C15.6678 0.105469 14.7598 1.01349 14.7598 2.13359C14.7598 3.2537 15.6678 4.16172 16.7879 4.16172Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M20.0006 8.09781C19.9656 6.16094 18.5431 4.60156 16.7894 4.60156C15.0356 4.60156 13.6137 6.16094 13.5781 8.09781H20.0006Z"
+                                        fill="currentColor" />
+                                </svg>
 
-                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users</span>
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <ul id="dropdown-user"
-                            class="  {{ request()->is('users') ? '' : 'hidden' }} py-2 space-y-2 bg-white text-primary rounded-xl mx-2">
-                            <li>
-                                <a href="../users?type=candidate"
-                                    class=" flex items-center p-2 rounded-lg text-white  group ">
-                                    <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2"
-                                            d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
-                                    </svg>
-
-
-                                    <span class="ms-3 text-primary">Candidate</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../users?type=assessor"
-                                    class=" flex items-center p-2 rounded-lg text-white  group">
-                                    <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2"
-                                            d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z" />
-                                    </svg>
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <ul id="dropdown-user"
+                                class="  {{ request()->is('users') ? '' : 'hidden' }} py-2 space-y-2 bg-white text-primary rounded-xl mx-2">
+                                <li>
+                                    <a href="../users?type=candidate"
+                                        class=" flex items-center p-2 rounded-lg text-white  group ">
+                                        <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
+                                        </svg>
 
 
-                                    <span class="ms-3  text-primary">Assessor</span>
-                                </a>
-                            </li>
+                                        <span class="ms-3 text-primary">Candidate</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../users?type=assessor"
+                                        class=" flex items-center p-2 rounded-lg text-white  group">
+                                        <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z" />
+                                        </svg>
 
 
-                        </ul>
-                    </li>
+                                        <span class="ms-3  text-primary">Assessor</span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
 
                         {{-- <li class="{{ request()->is('users') ? 'active bg-white text-black rounded-md ' : '' }} ">
                             <a href="../users" class="mt-3 flex items-center p-2 rounded-lg   group">
@@ -193,24 +193,6 @@
                             <span class="ms-3">Courses</span>
                         </a>
                     </li>
-
-                    @if (session('user_det')['role'] == 'canditate')
-                        <li class="{{ request()->is('/') ? 'active bg-white text-black rounded-md ' : '' }} ">
-                            <a href="../user-profile/{{ session('user_det')['user_id'] }}"
-                                class=" flex items-center p-2 rounded-lg">
-                                <svg class="{{ request()->is('users') ? 'text-black' : 'text-white' }} w-5 h-5"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z" />
-                                </svg>
-
-
-                                <span class="ms-3">Assignment Report</span>
-                            </a>
-                        </li>
-                    @endif
                     @if (session('user_det')['role'] == 'admin')
                         <li>
 
@@ -268,57 +250,113 @@
                             </ul>
                         </li>
                     @endif
-                    @if (session('user_det')['role'] == 'candidate')
-                    <li class="{{ request()->is('assignment') ? 'active bg-white text-black rounded-md ' : '' }}">
-                        <a href="../assignment" class=" flex items-center p-2 rounded-lg ">
-                            <svg class="{{ request()->is('assignment') ? 'text-black' : 'text-white' }} w-5 h-5"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                fill="currentColor" viewBox="0 0 24 24">
+                    {{-- assignments dropdown --}}
+                    @if (session('user_det')['role'] !== 'admin')
+
+                    <li>
+
+                        <button type="button"
+                            class="flex items-center w-full p-2 text-base transition duration rounded-lg group hover:bg-gray-hover:text-primary:hover:bg-gray-700"
+                            aria-controls="assignment-dropdown" data-collapse-toggle="assignment-dropdown">
+                            <svg class="w-5 h-5  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
-                                    d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
+                                    d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
                                     clip-rule="evenodd" />
                             </svg>
-
-
-                            <span class="ms-3">Assignments</span>
-                        </a>
-                    </li>
-                    <li class="{{ request()->is('profile') ? 'active bg-white text-black rounded-md ' : '' }}">
-                        <a href="../profile?u={{ base64_encode(session('user_det')['user_id'])}}" class=" flex items-center p-2 rounded-lg ">
-                            <svg class="{{ request()->is('profile') ? 'text-black' : 'text-white' }} w-5 h-5"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
-                                    clip-rule="evenodd" />
+                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Assignments</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
+                        </button>
+                        <ul id="assignment-dropdown"
+                            class="hidden py-2 space-y-2 bg-white text-primary rounded-xl mx-2">
+                            <li>
+                                <a href="{{ session('user_det')['role'] == 'candidate' ? '../assignment' : '../assignmentReview' }}"
+                                    class=" flex items-center p-2 rounded-lg text-white  group">
+                                    <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
+                                    </svg>
 
 
-                            <span class="ms-3">Profile</span>
-                        </a>
-                    </li>
-                    @else
-                    <li class="{{ request()->is('assignmentReview') ? 'active bg-white text-black rounded-md ' : '' }}">
-                        <a href="../assignmentReview" class=" flex items-center p-2 rounded-lg ">
-                            <svg class="{{ request()->is('assignmentReview') ? 'text-black' : 'text-white' }} w-5 h-5"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
-                                    clip-rule="evenodd" />
-                            </svg>
+                                    <span class="ms-3 text-primary">All</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ session('user_det')['role'] == 'candidate' ? '../assignment?s=' . base64_encode(1) : '../assignmentReview?s=' . base64_encode(1) }}"
+                                    class=" flex items-center p-2 rounded-lg text-white  group">
+                                    <svg class="w-5 h-5 text-primary dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z" />
+                                    </svg>
 
 
-                            <span class="ms-3">Assignments</span>
-                        </a>
+                                    <span class="ms-3  text-primary">Approved</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ session('user_det')['role'] == 'candidate' ? '../assignment?s=' . base64_encode(2) : '../assignmentReview?s=' . base64_encode(2) }}"
+                                    class=" flex items-center p-2 rounded-lg text-white  group">
+                                    <svg class="w-5 h-5 text-primary " xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512">
+                                        <path fill="currentColor"
+                                            d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+                                    </svg>
+                                    <span class="ms-3  text-primary">Pending</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ session('user_det')['role'] == 'candidate' ? '../assignment?s=' . base64_encode(3) : '../assignmentReview?s=' . base64_encode(3) }}"
+                                    class=" flex items-center p-2 rounded-lg text-white  group">
+                                    <svg class="w-5 h-5 text-primary" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 384 512">
+                                        <path fill="currentColor"
+                                            d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
+                                    </svg>
+
+
+                                    <span class="ms-3  text-primary">Rejections</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
                     </li>
                     @endif
+                    {{-- assignments dropdown end --}}
+                    @if (session('user_det')['role'] == 'candidate')
+             
+                        <li class="{{ request()->is('profile') ? 'active bg-white text-black rounded-md ' : '' }}">
+                            <a href="../profile?u={{ base64_encode(session('user_det')['user_id']) }}"
+                                class=" flex items-center p-2 rounded-lg ">
+                                <svg class="{{ request()->is('profile') ? 'text-black' : 'text-white' }} w-5 h-5"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+
+                                <span class="ms-3">Profile</span>
+                            </a>
+                        </li>
+                    @endif
                     @if (session('user_det')['role'] !== 'admin')
-                    <li class="{{ request()->is('resources') ? 'active bg-white text-black rounded-md ' : '' }}">
+                        <li class="{{ request()->is('resources') ? 'active bg-white text-black rounded-md ' : '' }}">
                             <a href="../resources" class=" flex items-center p-2 rounded-lg ">
-                                <svg class="{{ request()->is('resources') ? 'text-black' : 'text-white' }} w-5 h-5" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
+                                <svg class="{{ request()->is('resources') ? 'text-black' : 'text-white' }} w-5 h-5"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2"
                                         d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z" />
@@ -395,20 +433,20 @@
     <nav id="Navbar">
         <div class="flex justify-between items-center gap-5 gradient-bg py-3 px-5 fixed top-0 w-full z-40">
 
-                <a href="../"> <img class=" h-[40px]" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
-                {{-- <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2> --}}
-                <div class="flex items-center gap-2">
-                    <div class="leading-tight  text-end">
-                        <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>
-                        <p class="text-xs  text-white">{{ session('user_det')['role'] }}</p>
-                    </div>
-                    <div>
-                        <img height="48px" width="48px"
-                            class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 "
-                            src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
-                            alt="user">
-                    </div>
+            <a href="../"> <img class=" h-[40px]" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
+            {{-- <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2> --}}
+            <div class="flex items-center gap-2">
+                <div class="leading-tight  text-end">
+                    <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>
+                    <p class="text-xs  text-white">{{ session('user_det')['role'] }}</p>
                 </div>
+                <div>
+                    <img height="48px" width="48px"
+                        class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 "
+                        src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
+                        alt="user">
+                </div>
+            </div>
         </div>
     </nav>
     <div id="content" class="sm:ml-[240px] my-[48px] min-h-full overflow-auto ">
@@ -421,7 +459,9 @@
 
     </div>
     <div class="fixed flex justify-center items-center  w-full bottom-0 py-2 bg-white ">
-        <p class="text-sm text-black">Powered by <a href="https://globalconsulting-int.com/" target="_blank" class="text-primary font-semibold">Global Consulting pvt. Ltd.</a> & Developed by <a  class="text-blue-500" href="">Velodity Solutions</a>.
+        <p class="text-sm text-black">Powered by <a href="https://globalconsulting-int.com/" target="_blank"
+                class="text-primary font-semibold">Global Consulting pvt. Ltd.</a> & Developed by <a
+                class="text-blue-500" href="">Velodity Solutions</a>.
         </p>
     </div>
     <script src="https://kit.fontawesome.com/b6b9586b26.js" crossorigin="anonymous"></script>

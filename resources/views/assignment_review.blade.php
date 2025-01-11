@@ -36,25 +36,31 @@
                                     <td>{{ $assignment->assignment_name }}</td>
                                     <td><a href="{{ $assignment->file }}" target="_blank" class="text-blue-600">open
                                             File</a></td>
-                                            <td>
-                                                {!! 
-                                                    $assignment->status == 2 
-                                                    ? '<span class="bg-purple-100 text-purple-800r text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>' 
-                                                    : ($assignment->status == 1 
-                                                        ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Approved</span>' 
-                                                        : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Rejected</span>'
-                                                    ) 
-                                                !!}
-                                            </td>
-                                            
+                                    <td>
+                                        {!! $assignment->status == 2
+                                            ? '<span class="bg-purple-100 text-purple-800r text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>'
+                                            : ($assignment->status == 1
+                                                ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Approved</span>'
+                                                : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Rejected</span>') !!}
+                                    </td>
+
                                     <td>{{ $assignment->time_ago }}</td>
                                     <td>
-                                        <button data-modal-target="check-Modal" data-modal-toggle="check-Modal"
-                                            addedUserId={{ $assignment->user_id }} assignmentId="{{ $assignment->assignment_id }}"
-                                            class="checkBtn bg-green-600 font-semibold text-white px-4 rounded-md py-2"
-                                            updId="">
-                                            Check
-                                        </button>
+                                        <div class="flex gap-3">
+                                            <button data-modal-target="check-Modal" data-modal-toggle="check-Modal"
+                                                addedUserId={{ $assignment->user_id }}
+                                                assignmentId="{{ $assignment->assignment_id }}"
+                                                class="checkBtn bg-green-600 font-semibold text-white px-4 rounded-md py-2"
+                                                updId="">
+                                                Check
+                                            </button>
+                                            <a href="../profile?u={{ base64_encode($assignment->user_id) }}">
+                                                <button
+                                                    class=" bg-purple-600 font-semibold text-white px-4 rounded-md py-2">
+                                                    Profile
+                                                </button>
+                                            </a>
+                                        </div>
 
                                     </td>
                                     </r>
@@ -159,6 +165,7 @@
                 $('#assignmentId').val($(this).attr('assignmentId'));
             });
         });
+
         function updateDatafun() {}
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             console.log(response);

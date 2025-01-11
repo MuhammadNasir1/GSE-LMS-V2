@@ -27,6 +27,7 @@
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Email')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
+                                <th class="whitespace-nowrap">invitation</th>
                                 {{-- <th class="whitespace-nowrap">@lang('lang.Role')</th> --}}
                                 {{-- <th class="whitespace-nowrap">Login Status</th> --}}
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
@@ -54,11 +55,11 @@
                                     {{-- <td><span
                                             class="{{ $data->role == 'assessor' ? 'text-green-800' : 'text-purple-700' }}">{{ $data->role }}</span>
                                     </td> --}}
-                                    {{-- <td>
+                                    <td>
                                         <span
-                                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->verification }}</span>
+                                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->enrolled  == 0 ? "Pending" }}</span>
 
-                                    </td> --}}
+                                    </td>
                                     <td>
                                         <div class="flex gap-5 items-center justify-center">
 
@@ -79,31 +80,13 @@
                                                 <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                     alt="delete" class="cursor-pointer">
                                             </button>
-                                         <button>
-                                            <svg width="37" height="36" viewBox="0 0 37 36" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M28.0642 18.5C28.0642 18.126 27.8621 17.8812 27.4579 17.3896C25.9788 15.5938 22.7163 12.25 18.9288 12.25C15.1413 12.25 11.8788 15.5938 10.3996 17.3896C9.99542 17.8812 9.79333 18.126 9.79333 18.5C9.79333 18.874 9.99542 19.1187 10.3996 19.6104C11.8788 21.4062 15.1413 24.75 18.9288 24.75C22.7163 24.75 25.9788 21.4062 27.4579 19.6104C27.8621 19.1187 28.0642 18.874 28.0642 18.5ZM18.9288 21.625C19.7576 21.625 20.5524 21.2958 21.1385 20.7097C21.7245 20.1237 22.0538 19.3288 22.0538 18.5C22.0538 17.6712 21.7245 16.8763 21.1385 16.2903C20.5524 15.7042 19.7576 15.375 18.9288 15.375C18.0999 15.375 17.3051 15.7042 16.719 16.2903C16.133 16.8763 15.8038 17.6712 15.8038 18.5C15.8038 19.3288 16.133 20.1237 16.719 20.7097C17.3051 21.2958 18.0999 21.625 18.9288 21.625Z"
-                                                fill="url(#paint0_linear_872_5570)" />
-                                            <circle opacity="0.1" cx="18.4287" cy="18" r="18"
-                                                fill="url(#paint1_linear_872_5570)" />
-                                            <defs>
-                                                <linearGradient id="paint0_linear_872_5570" x1="18.9288"
-                                                    y1="12.25" x2="18.9288" y2="24.75"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#394DBEFF" />
-                                                    <stop offset="1" stop-color="#394DBEFF" />
-                                                </linearGradient>
-                                                <linearGradient id="paint1_linear_872_5570" x1="18.4287"
-                                                    y1="0" x2="18.4287" y2="36"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop stop-color="#FCB376" />
-                                                    <stop offset="1" stop-color="#394DBEFF" />
-                                                </linearGradient>
-                                            </defs>
-                                        </svg>
-                                         </button>
-
+                                       
+                                            <a href="../profile?u={{ base64_encode($data->id) }}">
+                                                <button
+                                                    class=" bg-purple-600 font-semibold text-white px-4 rounded-md py-2">
+                                                    Profile
+                                                </button>
+                                            </a>
 
                                         </div>
                                     </td>
