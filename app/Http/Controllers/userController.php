@@ -69,7 +69,49 @@ class userController extends Controller
 
     public function Dashboard()
     {
-        return view('dashboard');
+
+        $user_role = session('user_det')['role'];
+        $user_id = session('user_det')['user_id'];
+
+        // Initialize variables
+        $total_user = 0;
+        $submission = 0;
+        $approved = 0;
+        $rejection = 0;
+        $pending = 0;
+        $recent_assignments = [];
+
+        if ($user_role == "admin") {
+            $total_user = User::where('role', '!=', 'admin')->count();
+            $submission = Assignment::count();
+            $approved = Assignment::where('status', 1)->count();
+            $rejection = Assignment::where('status', 3)->count();
+            $pending = Assignment::where('status', 2)->count();
+        } elseif ($user_role == "assessor") {
+            $submission = Assignment::where('assessor_id', $user_id)->count();
+            $approved = Assignment::where('assessor_id', $user_id)->where('status', 1)->count();
+            $rejection = Assignment::where('assessor_id', $user_id)->where('status', 3)->count();
+            $pending = Assignment::where('assessor_id', $user_id)->where('status', 2)->count();
+            $recent_assignments = Assignment::where('assessor_id', $user_id)
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
+        } elseif ($user_role == "candidate") {
+            $submission = Assignment::where('user_id', $user_id)->count();
+            $approved = Assignment::where('user_id', $user_id)->where('status', 1)->count();
+            $rejection = Assignment::where('user_id', $user_id)->where('status', 3)->count();
+            $pending = Assignment::where('user_id', $user_id)->where('status', 2)->count();
+        }
+
+        // Pass data to the dashboard view
+        return view('dashboard', [
+            'total_user' => $total_user,
+            'submission' => $submission,
+            'approved' => $approved,
+            'rejection' => $rejection,
+            'pending' => $pending,
+            'recent_assignments' => $recent_assignments,
+        ]);
     }
 
     public function changeVerifictionStatus(Request $request, $user_id)
@@ -171,7 +213,8 @@ class userController extends Controller
 
     public function profileData(Request $request)
     {
-        $user_id =  Crypt::decryptString($request['u']);
+        $user_id =  base64_decode($request['u']);
+        // $user_id =  Crypt::decryptString($request['u']);
         $user = User::select('name', 'email', 'phone')->where('id', $user_id)->first();
         $course_id  = User::where('id', $user_id)->value('course');
         $course = Course::where('id', $course_id)->first();
@@ -197,16 +240,15 @@ class userController extends Controller
         }
 
 
-        $completeAssignments = EnrollUnits::select('assignment_id')->where('user_id', $user_id)->where('checked_status' , '1')->get();
+        $completeAssignments = EnrollUnits::select('assignment_id')->where('user_id', $user_id)->where('checked_status', '1')->get();
         foreach ($completeAssignments as $completeAssignment) {
             $comCredits = CourseAssignments::select('credits')->where('id', $completeAssignment->assignment_id)->first();
             $completeCredits += $comCredits->credits;
-
         }
 
-        $percentageCompleted = $totalCredits > 0 
-        ? round(($completeCredits / $totalCredits) * 100, 2) 
-        : 0;
+        $percentageCompleted = $totalCredits > 0
+            ? round(($completeCredits / $totalCredits) * 100, 2)
+            : 0;
         $progress_data = [
             'assessments' => $completeAssignments->count(),
             'completeCredits' => $completeCredits,
@@ -216,6 +258,6 @@ class userController extends Controller
             'completionPercentage' => $percentageCompleted,
         ];
 
-        return view('profile', compact("course", "enroll_assignments", 'user' , 'progress_data'));
+        return view('profile', compact("course", "enroll_assignments", 'user', 'progress_data'));
     }
 }

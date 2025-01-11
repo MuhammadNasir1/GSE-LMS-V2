@@ -284,7 +284,7 @@
                         </a>
                     </li>
                     <li class="{{ request()->is('profile') ? 'active bg-white text-black rounded-md ' : '' }}">
-                        <a href="../profile?u={{Illuminate\Support\Facades\Crypt::encryptString(session('user_det')['user_id'])}}" class=" flex items-center p-2 rounded-lg ">
+                        <a href="../profile?u={{ base64_encode(session('user_det')['user_id'])}}" class=" flex items-center p-2 rounded-lg ">
                             <svg class="{{ request()->is('profile') ? 'text-black' : 'text-white' }} w-5 h-5"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">

@@ -8,9 +8,22 @@
     <div class="mx-6 mt-16">
         <h2 class="text-black text-2xl font-semibold">Dashboard </h2>
         <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 w-full mt-4 ">
+            @if(session('user_det')['role'] == "admin")
+            <div class="flex border border-primary    gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
+                <div>
+                    <h3 class="font-bold text-4xl text-black">{{$total_user}}</h3>
+                    <p class="text-gray-800 text-lg">Users</p>
+                </div>
+                <div class="h-20 w-20 flex-shrink-0 bg-black rounded-full flex justify-center items-center">
+
+                    <svg  class="h-12 w-12"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="#ffffff" d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
+                </div>
+
+            </div>
+            @endif
             <div class="flex border border-primary  gap-4 justify-between items-center h-[120px]  rounded-xl px-4 w-full">
                 <div>
-                    <h3 class="font-bold text-4xl text-black">00</h3>
+                    <h3 class="font-bold text-4xl text-black">{{$submission}}</h3>
                     <p class="text-gray-800 text-lg">Submission</p>
                 </div>
                 <div class="h-20 w-20 flex-shrink-0 bg-[#fe8949] rounded-full flex items-center justify-center">
@@ -23,7 +36,7 @@
 
             <div class="flex border border-primary  gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
                 <div>
-                    <h3 class="font-bold text-4xl text-black">01</h3>
+                    <h3 class="font-bold text-4xl text-black">{{$pending}}</h3>
                     <p class="text-gray-800 text-lg">pending Units</p>
                 </div>
                 <div class="h-20 w-20 flex-shrink-0 bg-[#fbbc1d] rounded-full flex justify-center items-center">
@@ -36,7 +49,7 @@
 
             <div class="flex border border-primary  gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
                 <div>
-                    <h3 class="font-bold text-4xl text-black">10</h3>
+                    <h3 class="font-bold text-4xl text-black">{{$approved}}</h3>
                     <p class="text-gray-800 text-lg"> Approved</p>
                 </div>
                 <div class="h-20 w-20 flex-shrink-0 bg-[#ffa7a7] rounded-full flex justify-center  items-center">
@@ -49,7 +62,7 @@
 
             <div class="flex border border-primary    gap-4 justify-between items-center h-[120px] rounded-xl px-4 w-full">
                 <div>
-                    <h3 class="font-bold text-4xl text-black">01</h3>
+                    <h3 class="font-bold text-4xl text-black">{{$rejection}}</h3>
                     <p class="text-gray-800 text-lg">Rejection</p>
                 </div>
                 <div class="h-20 w-20 flex-shrink-0 bg-white rounded-full flex justify-center items-center">
@@ -63,12 +76,13 @@
 
         </div>
     </div>
-@if(session('user_det')['role'] == "admin")
+    @if(session('user_det')['role'] == "assessor")
+
     <div class="lg:flex gap-4 mt-6 mx-6 ">
         <div class="lg:w-[60%] w-full">
             <div class="min-h-[448px] border border-primary rounded-xl">
                     <h2 class="text-xl text-white gradient-bg    rounded-t-xl py-2 px-6  font-semibold ">Recent Units</h2>
-                    <div class="pt-3  mt-2 border-t  border-gray-200">
+                    <div class="pt-3  mt-2 border-t  border-gray-   200">
 
                         <div class="relative overflow-auto h-[300px] ">
                             <table class="w-full text-sm text-center ">
@@ -112,15 +126,16 @@
             </div>
 
         </div>
-        <div class="lg:w-[40%] w-full border border-gray-500 rounded-xl">
+        @endif
+        {{-- <div class="lg:w-[40%] w-full border border-gray-500 rounded-xl">
             <div class="  ">
                 <h2 class="text-xl rounded-t-xl  font-semibold gradient-bg text-white px-6 py-2">Units Progress</h2>
                 <div class="w-[300px] " id="progressChart"></div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
-    @endif
+
     <script>
         window.onload = function() {
 
