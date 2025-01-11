@@ -27,7 +27,7 @@
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Email')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                                <th class="whitespace-nowrap">invitation</th>
+                                    <th class="whitespace-nowrap">invitation</th>
                                 {{-- <th class="whitespace-nowrap">@lang('lang.Role')</th> --}}
                                 {{-- <th class="whitespace-nowrap">Login Status</th> --}}
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
@@ -55,11 +55,10 @@
                                     {{-- <td><span
                                             class="{{ $data->role == 'assessor' ? 'text-green-800' : 'text-purple-700' }}">{{ $data->role }}</span>
                                     </td> --}}
-                                    <td>
-                                        <span
-                                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->enrolled  == 0 ? "Pending" }}</span>
-
-                                    </td>
+                                        <td>
+                                            <span
+                                                class= "{{ $data->enrolled == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-600' }}  text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->enrolled == 0 ? 'Pending' : 'Accepted' }}</span>
+                                        </td>
                                     <td>
                                         <div class="flex gap-5 items-center justify-center">
 
@@ -80,13 +79,14 @@
                                                 <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                     alt="delete" class="cursor-pointer">
                                             </button>
-                                       
+                                            @if ($data->role == 'candidate')         
                                             <a href="../profile?u={{ base64_encode($data->id) }}">
                                                 <button
                                                     class=" bg-purple-600 font-semibold text-white px-4 rounded-md py-2">
                                                     Profile
                                                 </button>
                                             </a>
+                                            @endif
 
                                         </div>
                                     </td>
@@ -124,8 +124,8 @@
                             data-modal-hide="userModal">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
                         </button>
                     </div>
@@ -144,7 +144,7 @@
                                 name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')"
                                 value="{{ $user->email ?? '' }}">
                         </div>
-                                     <div class="w-full col-span-2">
+                        <div class="w-full col-span-2">
                             <label class="text-[14px] font-normal" for="course">Course</label>
                             <select name="course" id="course">
                                 <option disabled selected>Select Course</option>
