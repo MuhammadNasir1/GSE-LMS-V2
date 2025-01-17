@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="mx-6 mt-16">
+
         <h2 class="text-black text-2xl font-semibold">Dashboard </h2>
         <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 w-full mt-4 ">
             @if(session('user_det')['role'] == "admin")

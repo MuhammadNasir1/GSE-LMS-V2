@@ -158,15 +158,15 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+        function updateDatafun() {
+
             $('.checkBtn').click(function() {
                 $('#check-Modal').removeClass('hidden').addClass('flex');
                 $('#userId').val($(this).attr('addedUserId'));
                 $('#assignmentId').val($(this).attr('assignmentId'));
             });
-        });
-
-        function updateDatafun() {}
+        }
+        updateDatafun()
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             console.log(response);
 

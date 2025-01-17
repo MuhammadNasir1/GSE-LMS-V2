@@ -32,15 +32,15 @@
 
                     </form>
                     @if (session('user_det')['role'] == 'admin')
-                        {{-- <div>
+                        <div>
 
                             <button data-modal-target="addCourseModal" data-modal-toggle="addCourseModal"
-                                class="bg-primary cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
+                                class="bg-customOrange cursor-pointer text-white h-12 px-5 py-3 rounded-[6px]  shadow-sm font-semibold ">+
                                 Add Course</button>
-                        </div> --}}
+                        </div>
                     @endif
                 </div>
-                <div class="grid grid-cols-3 gap-6 mt-4   ">
+                <div class="grid md:grid-cols-2 grid-cols-1  xl:grid-cols-3 gap-6 mt-4   ">
 
 
                     {{-- @for ($i = 1; $i <= 4; $i++) --}}
@@ -49,15 +49,15 @@
                             {!! session('user_det')['role'] == 'candidate' &&  isset($data->enrolled_course) && $data->enrolled_course->course == $data->id ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
                                 : (session('user_det')['role'] != 'candidate' ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"' : '') !!}>
                             <a href="#">
-                                <img class="rounded-t-lg" src="{{ $data->image}}"
+                                <img class="rounded-t-lg w-full" src="{{ $data->image}}"
                                     alt="" />
                             </a>
                             <div class="p-5">
                                 <a href="#">
-                                    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                                    <h5 class="mb-2  text-xl-right font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ $data->name }}</h5>
                                 </a>
-                                <p class="mb-1 font-normal font-sm text-gray-600 dark:text-gray-400">
+                                <p class="mb-1 font-normal font-xs text-gray-600 dark:text-gray-400">
                                     {{ strlen($data->description) > 60 ? substr($data->description, 0, 60) . '...' : $data->description }}
                                 </p>
                                 <a href="#" class="underline text-sm font-semibold text-primary  cursor-pointer ">

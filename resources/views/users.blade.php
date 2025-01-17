@@ -14,13 +14,13 @@
                     <div>
 
                         <button data-modal-target="userModal" data-modal-toggle="userModal"
-                            class="gradient-bg cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
+                            class="bg-customOrange cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                             Add {{ ucfirst($_GET['type']) }}</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
                     <table id="datatable">
-                        <thead class="py-1 gradient-bg text-white">
+                        <thead class="py-1 bg-primary text-white">
                             <tr>
                                 <th class="whitespace-nowrap">@lang('lang.STN')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Image')</th>
@@ -39,7 +39,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="rounded-full flex justify-content-center ">
-                                            <img src="{{ isset($data->user_image) ? asset($data->user_image) : asset('assets/circle-logo.png') }}"
+                                            <img src="{{asset($data->user_image ?? 'assets/logo/logo-bg-white.png') }}"
                                                 class="object-contain rounded-full h-[80px] min-w-[80px] max-w-[80] bg-slate-400"
                                                 width="80">
                                         </div>
@@ -79,10 +79,10 @@
                                                 <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                     alt="delete" class="cursor-pointer">
                                             </button>
-                                            @if ($data->role == 'candidate')         
+                                            @if ($data->role == 'candidate')
                                             <a href="../profile?u={{ base64_encode($data->id) }}">
                                                 <button
-                                                    class=" bg-purple-600 font-semibold text-white px-4 rounded-md py-2">
+                                                    class=" bg-secondary font-semibold text-white px-4 rounded-md py-2">
                                                     Profile
                                                 </button>
                                             </a>
@@ -115,7 +115,7 @@
                 @csrf
                 <input type="hidden" value="{{ $_GET['type'] }}" name="role">
                 <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-                    <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 gradient-bg">
+                    <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-secondary">
                         <h3 class="text-xl font-semibold text-white ">
                             Add {{ ucfirst($_GET['type']) }}
                         </h3>
@@ -161,7 +161,7 @@
 
                     <div class="flex justify-end ">
                         <button
-                            class="gradient-bg text-white py-2 px-6 w-full my-6 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                            class="bg-customOrange text-white py-2 px-6 w-full my-6 rounded-[4px]  mx-6 uaddBtn  font-semibold "
                             id="submitBtn">
                             <div class=" text-center hidden" id="btnSpinner">
                                 <svg aria-hidden="true"

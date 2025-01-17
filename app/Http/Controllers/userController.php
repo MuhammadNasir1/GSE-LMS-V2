@@ -215,7 +215,7 @@ class userController extends Controller
     {
         $user_id =  base64_decode($request['u']);
         // $user_id =  Crypt::decryptString($request['u']);
-        $user = User::select('name', 'email', 'phone')->where('id', $user_id)->first();
+        $user = User::select('name', 'email', 'phone' , 'user_image')->where('id', $user_id)->first();
         $course_id  = User::where('id', $user_id)->value('course');
         $course = Course::where('id', $course_id)->first();
         $course->assessor = User::where('id', $course->assessor_id)->value('name');

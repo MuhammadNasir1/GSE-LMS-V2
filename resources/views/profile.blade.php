@@ -15,7 +15,7 @@
                             <div class="bg-white   w-full py-6 lg:px-6 px-3">
                                 <div class="flex flex-col items-center">
                                     <img class="h-36 w-36 rounded-full object-cover "
-                                        src="{{ asset('images/man-victor.png') }}" alt="user">
+                                        src="{{ asset($user->user_image ?? 'images/man-victor.png') }}" alt="user">
                                     <h3 class="font-semibold">{{ $user->name }}</h3>
                                 </div>
                                 <div class="mt-4">
@@ -72,7 +72,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                    {{-- <div
+                                {{-- <div
                                         class="flex border border-yellow-400  gap-4 justify-between items-center py-6 rounded-xl px-4 w-full">
                                         <div>
                                             <h3 class="font-bold text-3xl text-black">{{ $progress_data['completionPercentage'] }}

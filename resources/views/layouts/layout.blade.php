@@ -62,7 +62,7 @@
 
         </div>
         <aside id="sidebar-multi-level-sidebar"
-            class="fixed   gradient-bg text-white top-[73px] left-0 z-40 w-60 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            class="fixed   bg-primary text-white top-[73px] left-0 z-40 w-60 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
             <div class="h-full  py-4 overflow-y-auto ">
                 <ul class="space-y-2  px-4 font-medium">
@@ -334,7 +334,7 @@
                     @endif
                     {{-- assignments dropdown end --}}
                     @if (session('user_det')['role'] == 'candidate')
-             
+
                         <li class="{{ request()->is('profile') ? 'active bg-white text-black rounded-md ' : '' }}">
                             <a href="../profile?u={{ base64_encode(session('user_det')['user_id']) }}"
                                 class=" flex items-center p-2 rounded-lg ">
@@ -431,25 +431,26 @@
         </aside>
     </div>
     <nav id="Navbar">
-        <div class="flex justify-between items-center gap-5 gradient-bg py-3 px-5 fixed top-0 w-full z-40">
+        <div class="flex justify-between items-center gap-5 bg-primary py-3 px-5 fixed top-0 w-full z-40">
 
             <a href="../"> <img class=" h-[40px]" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a>
+            {{-- <a href="../"> <img class=" h-[40px]" src="{{ asset('assets/name-logo.svg') }}" alt="GSE"></a> --}}
             {{-- <h2 class="text-white font-bold text-2xl">Welcome back {{ session('user_det')['name'] }}!</h2> --}}
             <div class="flex items-center gap-2">
                 <div class="leading-tight  text-end">
                     <h2 class="text-md text-white">{{ session('user_det')['name'] }}</h2>
-                    <p class="text-xs  text-white">{{ session('user_det')['role'] }}</p>
+                    <p class="text-xs  text-white font-semibold">{{ session('user_det')['role'] }}</p>
                 </div>
                 <div>
                     <img height="48px" width="48px"
                         class="rounded-full w-[48px] h-[48px] object-contain bg-black border-2 "
-                        src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/user.png') }}"
+                        src="{{ session()->has('user_image') && session('user_image.user_image') !== null ? asset(session('user_image.user_image')) : asset('images/man-victor.png') }}"
                         alt="user">
                 </div>
             </div>
         </div>
     </nav>
-    <div id="content" class="sm:ml-[240px] my-[48px] min-h-full overflow-auto ">
+    <div id="content" class="sm:ml-[240px] my-[48px] min-h-full overflow-auto px-4 ">
 
 
 
@@ -459,7 +460,7 @@
 
     </div>
     <div class="fixed flex justify-center items-center  w-full bottom-0 py-2 bg-white ">
-        <p class="text-sm text-black">Powered by <a href="https://globalconsulting-int.com/" target="_blank"
+        <p class="text-sm text-black text-center">Powered by <a href="https://globalconsulting-int.com/" target="_blank"
                 class="text-primary font-semibold">Global Consulting pvt. Ltd.</a> & Developed by <a
                 class="text-blue-500" href="">Velodity Solutions</a>.
         </p>

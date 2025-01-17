@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('file');
             $table->text('description');
             $table->integer('status')->default(0);
-            $table->text('assignments')->nullable();
+            $table->string('assignments')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
         });
     }
