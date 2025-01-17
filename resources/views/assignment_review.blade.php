@@ -56,7 +56,7 @@
                                             </button>
                                             <a href="../profile?u={{ base64_encode($assignment->user_id) }}">
                                                 <button
-                                                    class=" bg-purple-600 font-semibold text-white px-4 rounded-md py-2">
+                                                    class=" bg-customOrange font-semibold text-white px-4 rounded-md py-2">
                                                     Profile
                                                 </button>
                                             </a>
@@ -86,7 +86,7 @@
                 <input type="hidden" id="userId" name="user_id">
                 <input type="hidden" id="assignmentId" name="assignment_id">
                 <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-                    <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 gradient-bg">
+                    <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-secondary">
                         <h3 class="text-xl font-semibold text-white ">
                             Review Assignment
                         </h3>
@@ -125,7 +125,7 @@
 
                     <div class="flex justify-end ">
                         <button
-                            class="gradient-bg text-white py-2 px-6 w-full mb-6  rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                            class="bg-customOrange text-white py-2 px-6 w-full mb-6  rounded-[4px]  mx-6 uaddBtn  font-semibold "
                             id="submitBtn">
                             <div class=" text-center hidden" id="btnSpinner">
                                 <svg aria-hidden="true"

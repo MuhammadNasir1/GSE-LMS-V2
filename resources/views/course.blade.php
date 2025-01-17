@@ -10,8 +10,9 @@
         <div class=" mt-6  rounded-xl py-8 xl:px-[60px]  ">
             <div>
                 <div class="flex justify-end sm:justify-between  items-start  mb-3">
-                    <form action="">
 
+
+                    <div class="mx-auto sm:mx-0">
                         <form class="max-w-md mx-auto">
                             <label for="default-search"
                                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white ">Search</label>
@@ -29,8 +30,9 @@
 
                             </div>
                         </form>
+                    </div>
 
-                    </form>
+
                     @if (session('user_det')['role'] == 'admin')
                         <div>
 
@@ -45,12 +47,22 @@
 
                     {{-- @for ($i = 1; $i <= 4; $i++) --}}
                     @foreach ($courses as $data)
-                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700 cursor-pointer  relative   {!! session('user_det')['role'] == 'candidate' &&  isset($data->enrolled_course) && $data->enrolled_course->course == $data->id ? 'courseCard'  : (session('user_det')['role'] != 'candidate' ? 'courseCard' : '') !!}"
-                            {!! session('user_det')['role'] == 'candidate' &&  isset($data->enrolled_course) && $data->enrolled_course->course == $data->id ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
-                                : (session('user_det')['role'] != 'candidate' ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"' : '') !!}>
+                        <div class="max-w-full bg-white shadow-lg rounded-lg  dark:bg-gray-800 dark:border-gray-700 cursor-pointer  relative   {!! session('user_det')['role'] == 'candidate' &&
+                        isset($data->enrolled_course) &&
+                        $data->enrolled_course->course == $data->id
+                            ? 'courseCard'
+                            : (session('user_det')['role'] != 'candidate'
+                                ? 'courseCard'
+                                : '') !!}"
+                            {!! session('user_det')['role'] == 'candidate' &&
+                            isset($data->enrolled_course) &&
+                            $data->enrolled_course->course == $data->id
+                                ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
+                                : (session('user_det')['role'] != 'candidate'
+                                    ? 'data-modal-target="CourseDetailsModal" data-modal-toggle="CourseDetailsModal" courseId="' . $data->id . '"'
+                                    : '') !!}>
                             <a href="#">
-                                <img class="rounded-t-lg w-full" src="{{ $data->image}}"
-                                    alt="" />
+                                <img class="rounded-t-lg w-full  object-fill" src="{{ $data->image }}" alt="" />
                             </a>
                             <div class="p-5">
                                 <a href="#">
@@ -143,91 +155,95 @@
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
         <div class="relative p-4 w-full   max-w-7xl max-h-full ">
-                    {{-- <form action="../addCourse" method="post" enctype="multipart/form-data"> --}}
-                    <form id="courseData" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
-                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                    <h3 class="text-xl font-semibold text-white ">
-                        Add Course
-                    </h3>
-                    <button type="button"
-                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                        data-modal-hide="addCourseModal">
-                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4  mx-6 my-6 relative">
-                    <div>
-                        <label class="text-[14px] font-normal" for="Course_name">Course Name</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="course_name" placeholder="Course Name Here" value="" required>
+            {{-- <form action="../addCourse" method="post" enctype="multipart/form-data"> --}}
+            <form id="courseData" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+                    <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                        <h3 class="text-xl font-semibold text-white ">
+                            Add Course
+                        </h3>
+                        <button type="button"
+                            class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                            data-modal-hide="addCourseModal">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                        </button>
                     </div>
-                    <div class="flex gap-4">
-                        <div>
-                            <label class="text-[14px] font-normal" for="assessor">Assessor</label>
-                            <select name="assessor_id" id="assessor" required>
-                                <option disabled selected>Select Assessor</option>
-                                @foreach ($assessors as $assessor)
-                                    <option value="{{ $assessor->id }}">{{ $assessor->name }}</option>
-                                @endforeach
 
-                            </select>
-                        </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4  mx-6 my-6 relative">
                         <div>
-                            <label class="text-[14px] font-normal" for="qualification_number">Qualification Number</label>
+                            <label class="text-[14px] font-normal" for="Course_name">Course Name</label>
                             <input type="text" required
-                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="qualification_number" id="qualification_num" placeholder="00/000/0" required>
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="name" id="course_name" placeholder="Course Name Here" value="" required>
                         </div>
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="course_assigment">Total Units</label>
-                        <input type="number" required
-                            class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="total_assignments" id="TotalAssigment" placeholder="0" required>
-                    </div>
-                    <div class="flex gap-4 col-span-3">
+                        <div class="flex gap-4">
+                            <div>
+                                <label class="text-[14px] font-normal" for="assessor">Assessor</label>
+                                <select name="assessor_id" id="assessor" required>
+                                    <option disabled selected>Select Assessor</option>
+                                    @foreach ($assessors as $assessor)
+                                        <option value="{{ $assessor->id }}">{{ $assessor->name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[14px] font-normal" for="qualification_number">Qualification
+                                    Number</label>
+                                <input type="text" required
+                                    class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="qualification_number" id="qualification_num" placeholder="00/000/0" required>
+                            </div>
+                        </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="CourseAssignments">Mandatory Units</label>
+                            <label class="text-[14px] font-normal" for="course_assigment">Total Units</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="mandatory_assignments" id="mandatoryAssignments" placeholder="0" required value="0">
+                                name="total_assignments" id="TotalAssigment" placeholder="0" required>
                         </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="CourseAssignments">Total Optional Units</label>
-                            <input type="number" required
-                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="optional_assignments" id="optionalAssignment" placeholder="0" required>
+                        <div class="flex gap-4 col-span-3">
+                            <div>
+                                <label class="text-[14px] font-normal" for="CourseAssignments">Mandatory Units</label>
+                                <input type="number" required
+                                    class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="mandatory_assignments" id="mandatoryAssignments" placeholder="0" required
+                                    value="0">
+                            </div>
+                            <div>
+                                <label class="text-[14px] font-normal" for="CourseAssignments">Total Optional
+                                    Units</label>
+                                <input type="number" required
+                                    class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="optional_assignments" id="optionalAssignment" placeholder="0" required>
+                            </div>
+                            <div>
+                                <label class="text-[14px] font-normal" for="CourseAssignments">Optional To Be
+                                    Selected</label>
+                                <input type="number" required
+                                    class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                    name="option_selected" id="optionSelected" placeholder="0" required>
+                            </div>
                         </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="CourseAssignments">Optional To Be Selected</label>
-                            <input type="number" required
-                                class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="option_selected" id="optionSelected" placeholder="0" required>
+
+
+                        <div class="col-span-2 lg:col-span-3">
+                            <label class="text-[14px] font-normal" for="description">Course Description</label>
+                            <textarea name="description" id="description"
+                                class="w-full min-h-20 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]" required
+                                placeholder="Course Description Here"></textarea>
                         </div>
-                    </div>
+                        <div class="col-span-2 lg:col-span-3 grid grid-cols-3 gap-4" id="InputOutput">
 
 
-                    <div class="col-span-2 lg:col-span-3">
-                        <label class="text-[14px] font-normal" for="description">Course Description</label>
-                        <textarea name="description" id="description"
-                            class="w-full min-h-20 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]" required
-                            placeholder="Course Description Here"></textarea>
-                    </div>
-                    <div class="col-span-2 lg:col-span-3 grid grid-cols-3 gap-4" id="InputOutput">
-
+                        </div>
 
                     </div>
-
-                </div>
-                {{-- <div>
+                    {{-- <div>
                     <label class="text-[14px] invisible">+</label>
                     <button class="gradient-bg h-[40px] w-[40px] text-white font-bold rounded-[4px] "
                         id="addInputButton" type="button">+</button>
@@ -235,28 +251,28 @@
 
 
 
-                <div class="flex justify-end ">
-                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                        id="addBtn">
-                        <div class=" text-center hidden" id="spinner">
-                            <svg aria-hidden="true"
-                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
-                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                    fill="currentFill" />
-                            </svg>
-                        </div>
-                        <div id="text">
-                            @lang('lang.Save')
-                        </div>
+                    <div class="flex justify-end ">
+                        <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                            id="addBtn">
+                            <div class=" text-center hidden" id="spinner">
+                                <svg aria-hidden="true"
+                                    class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                    viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                        fill="currentColor" />
+                                    <path
+                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                        fill="currentFill" />
+                                </svg>
+                            </div>
+                            <div id="text">
+                                @lang('lang.Save')
+                            </div>
 
-                    </button>
+                        </button>
+                    </div>
                 </div>
-            </div>
             </form>
             <div>
 
@@ -467,12 +483,12 @@
                                         <th class="px-6 py-4">${assignment.credits}</th>
                                         <td class="px-6 py-4">
                                            ${assignment.optional == 0 ? `
-                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                                <path fill="#087a06" d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
-                                            </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                                <path fill='red'd="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                                                        </svg>`
+                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                                        <path fill="#087a06" d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+                                                    </svg>` : ` <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                                        <path fill='red'd="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                                                </svg>`
             }
                                         </td>
                                     </tr>`
