@@ -77,7 +77,7 @@
                                             placeholder="Enter Here" name="password">
                                         <span
                                             class="absolute inset-y-0 flex items-center cursor-pointer right-4 togglePassword">
-                                            <i class="fa-solid fa-eye-slash text-customGrayColorDark"></i>
+                                            <i class="fa-solid fa-eye-slash text-black"></i>
                                         </span>
                                     </div>
                                 </div>
