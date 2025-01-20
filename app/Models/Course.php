@@ -24,4 +24,8 @@ class Course extends Model
 
     ];
     private $timestamp  = true;
+    public function users()
+    {
+        return $this->hasMany(User::class, 'course', 'id');
+    }
 }

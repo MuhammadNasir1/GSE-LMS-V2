@@ -66,7 +66,6 @@ class userController extends Controller
         }
     }
 
-
     public function Dashboard()
     {
 
@@ -80,6 +79,9 @@ class userController extends Controller
         $rejection = 0;
         $pending = 0;
         $recent_assignments = [];
+        $coursesChart = [];
+        $totalCandidates = 0;
+        $totalAssessors = 0;
 
         if ($user_role == "admin") {
             $total_user = User::where('role', '!=', 'admin')->count();
@@ -87,6 +89,23 @@ class userController extends Controller
             $approved = Assignment::where('status', 1)->count();
             $rejection = Assignment::where('status', 3)->count();
             $pending = Assignment::where('status', 2)->count();
+
+            $courses = Course::select('id', 'name')
+                ->withCount(['users' => function ($query) {
+                    $query->where('role', 'candidate');
+                }])
+                ->get();
+            foreach ($courses as &$course) {
+                if (preg_match('/LEVEL \d+/', $course['name'], $matches)) {
+                    $course['name'] = $matches[0];
+                } else {
+                    $course['name'] = 'No Level Found';
+                }
+            }
+            $totalCandidates = User::where('role', 'candidate')->count();
+$totalAssessors = User::where('role', 'assessor')->count();
+
+            $coursesChart = $courses;
         } elseif ($user_role == "assessor") {
             $submission = Assignment::where('assessor_id', $user_id)->count();
             $approved = Assignment::where('assessor_id', $user_id)->where('status', 1)->count();
@@ -111,6 +130,9 @@ class userController extends Controller
             'rejection' => $rejection,
             'pending' => $pending,
             'recent_assignments' => $recent_assignments,
+            'coursesChart' => $coursesChart,
+            'totalCandidates' => $totalCandidates,
+            'totalAssessors' => $totalAssessors,
         ]);
     }
 
@@ -215,7 +237,7 @@ class userController extends Controller
     {
         $user_id =  base64_decode($request['u']);
         // $user_id =  Crypt::decryptString($request['u']);
-        $user = User::select('name', 'email', 'phone' , 'user_image')->where('id', $user_id)->first();
+        $user = User::select('name', 'email', 'phone', 'user_image')->where('id', $user_id)->first();
         $course_id  = User::where('id', $user_id)->value('course');
         $course = Course::where('id', $course_id)->first();
         $course->assessor = User::where('id', $course->assessor_id)->value('name');
