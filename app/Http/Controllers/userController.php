@@ -103,7 +103,7 @@ class userController extends Controller
                 }
             }
             $totalCandidates = User::where('role', 'candidate')->count();
-$totalAssessors = User::where('role', 'assessor')->count();
+            $totalAssessors = User::where('role', 'assessor')->count();
 
             $coursesChart = $courses;
         } elseif ($user_role == "assessor") {
@@ -120,6 +120,10 @@ $totalAssessors = User::where('role', 'assessor')->count();
             $approved = Assignment::where('user_id', $user_id)->where('status', 1)->count();
             $rejection = Assignment::where('user_id', $user_id)->where('status', 3)->count();
             $pending = Assignment::where('user_id', $user_id)->where('status', 2)->count();
+            $recent_assignments = Assignment::where('user_id', $user_id)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
         }
 
         // Pass data to the dashboard view

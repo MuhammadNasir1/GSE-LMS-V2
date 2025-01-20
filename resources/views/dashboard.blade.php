@@ -85,80 +85,65 @@
 
         </div>
 
-        <div class="flex lg:flex-row flex-col gap-4 mt-4">
+        <div class="flex lg:flex-row flex-col gap-4 mt-6">
             <div class="lg:w-[65%] w-full bg-white shadow-med   rounded-xl">
-                <div class=" bg-customOrange  rounded-t-xl">
-                    <h3 class="text-white p-3 font-semibold text-xl">Course Enrollments</h3>
-                </div>
-                <div id="coursesChart" class="w-full h-[350px] mt-4 px-2 "></div>
+                @if (session('user_det')['role'] == 'admin')
+                    <div class=" bg-customOrange  rounded-t-xl">
+                        <h3 class="text-white p-3 font-semibold text-xl">Course Enrollments</h3>
+                    </div>
+                    <div id="coursesChart" class="w-full h-[350px] mt-4 px-2 "></div>
+                @else
+                    <div class=" bg-customOrange  rounded-t-xl">
+                        <h3 class="text-white p-3 font-semibold text-xl">Last Assignments</h3>
+                    </div>
+                    <a href="{{ session('user_det')['role'] == 'assessor' ? '../assignmentReview' : '../assignment' }}">
+                        <table class="min-w-full border border-gray-300  overflow-hidden bg-white">
+                            <thead class="bg-primary text-white text-sm uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4 text-left font-semibold border-b border-gray-400">STN</th>
+                                    <th class="px-6 py-4 text-left font-semibold border-b border-gray-400">Candidates Name
+                                    </th>
+                                    <th class="px-6 py-4 text-left font-semibold border-b border-gray-400">Assignment Status
+                                    </th>
+                                    <th class="px-6 py-4 text-left font-semibold border-b border-gray-400">Date Time</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                @foreach ($recent_assignments as $assignment)
+                                    <tr class="border-b border-gray-300 hover:bg-gray-100 transition duration-200">
+                                        <td class="px-6 py-4 font-medium text-gray-900">{{ $loop->iteration }}</td>
+                                        <td class="px-6 py-4">{{ $assignment->user->name }}</td>
+                                        <td>
+                                            <div class="pl-4">
+                                                {!! $assignment->status == 2
+                                                    ? '<span class="bg-purple-100 text-purple-800r text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>'
+                                                    : ($assignment->status == 1
+                                                        ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Approved</span>'
+                                                        : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Rejected</span>') !!}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ \Carbon\Carbon::parse($assignment->created_at)->format('M-d-Y') }}</td>
+                                    </tr>
+                                @endforeach
+
+
+                            </tbody>
+                        </table>
+                    </a>
+                @endif
+
             </div>
             <div class="lg:w-[35%] w-full bg-white shadow-med   rounded-xl">
                 <div class=" bg-secondary  rounded-t-xl">
-                    <h3 class="text-white p-3 font-semibold text-xl">Users</h3>
+                    <h3 class="text-white p-3 font-semibold text-xl">
+                        {{ session('user_det')['role'] == 'admin' ? 'Users' : 'Assignments' }}</h3>
                 </div>
                 <div id="userChart" class="w-full h-[350px] mt-4 px-2 "></div>
             </div>
         </div>
     </div>
-    @if (session('user_det')['role'] == 'assessor')
-        <div class="lg:flex gap-4 mt-6 mx-6 ">
-            <div class="lg:w-[60%] w-full">
-                <div class="min-h-[448px] border border-primary rounded-xl">
-                    <h2 class="text-xl text-white gradient-bg    rounded-t-xl py-2 px-6  font-semibold ">Recent Units</h2>
-                    <div class="pt-3  mt-2 border-t  border-gray-   200">
-
-                        <div class="relative overflow-auto h-[300px] ">
-                            <table class="w-full text-sm text-center ">
-                                <thead class="text-sm text-white ">
-                                    <tr class="bg-gray-500">
-                                        <th class="px-6 py-3">
-                                            STN
-                                        </th>
-                                        <th class="px-6 py-3">
-                                            Candidates Name
-                                        </th>
-                                        <th class="px-6 py-3">
-                                            Assignment File
-                                        </th>
-                                        <th class="px-6 py-3">
-                                            Date/Time
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="border-b  border-b-slate-300">
-                                        <td class="pb-3 pt-3 ">1</td>
-                                        <td class="pb-3 pt-3 ">Peter Jones</td>
-                                        <td class="pb-3 pt-3 "><a href="#" class="text-blue-500">Opeen FIle</a></td>
-                                        <td class="pb-3 pt-3 ">01-08-2024/13:14</td>
-                                    </tr>
-                                    <tr class="border-b  border-b-slate-300">
-                                        <td class="pb-3 pt-3 ">1</td>
-                                        <td class="pb-3 pt-3 ">Peter Jones</td>
-                                        <td class="pb-3 pt-3 "><a href="#" class="text-blue-500">Opeen FIle</a></td>
-                                        <td class="pb-3 pt-3 ">01-08-2024/13:14</td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-    @endif
-    {{-- <div class="lg:w-[40%] w-full border border-gray-500 rounded-xl">
-            <div class="  ">
-                <h2 class="text-xl rounded-t-xl  font-semibold gradient-bg text-white px-6 py-2">Units Progress</h2>
-                <div class="w-[300px] " id="progressChart"></div>
-            </div>
-        </div> --}}
-    </div>
-
-
+   
     <script>
         window.onload = function() {
 
@@ -170,21 +155,39 @@
                     startAngle: 240,
                     indexLabelPlacement: "inside",
                     indexLabelFontColor: "#FFFFFF",
-                    dataPoints: [{
-                            y: {{$totalAssessors}},
-                            label: "Assessors",
-                            color: "#012169"
-                        },
-                        {
-                            y: {{$total_user}},
-                            label: "Total User",
-                            color: "#009A00"
-                        },
-                        {
-                            y: {{$totalCandidates}},
-                            label: "Candidates",
-                            color: "#F3490F"
-                        }
+                    dataPoints: [
+                        @if (session('user_det')['role'] == 'admin')
+
+                            {
+                                y: {{ $totalAssessors }},
+                                label: "Assessors",
+                                color: "#012169"
+                            }, {
+                                y: {{ $total_user }},
+                                label: "Total User",
+                                color: "#009A00"
+                            }, {
+                                y: {{ $totalCandidates }},
+                                label: "Candidates",
+                                color: "#F3490F"
+                            }
+                        @else
+                            {
+                                y: {{ $pending }},
+                                label: "pending",
+                                color: "#DCDC1CFF"
+                            }, {
+                                y: {{ $approved }},
+                                label: "Approved",
+                                color: "#009A00"
+                            }, {
+                                y: {{ $rejection }},
+                                label: "Rejection",
+                                color: "#F3490F"
+                            }
+                        @endif
+
+
                     ]
                 }]
             });
