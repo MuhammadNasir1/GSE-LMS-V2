@@ -173,6 +173,7 @@
     </div>
 @endsection
 @section('js')
+<script>
 $(document).ready(function() {
     $('#assignmentSelect').change(function() {
         let assessorId = $(this).find(':selected').data('assessor-id');
@@ -204,4 +205,5 @@ $(document).on("formSubmissionResponse", function(event, response, Alert, Succes
         $('.modalCloseBtn').click();
     } else {}
 });
+</script>
 @endsection
