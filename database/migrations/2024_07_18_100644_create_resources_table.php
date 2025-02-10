@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
-            $table->text('file');
-            $table->string('name');
-            $table->string('course');
+            $table->text('resource_file');
+            $table->string('resource_name');
+            $table->integer('course');
+            $table->integer('course_assignments')->nullable();
             $table->text('description');
             $table->timestamps();
         });

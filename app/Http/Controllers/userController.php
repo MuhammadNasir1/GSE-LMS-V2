@@ -121,9 +121,9 @@ class userController extends Controller
             $rejection = Assignment::where('user_id', $user_id)->where('status', 3)->count();
             $pending = Assignment::where('user_id', $user_id)->where('status', 2)->count();
             $recent_assignments = Assignment::where('user_id', $user_id)
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
         }
 
         // Pass data to the dashboard view
@@ -230,7 +230,7 @@ class userController extends Controller
                 return response()->json(['success' => false, 'message' => 'User not found'], 404);
             }
 
-            
+
             if ($request->hasFile('user_image')) {
                 $image = $request->file('user_image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -298,5 +298,16 @@ class userController extends Controller
         ];
 
         return view('profile', compact("course", "enroll_assignments", 'user', 'progress_data'));
+    }
+
+    public function resendMail($user_id)
+    {
+        try {
+            $user  = User::select('id', 'email', "name")->where('id', $user_id)->first();
+            Mail::to($user->email)->send(new registrationMail($user->name, asset("setupPassword?key=" . Hash::make($user->id))));
+            return response()->json(['success' => true, 'message' => 'invitation Send Successfully!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }

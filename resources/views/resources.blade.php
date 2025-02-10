@@ -34,14 +34,14 @@
                             @foreach ($resources as $resource)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $resource->name }}</td>
+                                    <td>{{ $resource->resource_name }}</td>
                                     <td>{{ $resource->course }}</td>
-                                    <td><a href="{{ $resource->file }}" target="_blank" class="text-blue-500">Open File</a>
+                                    <td><a href="../{{$resource->resource_file }}" target="_blank" class="text-blue-500">Open File</a>
                                     </td>
                                     <td>{{ $resource->description }}</td>
                                     <td>
                                         <div class="flex gap-4">
-                                            <a href="#">
+                                            {{-- <a href="#">
                                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <circle opacity="0.1" cx="18" cy="18" r="18"
@@ -51,19 +51,19 @@
                                                         fill="#D11A2A" />
                                                 </svg>
 
-                                            </a>
-                                            <button class="updateDataBtn" resourceId="{{ $resources->id }}"
-                                                resourceName="{{ $resources->name }}"
+                                            </a> --}}
+                                            {{-- <button class="updateDataBtn" resourceId="{{ $resources->id }}"
+                                                resourceName="{{ $resources->resource }}"
                                                 resourceCourse="{{ $resources->course }}">
-                                                <svg width="36" height="36"
-                                                viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle opacity="0.1" cx="18" cy="18" r="18"
-                                                    fill="#233A85" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M16.1637 23.6197L22.3141 15.666C22.6484 15.2371 22.7673 14.7412 22.6558 14.2363C22.5593 13.7773 22.277 13.3408 21.8536 13.0097L20.8211 12.1895C19.9223 11.4747 18.8081 11.5499 18.1693 12.3701L17.4784 13.2663C17.3893 13.3785 17.4116 13.544 17.523 13.6343C17.523 13.6343 19.2686 15.0339 19.3058 15.064C19.4246 15.1769 19.5137 15.3274 19.536 15.508C19.5732 15.8616 19.328 16.1927 18.9641 16.2379C18.7932 16.2605 18.6298 16.2078 18.511 16.11L16.6762 14.6502C16.5871 14.5832 16.4534 14.5975 16.3791 14.6878L12.0188 20.3314C11.7365 20.6851 11.64 21.1441 11.7365 21.588L12.2936 24.0035C12.3233 24.1314 12.4348 24.2217 12.5685 24.2217L15.0197 24.1916C15.4654 24.1841 15.8814 23.9809 16.1637 23.6197ZM19.5957 22.8676H23.5928C23.9828 22.8676 24.2999 23.1889 24.2999 23.5839C24.2999 23.9797 23.9828 24.3003 23.5928 24.3003H19.5957C19.2058 24.3003 18.8886 23.9797 18.8886 23.5839C18.8886 23.1889 19.2058 22.8676 19.5957 22.8676Z"
-                                                    fill="#233A85" />
-                                            </svg>
-                                            </button>
+                                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle opacity="0.1" cx="18" cy="18" r="18"
+                                                        fill="#233A85" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M16.1637 23.6197L22.3141 15.666C22.6484 15.2371 22.7673 14.7412 22.6558 14.2363C22.5593 13.7773 22.277 13.3408 21.8536 13.0097L20.8211 12.1895C19.9223 11.4747 18.8081 11.5499 18.1693 12.3701L17.4784 13.2663C17.3893 13.3785 17.4116 13.544 17.523 13.6343C17.523 13.6343 19.2686 15.0339 19.3058 15.064C19.4246 15.1769 19.5137 15.3274 19.536 15.508C19.5732 15.8616 19.328 16.1927 18.9641 16.2379C18.7932 16.2605 18.6298 16.2078 18.511 16.11L16.6762 14.6502C16.5871 14.5832 16.4534 14.5975 16.3791 14.6878L12.0188 20.3314C11.7365 20.6851 11.64 21.1441 11.7365 21.588L12.2936 24.0035C12.3233 24.1314 12.4348 24.2217 12.5685 24.2217L15.0197 24.1916C15.4654 24.1841 15.8814 23.9809 16.1637 23.6197ZM19.5957 22.8676H23.5928C23.9828 22.8676 24.2999 23.1889 24.2999 23.5839C24.2999 23.9797 23.9828 24.3003 23.5928 24.3003H19.5957C19.2058 24.3003 18.8886 23.9797 18.8886 23.5839C18.8886 23.1889 19.2058 22.8676 19.5957 22.8676Z"
+                                                        fill="#233A85" />
+                                                </svg>
+                                            </button> --}}
                                         </div>
                                     </td>
                                 </tr>
@@ -108,19 +108,18 @@
                             </button>
                         </div>
 
-                        <div class="grid md:grid-cols-3 gap-x-6 gap-y-4 mx-6 my-6">
+                        <div class="grid md:grid-cols-2 gap-x-6 gap-y-4 mx-6 my-6">
                             <div>
                                 <label class="text-[14px] font-normal" for="file">Resource File</label>
                                 <input type="file" required
                                     class="w-full border-[#DEE2E6] border rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="file" id="file" >
+                                    name="resource_file" id="file">
                             </div>
                             <div>
                                 <label class="text-[14px] font-normal" for="name">Resource Name</label>
                                 <input type="text" required
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                    name="name" id="name" placeholder="Resource Name Here"
-                                   >
+                                    name="resource_name" id="name" placeholder="Resource Name Here">
                             </div>
                             <div class="w-full">
                                 <label class="text-[14px] font-normal" for="course">Course</label>
@@ -131,7 +130,16 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-span-3">
+                            <div class="w-full">
+                                <label class="text-[14px] font-normal" for="assignment">Course Assignment</label>
+                                <select name="course_assignments" id="assignment">
+                                    <option disabled selected>Select Assignment </option>
+                                    @foreach ($assignments as $assignment)
+                                        <option value="{{ $assignment->id }}">{{ $assignment->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-span-2">
                                 <label class="text-[14px] font-normal" for="description">Resource Description</label>
                                 <textarea name="description" id="description"
                                     class="w-full min-h-20 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -173,37 +181,19 @@
     </div>
 @endsection
 @section('js')
-<script>
-$(document).ready(function() {
-    $('#assignmentSelect').change(function() {
-        let assessorId = $(this).find(':selected').data('assessor-id');
+    <script>
+    
 
-        $('#assessorId').val(assessorId || '');
-    });
-});
+        function updateDatafun() {
+          
+        }
+        updateDatafun()
+        // Listen for the custom form submission response event
+        $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
+            console.log(response);
 
-function updateDatafun() {
-    $('.updateDataBtn').click(function() {
-        $('#unitModal').removeClass("hidden");
-        $('#unitModal').addClass('flex');
-        $('#assignmentSelect').trigger('change');
-        $('#description').val($(this).attr('description'));
+                $('.modalCloseBtn').click();
 
-        $('#updateId').val($(this).attr('assignmentId'));
-
-        $('#unitModal #modalTitle').text("Update Assignment");
-        $('#unitModal #btnText').text("Update");
-
-    });
-}
-updateDatafun()
-// Listen for the custom form submission response event
-$(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
-    console.log(response);
-
-    if (response.success) {
-        $('.modalCloseBtn').click();
-    } else {}
-});
-</script>
+        });
+    </script>
 @endsection

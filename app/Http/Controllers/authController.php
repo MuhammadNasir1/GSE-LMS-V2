@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class authController extends Controller
@@ -252,9 +253,9 @@ class authController extends Controller
                         $user->password = Hash::make($request['new_password']);
                         $user->save();
                     } else {
-                        return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 401);
+                        return response()->json(['success' => false, 'message' => 'New password and confirm password do not match'], 201);
                     }
-                    return response()->json(['success' => true, 'message' => 'Profile Updated!']);
+                    return response()->json(['success' => true, 'message' => 'Profile Updated!'] , 500);
                 }
             }
 
@@ -265,8 +266,7 @@ class authController extends Controller
 
             ]]);
             $user->save();
-            return redirect('../setting');
-            // return response()->json(['success' => true, 'message' => 'Profile Updated!', 'updated_data' => $user], 200);
+            return response()->json(['success' => true, 'message' => 'Profile Updated!', 'updated_data' => $user], 200);
         } catch (\Exception $e) {
             return redirect('../setting');
             return response()->json(['success' => false, 'message' => $e->getMessage()], 400);

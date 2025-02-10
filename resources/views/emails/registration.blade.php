@@ -1,4 +1,3 @@
-
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -190,7 +189,7 @@
                                 <table class=t48 role=presentation cellpadding=0 cellspacing=0
                                     style="Margin-left:auto;Margin-right:auto;">
                                     <tr>
-            
+
                                         <td class=t47
                                             style="background-color:#FFFFFF;border:1px solid #EBEBEB;overflow:hidden;width:600px;border-radius:3px 3px 3px 3px;">
                                             <!--<![endif]-->
@@ -217,13 +216,13 @@
                                                                                     width=100% style="width:100%;">
                                                                                     <tr>
                                                                                         <td class=t1>
-                                                                                            <div style="font-size:0px;">
+                                                                                            {{-- <div style="font-size:0px;">
                                                                                                 <img class=t0
                                                                                                     style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;"
                                                                                                     width=238 height=238
                                                                                                     alt=""
                                                                                                     src="https://9f95ff95-91d8-4712-84e2-e1458813984e.b-cdn.net/e/738c4ed0-19b1-4c11-9de3-26f2b7b1ecb0/caa8546e-0c9f-4336-aef7-4e2bb8e6eb62.png" />
-                                                                                            </div>
+                                                                                            </div> --}}
                                                                                         </td>
                                                                                     </tr>
                                                                                 </table>
@@ -253,7 +252,8 @@
                                                                                             style="padding:0 0 18px 0;">
                                                                                             <h1 class=t5
                                                                                                 style="margin:0;Margin:0;font-family:Montserrat,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:28px;font-weight:700;font-style:normal;font-size:24px;text-decoration:none;text-transform:none;letter-spacing:-1px;direction:ltr;color:#141414;text-align:left;mso-line-height-rule:exactly;mso-text-raise:1px;">
-                                                                                                Hi {{$user_name}}</h1>
+                                                                                                Hi {{ $user_name }}
+                                                                                            </h1>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </table>
@@ -330,8 +330,7 @@
                                                                                                 below to confirm your
                                                                                                 email address and finish
                                                                                                 setting up your account.
-                                                                                                This link is valid for
-                                                                                                48 hours.</p>
+                                                                                            </p>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </table>
@@ -353,7 +352,7 @@
                                                                         cellspacing=0
                                                                         style="Margin-left:auto;Margin-right:auto;">
                                                                         <tr>
-                    
+
                                                                             <td class=t26
                                                                                 style="background-color:#3B874B;overflow:hidden;width:auto;border-radius:40px 40px 40px 40px;">
                                                                                 <table class=t25 role=presentation
@@ -362,9 +361,12 @@
                                                                                     <tr>
                                                                                         <td class=t24
                                                                                             style="text-align:center;line-height:34px;mso-line-height-rule:exactly;mso-text-raise:5px;padding:0 23px 0 23px;">
-                                                                                            <a href="{{$user}}"><span class=t22
-                                                                                                style="display:block;margin:0;Margin:0;font-family:Sofia Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:34px;font-weight:700;font-style:normal;font-size:16px;text-decoration:none;text-transform:none;letter-spacing:-0.2px;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:5px;">Setup
-                                                                                                Account</span></a></td>
+                                                                                            <a
+                                                                                                href="{{ $user }}"><span
+                                                                                                    class=t22
+                                                                                                    style="display:block;margin:0;Margin:0;font-family:Sofia Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:34px;font-weight:700;font-style:normal;font-size:16px;text-decoration:none;text-transform:none;letter-spacing:-0.2px;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:5px;">Setup
+                                                                                                    Account</span></a>
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </td>
@@ -401,7 +403,8 @@
                                                                                             <span class=t28
                                                                                                 style="display:block;margin:0;Margin:0;font-family:Open Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:20px;font-weight:600;font-style:normal;font-size:14px;text-decoration:none;direction:ltr;color:#222222;text-align:center;mso-line-height-rule:exactly;mso-text-raise:2px;">Global
                                                                                                 Consulting Pvt.
-                                                                                                Ltd.</span></td>
+                                                                                                Ltd.</span>
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </td>
@@ -446,7 +449,8 @@
                                                                                                             style="margin:0;Margin:0;font-weight:700;mso-line-height-rule:exactly;">admin@globalconsulting-int.com</span></span></span><span
                                                                                                     class=t37
                                                                                                     style="margin:0;Margin:0;color:#141414;mso-line-height-rule:exactly;">
-                                                                                                </span></span></td>
+                                                                                                </span></span>
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </td>

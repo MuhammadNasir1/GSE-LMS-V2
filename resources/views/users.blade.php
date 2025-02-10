@@ -27,7 +27,7 @@
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Email')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                                    <th class="whitespace-nowrap">invitation</th>
+                                <th class="whitespace-nowrap">invitation</th>
                                 {{-- <th class="whitespace-nowrap">@lang('lang.Role')</th> --}}
                                 {{-- <th class="whitespace-nowrap">Login Status</th> --}}
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
@@ -39,7 +39,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <div class="rounded-full flex justify-content-center ">
-                                            <img src="{{asset($data->user_image ?? 'assets/logo/logo-bg-white.png') }}"
+                                            <img src="{{ asset($data->user_image ?? 'assets/logo/logo-bg-white.png') }}"
                                                 class="object-contain rounded-full h-[80px] min-w-[80px] max-w-[80] bg-slate-400"
                                                 width="80">
                                         </div>
@@ -55,15 +55,34 @@
                                     {{-- <td><span
                                             class="{{ $data->role == 'assessor' ? 'text-green-800' : 'text-purple-700' }}">{{ $data->role }}</span>
                                     </td> --}}
-                                        <td>
-                                            <span
-                                                class= "{{ $data->enrolled == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-600' }}  text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->enrolled == 0 ? 'Pending' : 'Accepted' }}</span>
-                                        </td>
                                     <td>
-                                        <div class="flex gap-5 items-center justify-center">
+                                        <span
+                                            class= "{{ $data->enrolled == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-600' }}  text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ">{{ $data->enrolled == 0 ? 'Pending' : 'Accepted' }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-end">
+                                            <span disabled="{{ $data->enrolled == 1 ? 'true' : 'false' }}" type="button"
+                                                uId="{{ $data->id }}"
+                                                class=" {{ $data->enrolled !== 1 ? 'mailBtn cursor-pointer' : 'opacity-50 cursor-not-allowed' }} text-center bg-customOrange min-w-[130px] font-semibold text-white px-4 rounded-md py-2">
+                                                <div class="text-center hidden spinner" id="spinner-{{ $data->id }}">
+                                                    <svg aria-hidden="true"
+                                                        class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                                        viewBox="0 0 100 101" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                                            fill="currentColor" />
+                                                        <path
+                                                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                                            fill="currentFill" />
+                                                    </svg>
+                                                </div>
+                                                <div id="text-{{ $data->id }}">
+                                                    Resend Mail
+                                                </div>
+                                            </span>
 
-                                            <button data-modal-target="Updateproductmodal"
-                                                data-modal-toggle="Updateproductmodal"
+                                            <button data-modal-target="userModal" data-modal-toggle="userModal"
                                                 class=" updateBtn cursor-pointer  w-[42px]"
                                                 updateId="{{ $data->id }}"><svg width="36" height="36"
                                                     viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,18 +93,18 @@
                                                         fill="#233A85" />
                                                 </svg>
                                             </button>
-                                            <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            {{-- <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                                 class="delButton" delId="{{ $data->id }}">
                                                 <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                     alt="delete" class="cursor-pointer">
-                                            </button>
+                                            </button> --}}
                                             @if ($data->role == 'candidate')
-                                            <a href="../profile?u={{ base64_encode($data->id) }}">
-                                                <button
-                                                    class=" bg-secondary font-semibold text-white px-4 rounded-md py-2">
-                                                    Profile
-                                                </button>
-                                            </a>
+                                                <a href="../profile?u={{ base64_encode($data->id) }}">
+                                                    <button
+                                                        class=" bg-secondary font-semibold text-white px-4 rounded-md py-2">
+                                                        Profile
+                                                    </button>
+                                                </a>
                                             @endif
 
                                         </div>
@@ -194,7 +213,93 @@
 
 @section('js')
     <script>
-        function updateDatafun() {}
+        function resendMail() {
+
+
+            console.log("ldkf")
+            $('.mailBtn').click(function() {
+                console.log("ldkf")
+                // Get user ID for the mail action
+                var userId = $(this).attr('uId');
+                let url = "../resendMail/" + userId;
+                Swal.fire({
+                    title: "Resend Email",
+                    text: "Do you want to resend mail to this user!",
+                    showCancelButton: true,
+                    confirmButtonColor: "green",
+                    cancelButtonColor: "gray",
+                    confirmButtonText: "Yes, resend it!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show spinner
+                        $('#spinner-' + userId).removeClass('hidden');
+                        $('#text-' + userId).addClass('hidden');
+                        // Disable the button to prevent multiple clicks
+                        $(this).prop('disabled', true);
+
+                        // Prepare data for the AJAX request
+                        var delData = {
+                            id: userId, // Send the user ID for the request
+                        };
+                        var csrfToken = $('meta[name="csrf-token"]').attr('content'); // Get CSRF token
+
+                        // Send AJAX request to resend mail
+                        $.ajax({
+                            type: "POST",
+                            url: url, // Adjust the URL to your mail sending route
+                            data: delData,
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            beforeSend: function() {
+                                // Optionally you can show a loader here
+                            },
+                            success: function(response) {
+
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Success",
+                                    text: "Email Send!",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                // Hide spinner and re-enable the button
+                                $('#spinner-' + userId).addClass('hidden');
+                                $('.mailBtn').prop('disabled', false);
+                                $('#text-' + userId).removeClass('hidden');
+                            },
+                            error: function(xhr) {
+
+                                Swal.fire({
+                                position: "center",
+                                icon: "warning",
+                                title: "Error",
+                                text: "There was an error resending the mail.",
+                                showConfirmButton: false,
+                                timer: 2000,
+                            });
+                                // Hide spinner and re-enable the button
+                                $('#spinner-' + userId).addClass('hidden');
+                                $('#text-' + userId).removeClass('hidden');
+
+                                $('.mailBtn').prop('disabled', false);
+                            }
+                        });
+                    }
+                });
+            });
+
+
+        }
+
+        resendMail()
+
+        function updateDatafun() {
+            resendMail()
+
+
+        }
         // Listen for the custom form submission response event
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             console.log(response);

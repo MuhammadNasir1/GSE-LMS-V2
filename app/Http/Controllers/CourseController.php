@@ -23,6 +23,7 @@ class CourseController extends Controller
             asset('assets/course-imgs/Level 3.png'),
             asset('assets/course-imgs/othm level 6.png'),
             asset('assets/course-imgs/OTHM LEVEL 7.png'),
+            asset('assets/course-imgs/OTHM LEVEL 7.png'),
         ];
         foreach ($courses as $index => $course) {
             // $course_assignment = CourseAssignments::where('course_id', $course->id)->get();

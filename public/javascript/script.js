@@ -149,11 +149,7 @@ $(document).ready(function () {
                         },
                         error: function (xhr) {
                             $("#loading").hide();
-                            Swal.fire({
-                                title: "Error!",
-                                text: "There was an error deleting data.",
-                                icon: "error",
-                            });
+                            WarningAlert(There was an error deleting data.),
                         },
                     });
                 }

@@ -64,14 +64,9 @@ Route::middleware('custom')->group(function () {
         Route::post('/addRecource', 'add')->name('addRecource');
         Route::get('/view/resources', 'index')->name('viewResource');
         Route::get('/delResource/{id}', 'delete')->name("getForUpdateResource");
-        Route::get('/update-customer/{id}', 'get');
-        Route::post('/updateResource/{id}', 'update');
-        Route::post('/updateResource/{id}', 'update');
-        Route::get('/view/resources', 'index')->name('viewResource');
-
-        Route::get('resources', function () {
-            return view('view_resources');  
-        });
+        
+ 
+        Route::get('/resources', 'getResources')->name("getResources");
     });
 
     Route::controller(AssignmentController::class)->group(function () {
@@ -94,5 +89,6 @@ Route::middleware('custom')->group(function () {
         Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
         Route::post('/updateUserCar/{id}', [userController::class, 'updateUserCar']);
         // Route::get('/', [userController::class, 'Dashboard']);
+        Route::post('/resendMail/{user_id}', [userController::class, 'resendMail']);
     });
 });
