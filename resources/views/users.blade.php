@@ -218,7 +218,7 @@
 
             $('#userModal #modalTitle').text("Addd Data");
             $('#userModal #btnText').text("Add");
-            $('#postDataForm').attr("url", '../addUser/');
+            $('#postDataForm').attr("url", '../addUser');
             $('#userName').val('');
             $('#userEmail').val('');
             $('#course').val('').trigger("change");
