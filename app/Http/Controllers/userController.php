@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\AssignRef;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class userController extends Controller
 {
@@ -61,6 +62,59 @@ class userController extends Controller
             ]);
             Mail::to($validatedData['email'])->send(new registrationMail($user->name, asset("setupPassword?key=" . Hash::make($user->id))));
             return response()->json(['success' => true, 'message' => 'invitation Send Successfully!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function update(Request $request, $userId)
+    {
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:user,email,id,' . $userId,
+                'role' => 'required',
+                'course' => 'required',
+            ]);
+            
+            $user = User::find($userId);
+            if (!$user) {
+                return response()->json(['success' => false, "message" => "User not found"], 500);
+            }
+            
+            // Check if email or course has changed
+            $emailChanged = $user->email !== $validatedData['email'];
+            $courseChanged = $user->course !== $validatedData['course'];
+            
+            if ($emailChanged || $courseChanged) {
+                $user->enrolled = 0;
+            
+                $assignments = Assignment::where("user_id", $userId)->get();
+                foreach ($assignments as $assignment) {
+                    if ($assignment->file) {  
+                        Storage::delete($assignment->file); 
+                    }
+                    
+                    // Delete the assignment
+                    $assignment->delete();
+                }
+            
+                $assignmentsReport = assignmentReport::where("user_id", $userId)->get();
+                foreach ($assignmentsReport as $report) {
+                    $report->delete();
+                }
+            
+                Mail::to($validatedData['email'])->send(new registrationMail($user->name, asset("setupPassword?key=" . Hash::make($user->id))));
+            }
+            
+            // Update the user data
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
+            $user->course = $validatedData['course'];
+            $user->save(); // Use save() to update the user instead of update()
+            
+            return response()->json(['success' => true, "message" => "User updated successfully"]);
+            
+            
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
@@ -229,7 +283,10 @@ class userController extends Controller
             if (!$user) {
                 return response()->json(['success' => false, 'message' => 'User not found'], 404);
             }
+            if($user->role == "assessor"){
+                $user->enrolled = 1;
 
+            }
 
             if ($request->hasFile('user_image')) {
                 $image = $request->file('user_image');

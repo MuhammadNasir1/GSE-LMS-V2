@@ -149,7 +149,7 @@ $(document).ready(function () {
                         },
                         error: function (xhr) {
                             $("#loading").hide();
-                            WarningAlert(There was an error deleting data.),
+                            WarningAlert("There was an error deleting data");
                         },
                     });
                 }

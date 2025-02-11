@@ -22,8 +22,8 @@ class CourseController extends Controller
         $images = [
             asset('assets/course-imgs/Level 3.png'),
             asset('assets/course-imgs/othm level 6.png'),
-            asset('assets/course-imgs/OTHM LEVEL 7.png'),
-            asset('assets/course-imgs/OTHM LEVEL 7.png'),
+            asset('assets/course-imgs/Othm level 7  env.png'),
+            asset('assets/course-imgs/Othm level 7 diploma in occupational health and safety.png'),
         ];
         foreach ($courses as $index => $course) {
             // $course_assignment = CourseAssignments::where('course_id', $course->id)->get();

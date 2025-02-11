@@ -13,7 +13,7 @@
                     <h3 class="text-[20px] text-black hidden sm:block">{{ ucfirst($_GET['type']) }} List</h3>
                     <div>
 
-                        <button data-modal-target="userModal" data-modal-toggle="userModal"
+                        <button data-modal-target="userModal" data-modal-toggle="userModal" id="addDataBtn"
                             class="bg-customOrange cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                             Add {{ ucfirst($_GET['type']) }}</button>
                     </div>
@@ -83,8 +83,9 @@
                                             </span>
 
                                             <button data-modal-target="userModal" data-modal-toggle="userModal"
-                                                class=" updateBtn cursor-pointer  w-[42px]"
-                                                updateId="{{ $data->id }}"><svg width="36" height="36"
+                                                class=" updateBtn cursor-pointer  w-[42px]" updateId="{{ $data->id }}"
+                                                userName="{{ $data->name }}" userEmail="{{ $data->email }}"
+                                                course="{{ $data->course }}"><svg width="36" height="36"
                                                     viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle opacity="0.1" cx="18" cy="18" r="18"
                                                         fill="#233A85" />
@@ -150,17 +151,17 @@
                     </div>
                     <div class="grid xl:grid-cols-2 gap-y-2 gap-x-4 mx-6 mt-6">
                         <div>
-                            <label class="text-[14px] font-normal" for="user_name">@lang('lang.User_Name')</label>
+                            <label class="text-[14px] font-normal" for="userName">@lang('lang.User_Name')</label>
                             <input type="text" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="name" id="user_name" value="{{ $user->name ?? '' }}"
+                                name="name" id="userName" value="{{ $user->name ?? '' }}"
                                 placeholder=" @lang('lang.User_Name_Here')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
+                            <label class="text-[14px] font-normal" for="userEmail">@lang('lang.Email_Address')</label>
                             <input type="email" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')"
+                                name="email" id="userEmail" placeholder=" @lang('lang.Email_Address_Here')"
                                 value="{{ $user->email ?? '' }}">
                         </div>
                         <div class="w-full col-span-2">
@@ -213,12 +214,20 @@
 
 @section('js')
     <script>
+        $('#addDataBtn').click(function() {
+
+            $('#userModal #modalTitle').text("Addd Data");
+            $('#userModal #btnText').text("Add");
+            $('#postDataForm').attr("url", '../addUser/');
+            $('#userName').val('');
+            $('#userEmail').val('');
+            $('#course').val('').trigger("change");
+        })
+
         function resendMail() {
 
 
-            console.log("ldkf")
             $('.mailBtn').click(function() {
-                console.log("ldkf")
                 // Get user ID for the mail action
                 var userId = $(this).attr('uId');
                 let url = "../resendMail/" + userId;
@@ -272,13 +281,13 @@
                             error: function(xhr) {
 
                                 Swal.fire({
-                                position: "center",
-                                icon: "warning",
-                                title: "Error",
-                                text: "There was an error resending the mail.",
-                                showConfirmButton: false,
-                                timer: 2000,
-                            });
+                                    position: "center",
+                                    icon: "warning",
+                                    title: "Error",
+                                    text: "There was an error resending the mail.",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
                                 // Hide spinner and re-enable the button
                                 $('#spinner-' + userId).addClass('hidden');
                                 $('#text-' + userId).removeClass('hidden');
@@ -296,10 +305,28 @@
         resendMail()
 
         function updateDatafun() {
+
+            $('.updateBtn').click(function() {
+                $('#userModal').removeClass("hidden");
+                $('#userModal').addClass('flex');
+
+                $('#userName').val($(this).attr('userName'));
+                $('#userEmail').val($(this).attr('userEmail'));
+                $('#course').val($(this).attr('course')).trigger("change");
+
+                let userId = $(this).attr('updateId');
+
+                $('#userModal #modalTitle').text("Update Data");
+                $('#userModal #btnText').text("Update");
+                $('#postDataForm').attr("url", '../updateUserDetails/' + userId);
+
+            });
             resendMail()
 
 
         }
+
+        updateDatafun();
         // Listen for the custom form submission response event
         $(document).on("formSubmissionResponse", function(event, response, Alert, SuccessAlert, WarningAlert) {
             console.log(response);

@@ -90,5 +90,6 @@ Route::middleware('custom')->group(function () {
         Route::post('/updateUserCar/{id}', [userController::class, 'updateUserCar']);
         // Route::get('/', [userController::class, 'Dashboard']);
         Route::post('/resendMail/{user_id}', [userController::class, 'resendMail']);
+        Route::post('/updateUserDetails/{user_id}', [userController::class, 'update']);
     });
 });

@@ -39,7 +39,7 @@
             </div>
             <h2 class="font-semibold text-xl  mx-2 ">Course Content</h2>
 
-            <form id="unitForm" url="enrollCandidate" method="POST">
+        <form id="unitForm" url="enrollCandidate" method="POST">
                 @csrf
                 <input type="hidden" name="course_id" value="{{ request()->get('c') }}">
                 <input type="hidden" name="user_id" value="{{ request()->get('i') }}">

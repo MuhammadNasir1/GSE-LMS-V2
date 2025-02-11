@@ -203,10 +203,10 @@
     <script>
         $(document).ready(function() {
             $('#postDataForm').on('keypress', function(event) {
-        if (event.which === 13) { // 13 is the Enter key
-            event.preventDefault(); // Prevent default form submission
-        }
-    });
+                if (event.which === 13) { // 13 is the Enter key
+                    event.preventDefault(); // Prevent default form submission
+                }
+            });
             // Initially hide the userInfo div and passwordFields div
             $('#userInfo').hide();
             $('#passwordFields').show();
@@ -288,7 +288,19 @@
 
                 window.location.href =
                     `../enrolledCourse?key={{ request()->get('key') }}&c=${response.user.course}&i=${response.user.id}`;
-            } else {}
+            } else {
+
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Enrolled Successfully",
+                    text: "Enrollment Successful! Now you can login and use GSE LMS.",
+                    showConfirmButton: false,
+                    timer: 3000,
+                }).then(function() {
+                    window.location.href = '../login';
+                });
+            }
         });
     </script>
 </body>
