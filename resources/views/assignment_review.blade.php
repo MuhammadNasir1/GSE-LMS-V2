@@ -22,7 +22,7 @@
                                 <th>course</th>
                                 <th>Unit</th>
                                 <th>File</th>
-                                <th>status</th>
+                                <th>status / Submit-Count</th>
                                 <th>Uploaded</th>
                                 <th>Action</th>
                             </tr>
@@ -37,30 +37,39 @@
                                     <td><a href="{{ $assignment->file }}" target="_blank" class="text-blue-600">open
                                             File</a></td>
                                     <td>
-                                        {!! $assignment->status == 2
-                                            ? '<span class="bg-purple-100 text-purple-800r text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>'
-                                            : ($assignment->status == 1
-                                                ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Approved</span>'
-                                                : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Rejected</span>') !!}
+                                        <div>
+                                            {!! $assignment->status == 2
+                                                ? '<span class="bg-purple-100 text-purple-800r text-xs font-medium me-2 px-2.5 py-0.5 rounded">Pending</span>'
+                                                : ($assignment->status == 1
+                                                    ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Approved</span>'
+                                                    : '<span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Rejected</span>') !!} @if ($assignment->upload_count > 1)
+                                                / <span
+                                                    class="bg-customOrange text-xs text-white px-3 py-1 rounded-lg mr-1">{{ $assignment->upload_count }}</span>
+                                            @endif
+
+
+                                        </div>
                                     </td>
 
                                     <td>{{ $assignment->time_ago }}</td>
                                     <td>
-                                        <div class="flex gap-3">
-                                            <button data-modal-target="check-Modal" data-modal-toggle="check-Modal"
-                                                addedUserId={{ $assignment->user_id }}
-                                                assignmentId="{{ $assignment->assignment_id }}"
-                                                class="checkBtn bg-green-600 font-semibold text-white px-4 rounded-md py-2"
-                                                updId="">
-                                                Check
-                                            </button>
-                                            <a href="../profile?u={{ base64_encode($assignment->user_id) }}">
-                                                <button
-                                                    class=" bg-customOrange font-semibold text-white px-4 rounded-md py-2">
-                                                    Profile
+                                        @if ($assignment->resubmit == 0)
+                                            <div class="flex gap-3">
+                                                <button data-modal-target="check-Modal" data-modal-toggle="check-Modal"
+                                                    addedUserId={{ $assignment->user_id }}
+                                                    assignmentId="{{ $assignment->assignment_id }}"
+                                                    class="checkBtn bg-green-600 font-semibold text-white px-4 rounded-md py-2"
+                                                    updId="">
+                                                    Check
                                                 </button>
-                                            </a>
-                                        </div>
+                                                <a href="../profile?u={{ base64_encode($assignment->user_id) }}">
+                                                    <button
+                                                        class=" bg-customOrange font-semibold text-white px-4 rounded-md py-2">
+                                                        Profile
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        @endif
 
                                     </td>
                                     </r>
